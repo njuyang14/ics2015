@@ -39,17 +39,18 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
-/*static int cmd_si(char *args){
+static int cmd_si(char *args){
         char *tkp=strtok(args,"");
-        char *tk[2];
+        char s[2][10];
         int i=0;
         while(tkp!=NULL){
         printf(" %s " , tkp);
-        tk[i]=tkp;
+        strcpy(tkp,s[i]);
         tkp=strtok(NULL,"");
         i++;
         }
-}*/
+        return 0;
+}
 
 static struct {
 	char *name;
@@ -59,7 +60,7 @@ static struct {
 	{ "help", "Display informations about all supported commands", cmd_help },
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
-        /*{ "si", "Single step", cmd_si},*/
+        { "si", "Single step", cmd_si},
 
 	/* TODO: Add more commands */
 
