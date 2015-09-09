@@ -7,6 +7,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+
 void cpu_exec(uint32_t);
 
 /* We use the ``readline'' library to provide more flexibility to read from stdin. */
@@ -38,6 +39,18 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+/*static int cmd_si(char *args){
+        char *tkp=strtok(args,"");
+        char *tk[2];
+        int i=0;
+        while(tkp!=NULL){
+        printf(" %s " , tkp);
+        tk[i]=tkp;
+        tkp=strtok(NULL,"");
+        i++;
+        }
+}*/
+
 static struct {
 	char *name;
 	char *description;
@@ -46,6 +59,7 @@ static struct {
 	{ "help", "Display informations about all supported commands", cmd_help },
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
+        /*{ "si", "Single step", cmd_si},*/
 
 	/* TODO: Add more commands */
 
@@ -80,8 +94,7 @@ void ui_mainloop() {
 	while(1) {
 		char *str = rl_gets();
 		char *str_end = str + strlen(str);
-
-		/* extract the first token as the command */
+	/* extract the first token as the command */
 		char *cmd = strtok(str, " ");
 		if(cmd == NULL) { continue; }
 
