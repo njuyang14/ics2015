@@ -39,17 +39,15 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
-void str_to_int(char *s){
-        
-}
 static int cmd_si(char *args){
         char *tkp=strtok(args,"");
-        char s[10];
+        char s[5];
         if(tkp!=NULL){
         strcpy(s,tkp);
-        printf("%s\n", s);
+        //printf("%s\n", s);
         tkp=strtok(NULL,"");
         }
+
         int step=atoi(s);
         cpu_exec(step);
         return 0;
