@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-
+//#include <cstring>
 
 void cpu_exec(uint32_t);
 
@@ -45,7 +45,7 @@ static int cmd_si(char *args){
         int i=0;
         while(tkp!=NULL){
         strcpy(s[i],tkp);
-        printf("%s\n", s[i]);
+        printf("%s\n%d", s[i],i);
         tkp=strtok(NULL,"");
         i++;
         }
