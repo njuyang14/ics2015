@@ -44,7 +44,7 @@ static int cmd_si(char *args){
         char s[2][10];
         int i=0;
         while(tkp!=NULL){
-        strcpy(tkp,s[i]);
+        strcpy(s[i],tkp);
         printf("%s\n", s[i]);
         tkp=strtok(NULL,"");
         i++;
