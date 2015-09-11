@@ -72,6 +72,28 @@ static int cmd_info(char *args){
         return 0;     
 }
 
+static int cmd_x(char *args){
+        char *tkp=strtok(args,"");
+        char s[5];
+        if(tkp!=NULL){
+        strcpy(s,tkp);
+        //n=atoi(s);
+        tkp=strtok(NULL,"");
+        }
+        int memory_number=atoi(s);
+        printf("%d\n",memory_number);    
+//get N
+        char expr[20];
+        if(tkp!=NULL){
+        strcpy(expr,tkp);
+        tkp=strtok(NULL,"");
+        }
+//get expression
+        
+                
+        return 0;
+}
+
 static struct {
 	char *name;
 	char *description;
@@ -82,6 +104,7 @@ static struct {
 	{ "q", "Exit NEMU", cmd_q },
         { "si", "single excecution", cmd_si},
         { "i", "print register/watchpoint", cmd_info}, 
+        { "x", "examine memory", cmd_x}, 
 	/* TODO: Add more commands */
 
 };
