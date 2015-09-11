@@ -55,7 +55,7 @@ static int cmd_si(char *args){
 
 static int cmd_info(char *args){
         if(strcmp(args,"r")==0){
-                printf("eax\t%p\t%d",&cpu.eax,cpu.eax);   
+                printf("eax\t%p\t%x\n",&cpu.eax,cpu.eax);   
         }
         else if(strcmp(args,"w")==0){
         printf("waiting...");
@@ -72,7 +72,7 @@ static struct {
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
         { "si", "single excecution", cmd_si},
-        { "info", "print register/watchpoint", cmd_info}, 
+        { "i", "print register/watchpoint", cmd_info}, 
 	/* TODO: Add more commands */
 
 };
