@@ -55,8 +55,17 @@ static int cmd_si(char *args){
 
 static int cmd_info(char *args){
         if(strcmp(args,"r")==0){
-                printf("eax\t%p\t%x\n",&cpu.eax,cpu.eax);   
-        }
+                printf("eax\t%p\t%x\n",&cpu.eax,cpu.eax);
+                printf("ecx\t%p\t%x\n",&cpu.ecx,cpu.ecx); 
+                printf("edx\t%p\t%x\n",&cpu.edx,cpu.edx); 
+                printf("ebx\t%p\t%x\n",&cpu.ebx,cpu.ebx); 
+                printf("esp\t%p\t%x\n",&cpu.esp,cpu.esp); 
+                printf("ebp\t%p\t%x\n",&cpu.ebp,cpu.ebp); 
+                printf("esi\t%p\t%x\n",&cpu.esi,cpu.esi); 
+                printf("edi\t%p\t%x\n",&cpu.edi,cpu.edi); 
+                printf("eip\t%p\t%x\n",&cpu.eip,cpu.eip);
+                printf("xxx\n");     
+        }//finish the 32bit register.
         else if(strcmp(args,"w")==0){
         printf("waiting...");
         }
