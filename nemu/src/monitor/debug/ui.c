@@ -2,6 +2,7 @@
 #include "monitor/expr.h"
 #include "monitor/watchpoint.h"
 #include "nemu.h"
+#include "common.h"
 
 #include <stdlib.h>
 #include <readline/readline.h>
@@ -81,7 +82,7 @@ static int cmd_x(char *args){
         tkp=strtok(NULL,"");
         }
         int memory_number=atoi(s);
-        printf("%d\n",memory_number);    
+        //printf("%d\n",memory_number);    
 //get N
         char expr[20];
         if(tkp!=NULL){
@@ -89,13 +90,14 @@ static int cmd_x(char *args){
         tkp=strtok(NULL,"");
         }
 //get expression
-        long addr=atol(expr);
-        //printf("%x/n",addr);
-        int *addrp=(int*)addr;
-        printf("%p/n",&addrp);
-       // for(int i=0;i<memory_number;i++){
-        
-//}
+        swaddr_t addr;
+        sscanf(expr,"%x",&addr);
+        int i;
+        for(i=0;i<memory_number;i++){
+        uint32_t memory_value=swaddr_read(addr,4);
+        printf("%x: %x\n",addr,memory_value);
+        addr+=4;
+}
                 
         return 0;
 }
