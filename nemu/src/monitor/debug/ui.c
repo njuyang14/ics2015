@@ -99,7 +99,7 @@ static int cmd_x(char *args){
         for(i=0;i<memory_number;i++){
         //uint32_t memory_value=swaddr_read(addr,4);
         printf("%x: %x\n",addr,swaddr_read(addr,4));
-        addr+=4;
+        addr+=1;
 }
                 
         return 0;
