@@ -73,33 +73,28 @@ static int cmd_info(char *args){
         return 0;     
 }
 
-static int cmd_x(char *args){
-        //char *tkp=strtok(args,"");
-        //printf("%s\n",tkp);   
-        char *s=strtok(NULL," ");;
-        //tkp=strtok(NULL,"");
-        //strcpy(s,tkp);
-        //tkp=strtok(NULL,"");
+static int cmd_x(char *args){   
+        char *s=strtok(NULL," ");
         
         int memory_number=atoi(s);    
 //get N
         
-        //printf("%s\n",tkp);
         char *expr=strtok(NULL," ");
-        //tkp=strtok(NULL,""); 
-        //strcpy(expr,tkp);
-        //tkp=strtok(NULL,"");
 //get expression
+
         swaddr_t addr;
         sscanf(expr,"%x",&addr);
         //printf("%s %x\n",expr,addr);
         int i;
         for(i=0;i<memory_number;i++){
-        //uint32_t memory_value=swaddr_read(addr,4);
-        printf("%x: %x\n",addr,swaddr_read(addr,4));
+        uint32_t memory_value=swaddr_read(addr,4);
+        printf("%x: %x\n",addr,memory_value);
         addr+=1;
-}
-                
+}       
+        /*unsigned long addr;
+        sscanf(expr,"%x",&addr);
+        uint32_t *ad=(uint32_t*)addr;
+        printf("%x\n",*ad);*/
         return 0;
 }
 
