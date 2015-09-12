@@ -86,15 +86,15 @@ static int cmd_x(char *args){
         sscanf(expr,"%x",&addr);
         //printf("%s %x\n",expr,addr);
         int i;
+        printf("%x : ",addr);
         for(i=0;i<memory_number;i++){
         uint32_t memory_value=swaddr_read(addr,4);
-        printf("%x: %x\n",addr,memory_value);
+        printf("%02x ",memory_value);
         addr+=1;
+        if(i%5==0)
+           printf("\n%x : ",addr);
 }       
-        /*unsigned long addr;
-        sscanf(expr,"%x",&addr);
-        uint32_t *ad=(uint32_t*)addr;
-        printf("%x\n",*ad);*/
+
         return 0;
 }
 
