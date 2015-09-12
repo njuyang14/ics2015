@@ -84,7 +84,7 @@ static int cmd_x(char *args){
         int memory_number=atoi(s);    
 //get N
         
-        printf("%s\n",tkp);
+        //printf("%s\n",tkp);
         char expr[20];
         if(tkp!=NULL){
         strcpy(expr,tkp);
