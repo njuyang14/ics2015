@@ -94,8 +94,8 @@ static int cmd_x(char *args){
         sscanf(expr,"%x",&addr);
         int i;
         for(i=0;i<memory_number;i++){
-        uint32_t memory_value=swaddr_read(addr,4);
-        printf("%x: %x\n",addr,memory_value);
+        //uint32_t memory_value=swaddr_read(addr,4);
+        printf("%x: %x\n",addr,swaddr_read(addr,4));
         addr+=4;
 }
                 
