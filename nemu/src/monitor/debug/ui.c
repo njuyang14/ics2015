@@ -88,7 +88,7 @@ static int cmd_x(char *args){
         char expr[20];
         if(tkp!=NULL){
         strcpy(expr,tkp);
-        //tkp=strtok(NULL,"");
+        tkp=strtok(NULL,"");
         }
 //get expression
         swaddr_t addr;
