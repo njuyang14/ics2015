@@ -76,7 +76,7 @@ static int cmd_info(char *args){
 static int cmd_x(char *args){
         //char *tkp=strtok(args,"");
         //printf("%s\n",tkp);   
-        char *s=strtok(NULL,"");;
+        char *s=strtok(NULL," ");;
         //tkp=strtok(NULL,"");
         //strcpy(s,tkp);
         //tkp=strtok(NULL,"");
@@ -85,7 +85,7 @@ static int cmd_x(char *args){
 //get N
         
         //printf("%s\n",tkp);
-        char *expr=strtok(NULL,"");
+        char *expr=strtok(NULL," ");
         //tkp=strtok(NULL,""); 
         //strcpy(expr,tkp);
         //tkp=strtok(NULL,"");
