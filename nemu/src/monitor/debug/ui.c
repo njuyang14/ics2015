@@ -50,7 +50,10 @@ static int cmd_si(char *args){
         }
 
         int step=atoi(s);
-        cpu_exec(step);
+        if(step==1)
+                cpu_exec(1);
+        else
+                cpu_exec(step);
         return 0;
 }
 
