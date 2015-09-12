@@ -89,7 +89,13 @@ static int cmd_x(char *args){
         tkp=strtok(NULL,"");
         }
 //get expression
+        long addr=atol(expr);
+        //printf("%x/n",addr);
+        int *addrp=(int*)addr;
+        printf("%p/n",&addrp);
+       // for(int i=0;i<memory_number;i++){
         
+//}
                 
         return 0;
 }
