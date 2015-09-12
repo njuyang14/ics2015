@@ -96,6 +96,9 @@ static int cmd_x(char *args){
         addr+=1;
         if((i+1)%5==0)
              printf("\n");
+        
+        if(i==memory_number-1)
+             printf("\n"); 
 }       
 
         return 0;
