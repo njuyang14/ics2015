@@ -74,20 +74,20 @@ static int cmd_info(char *args){
 }
 
 static int cmd_x(char *args){
-        char *tkp=strtok(args,"");
-        printf("%s\n",tkp);   
-        char s[5];
-        tkp=strtok(NULL,"");
-        strcpy(s,tkp);
+        //char *tkp=strtok(args,"");
+        //printf("%s\n",tkp);   
+        char *s=strtok(NULL,"");;
+        //tkp=strtok(NULL,"");
+        //strcpy(s,tkp);
         //tkp=strtok(NULL,"");
         
         int memory_number=atoi(s);    
 //get N
         
         //printf("%s\n",tkp);
-        char expr[20];
-        tkp=strtok(NULL,""); 
-        strcpy(expr,tkp);
+        char *expr=strtok(NULL,"");
+        //tkp=strtok(NULL,""); 
+        //strcpy(expr,tkp);
         //tkp=strtok(NULL,"");
 //get expression
         swaddr_t addr;
