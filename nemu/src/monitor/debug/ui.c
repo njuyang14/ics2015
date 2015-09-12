@@ -86,13 +86,16 @@ static int cmd_x(char *args){
         sscanf(expr,"%x",&addr);
         //printf("%s %x\n",expr,addr);
         int i;
-        printf("%x : ",addr);
         for(i=0;i<memory_number;i++){
         if(i%5==0) 
-        printf("%x : ",addr);
+             printf("%x : ",addr);
+
         uint32_t memory_value=swaddr_read(addr,1);
+
         printf("%02x ",memory_value);
         addr+=1;
+        if(i%5==0)
+             printf("\n");
 }       
 
         return 0;
