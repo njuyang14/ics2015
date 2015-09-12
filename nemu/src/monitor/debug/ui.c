@@ -75,25 +75,26 @@ static int cmd_info(char *args){
 
 static int cmd_x(char *args){
         char *tkp=strtok(args,"");
-        char s[5];
-        if(tkp!=NULL){
-        strcpy(s,tkp);
-        //n=atoi(s);
+        char expr[2][20];
+        int t=0;
+        while(tkp!=NULL){
+        strcpy(expr[t],tkp);
+        t++;
         tkp=strtok(NULL,"");
         }
-        int memory_number=atoi(s);
-        //printf("%d\n",memory_number);    
+        int memory_number=atoi(expr[0]);    
 //get N
-        printf("%s\n",tkp);
-        char expr[20];
+        
+       /* printf("%s\n",tkp);
+        char *expr=tkp;
         if(tkp!=NULL){
         strcpy(expr,tkp);
         tkp=strtok(NULL,"");
-        }
+        }*/
 //get expression
         swaddr_t addr;
-        sscanf(expr,"%x",&addr);
-        printf("%s %x\n",expr,addr);
+        sscanf(expr[1],"%x",&addr);
+        printf("%s %x\n",expr[1],addr);
         int i;
         for(i=0;i<memory_number;i++){
         //uint32_t memory_value=swaddr_read(addr,4);
