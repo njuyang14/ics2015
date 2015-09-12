@@ -77,19 +77,18 @@ static int cmd_x(char *args){
         char *tkp=strtok(args,"");
         printf("%s\n",tkp);   
         char s[5];
-        if(tkp!=NULL){
-        strcpy(s,tkp);
         tkp=strtok(NULL,"");
-        }
+        strcpy(s,tkp);
+        //tkp=strtok(NULL,"");
+        
         int memory_number=atoi(s);    
 //get N
         
         //printf("%s\n",tkp);
         char expr[20];
-        if(tkp!=NULL){
+        tkp=strtok(NULL,""); 
         strcpy(expr,tkp);
-        tkp=strtok(NULL,"");
-        }
+        //tkp=strtok(NULL,"");
 //get expression
         swaddr_t addr;
         sscanf(expr,"%x",&addr);
