@@ -88,11 +88,11 @@ static int cmd_x(char *args){
         int i;
         printf("%x : ",addr);
         for(i=0;i<memory_number;i++){
-        uint32_t memory_value=swaddr_read(addr,4);
+        if(i%5==0) 
+        printf("%x : ",addr);
+        uint32_t memory_value=swaddr_read(addr,1);
         printf("%02x ",memory_value);
         addr+=1;
-        if(i%5==0)
-           printf("\n%x : ",addr);
 }       
 
         return 0;
