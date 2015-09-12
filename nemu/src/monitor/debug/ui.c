@@ -112,9 +112,9 @@ static struct {
 	{ "help", "Display informations about all supported commands", cmd_help },
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
-        { "si", "single excecution", cmd_si},
-        { "i", "print register/watchpoint", cmd_info}, 
-        { "x", "examine memory", cmd_x}, 
+        { "si", "single excecution: si [N]", cmd_si},
+        { "i", "print register/watchpoint: i r/w", cmd_info}, 
+        { "x", "examine memory: x [N] expr", cmd_x}, 
 	/* TODO: Add more commands */
 
 };
