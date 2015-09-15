@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-	NOTYPE = 256, EQ, PLU,MIN,MULT,DIVI,LP,RP
+	NOTYPE = 256, EQ,NUM,PLU,MIN,MULT,DIVI,LP,RP
         
 	/* TODO: Add more token types */
 
@@ -23,6 +23,7 @@ static struct rule {
 	 */
 
 	{" +",	NOTYPE},				// spaces
+        {"[0-9]+",  NUM}, 
 	{"\\+", PLU},					// plus
         {"\\-", MIN}, 
         {"\\*", MULT}, 
@@ -85,6 +86,10 @@ static bool make_token(char *e) {
 
 				switch(rules[i].token_type) {
                                         case(NOTYPE):break;
+                                        case(NUM):{
+                                                  strcpy(tokens[i].str,rules[i].regex); 
+                                                  tokens[i].type=NUM;  
+                                                  break;}
                                         case(PLU):{
                                                   strcpy(tokens[i].str,"+");
                                                   tokens[i].type=PLU; 
