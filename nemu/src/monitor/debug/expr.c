@@ -138,7 +138,7 @@ uint32_t expr(char *e, bool *success) {
         //test tokens[32].
         int j;
         for(j=0;j<=nr_token;j++)
-                printf("%d: %s ",nr_token,tokens[j].str);
+                printf("%s ",tokens[j].str);
         printf("\n");
         
 
