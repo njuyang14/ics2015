@@ -104,6 +104,12 @@ static int cmd_x(char *args){
         return 0;
 }
 
+static int cmd_p(char *args){
+       bool make=true;
+       printf("%d",expr(args,&make));
+       return 0;
+}
+
 static struct {
 	char *name;
 	char *description;
@@ -114,7 +120,8 @@ static struct {
 	{ "q", "Exit NEMU", cmd_q },
         { "si", "single excecution: si [N]", cmd_si},
         { "i", "print register/watchpoint: i r/w", cmd_info}, 
-        { "x", "examine memory: x [N] expr", cmd_x}, 
+        { "x", "examine memory: x [N] expr", cmd_x},
+        { "p", "evaluate expr: p expr", cmd_p},  
 	/* TODO: Add more commands */
 
 };
