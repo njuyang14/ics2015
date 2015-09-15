@@ -136,11 +136,11 @@ uint32_t expr(char *e, bool *success) {
 		return 0;
 	}
         //test tokens[32].
-        int j;
+        /*int j;
         for(j=0;j<=nr_token;j++)
                 printf("%d: %s ",nr_token,tokens[j].str);
         printf("\n");
-
+        */
 
 	/* TODO: Insert codes to evaluate the expression. */
 	panic("please implement me");
