@@ -85,9 +85,30 @@ static bool make_token(char *e) {
 
 				switch(rules[i].token_type) {
                                         case(NOTYPE):break;
-                                        case(PLU):{strcpy(tokens[i].str,"+");
-                                                  tokens[i].type=PLU;break;}
-
+                                        case(PLU):{
+                                                  strcpy(tokens[i].str,"+");
+                                                  tokens[i].type=PLU; 
+                                                  break;}
+                                        case(MIN):{
+                                                  strcpy(tokens[i].str,"-");
+                                                  tokens[i].type=MIN;
+                                                  break;}
+                                        case(MULT):{
+                                                  strcpy(tokens[i].str,"*");
+                                                  tokens[i].type=MULT;
+                                                  break;}
+                                        case(DIVI):{
+                                                  strcpy(tokens[i].str,"/");
+                                                  tokens[i].type=DIVI;
+                                                  break;}
+                                        case(LP):{
+                                                  strcpy(tokens[i].str,"(");
+                                                  tokens[i].type=LP;
+                                                  break;}
+                                        case(RP):{
+                                                  strcpy(tokens[i].str,")");
+                                                  tokens[i].type=RP;
+                                                  break;}
 					default: panic("please implement me");
 				}
 
