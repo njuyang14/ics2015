@@ -87,31 +87,31 @@ static bool make_token(char *e) {
 				switch(rules[i].token_type) {
                                         case(NOTYPE):break;
                                         case(NUM):{
-                                                  strcpy(tokens[nr_token].str,substr_start); 
+                                                  strncpy(tokens[nr_token].str,substr_start,substr_len); 
                                                   tokens[i].type=NUM;  
                                                   break;}
                                         case(PLU):{
-                                                  strcpy(tokens[nr_token].str,"+");
+                                                  strncpy(tokens[nr_token].str,substr_start,substr_len);
                                                   tokens[nr_token].type=PLU; 
                                                   break;}
                                         case(MIN):{
-                                                  strcpy(tokens[nr_token].str,"-");
+                                                  strncpy(tokens[nr_token].str,substr_start,substr_len);
                                                   tokens[nr_token].type=MIN;
                                                   break;}
                                         case(MULT):{
-                                                  strcpy(tokens[nr_token].str,"*");
+                                                  strncpy(tokens[nr_token].str,substr_start,substr_len);
                                                   tokens[nr_token].type=MULT;
                                                   break;}
                                         case(DIVI):{
-                                                  strcpy(tokens[nr_token].str,"/");
+                                                  strncpy(tokens[nr_token].str,substr_start,substr_len);
                                                   tokens[nr_token].type=DIVI;
                                                   break;}
                                         case(LP):{
-                                                  strcpy(tokens[nr_token].str,"(");
+                                                  strncpy(tokens[nr_token].str,substr_start,substr_len);
                                                   tokens[nr_token].type=LP;
                                                   break;}
                                         case(RP):{
-                                                  strcpy(tokens[nr_token].str,")");
+                                                  strncpy(tokens[nr_token].str,substr_start,substr_len);
                                                   tokens[nr_token].type=RP;
                                                   break;}
 					default: panic("please implement me");
