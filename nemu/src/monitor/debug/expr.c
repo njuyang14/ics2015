@@ -152,7 +152,7 @@ bool check_parenthese(int p,int q){
 uint32_t eval(int p,int q){
         if(p>q){
                printf("bad expression");
-               //return -1;
+               return 0;
                }
         else if(p==q){
                uint32_t val;
