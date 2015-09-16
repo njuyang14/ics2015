@@ -130,6 +130,56 @@ static bool make_token(char *e) {
 	return true; 
 }
 
+int dominant(int p,int q){
+        return 1;
+}
+
+bool check_parenthese(int p,int q){
+        int i;
+        int count=0;
+        if(tokens[p].type!=LP||tokens[p].type!=RP)return false;
+        for(i=p;i<q;i++){
+               if(tokens[i].type==LP)
+                         count++;
+               else if(tokens[i].type==RP)
+                         count--;
+               if(count<=0)
+                         return false;                      
+        }
+        return true;
+}
+
+uint32_t eval(int p,int q){
+        if(p>q){
+               printf("bad expression");
+               //return -1;
+               }
+        else if(p==q){
+               uint32_t val;
+               sscanf(tokens[p].str,"%x",&val);
+               return val;
+        }
+        else if(check_parenthese(p,q)==true){
+        
+               return eval(p+1,q-1);
+        }
+        else{
+               int op=dominant(p,q);
+               uint32_t val1 = eval(p, op - 1);
+               uint32_t val2 = eval(op + 1, q);
+
+               switch(tokens[op].type){
+               case(PLU):return val1+val2;break;
+               case(MIN):return val1*val2;break;
+               case(MULT):return val1-val2;break;
+               case(DIVI):return val1/val2;break;
+               default:assert(0);
+               }
+        }
+        return 0;
+}
+
+
 uint32_t expr(char *e, bool *success) {
 	if(!make_token(e)) {
 		*success = false;
@@ -141,7 +191,7 @@ uint32_t expr(char *e, bool *success) {
                 printf("%s ",tokens[j].str);
         printf("\n");
         
-
+        eval(0,sizeof(tokens)-1);
 	/* TODO: Insert codes to evaluate the expression. */
 	panic("please implement me");
 	return 0;
