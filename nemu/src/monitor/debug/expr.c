@@ -40,7 +40,7 @@ static regex_t re[NR_REGEX];
 /* Rules are used for many times.
  * Therefore we compile them only once before any usage.
  */
-void init_regex() {
+void init_regex(){
 	int i;
 	char error_msg[128];
 	int ret;
@@ -130,14 +130,54 @@ static bool make_token(char *e) {
 	return true; 
 }
 
+typedef struct{
+        int type;
+        int add;
+        char str[32]; 
+}temp_op;
+
+temp_op operator[32];
+int nr_op=0;
+
+/*int level(int type){
+        if(type==PLU||type==MIN)return 1;
+        else if(type==MULT||type==DIVI)return 2;
+}*/
+
 int dominant(int p,int q){
         return 1;
         /*int i;
         for(i=p;i<=q;i++){
-               if(tokens[i].type!=NUM){
-                         
+               int count=0;
+               if(tokens[i].type==LP){
+                         count++;
+                         int j;
+                         for(j=i;i<=q;j++){
+                                 if(tokens[j].type==RP)count--;
+                                 if(count==0)break;
+                         }
+                         i=j;
                }
-        }*/
+               else if(tokens[i].type!=NUM){
+                         strcpy(operator[nr_op].str,tokens[i].str);
+                         operator[nr_op].add=i;
+                         operator[nr_op].type=tokens[i].type;
+                         nr_op++;    
+               }
+        }
+
+        int t;
+        for(t=0;t<nr_op;t++){
+               printf("%s ",operator[t].str);
+        }
+        int dominant_position=operator[0].add;
+        int k;
+        for(k=0;k<nr_op-1;k++){
+        if(level(operator[k].type)>level(operator[k+1].type))
+               dominant_position=operator[k+1].add;
+        }
+        
+        return dominant_position;*/
 }
 
 bool check_parenthese(int p,int q){
@@ -156,6 +196,7 @@ bool check_parenthese(int p,int q){
 }
 
 uint32_t eval(int p,int q){
+        uint32_t v;
         if(p>q){
                printf("bad expression");
                return 0;
@@ -177,14 +218,14 @@ uint32_t eval(int p,int q){
                 
                printf("%s\n",tokens[op].str);
                switch(tokens[op].type){
-               case (PLU):{return val1+val2;break;}
-               case (MIN):{return val1*val2;break;}
-               case (MULT):{return val1-val2;break;}
-               case (DIVI):{return val1/val2;break;}
-               default:printf("error");
+               case (PLU):{v= val1+val2;break;}
+               case (MIN):{v= val1*val2;break;}
+               case (MULT):{v= val1-val2;break;}
+               case (DIVI):{v= val1/val2;break;}
+               default:assert(0);
                }
         }
-        return 0;
+        return v;
 }
 
 
