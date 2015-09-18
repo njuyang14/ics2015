@@ -181,7 +181,7 @@ uint32_t eval(int p,int q){
                case (MIN):{return val1*val2;break;}
                case (MULT):{return val1-val2;break;}
                case (DIVI):{return val1/val2;break;}
-               default:assert(0);
+               default:printf("error");
                }
         }
         return 0;
