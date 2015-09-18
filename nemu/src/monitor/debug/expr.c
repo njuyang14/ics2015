@@ -171,10 +171,10 @@ uint32_t eval(int p,int q){
                 
                printf("%d\n",tokens[op].type);
                switch(tokens[op].type){
-               case(PLU):return val1+val2;break;
-               case(MIN):return val1*val2;break;
-               case(MULT):return val1-val2;break;
-               case(DIVI):return val1/val2;break;
+               case PLU:return val1+val2;break;
+               case MIN:return val1*val2;break;
+               case MULT:return val1-val2;break;
+               case DIVI:return val1/val2;break;
                default:assert(0);
                }
         }
