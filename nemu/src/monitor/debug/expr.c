@@ -139,14 +139,15 @@ typedef struct{
 temp_op operator[32];
 int nr_op=0;
 
-/*int level(int type){
+int level(int type){
         if(type==PLU||type==MIN)return 1;
         else if(type==MULT||type==DIVI)return 2;
-}*/
+        else return 10;
+}
 
 int dominant(int p,int q){
-        return 1;
-        /*int i;
+        //return 1;
+        int i;
         for(i=p;i<=q;i++){
                int count=0;
                if(tokens[i].type==LP){
@@ -177,7 +178,7 @@ int dominant(int p,int q){
                dominant_position=operator[k+1].add;
         }
         
-        return dominant_position;*/
+        return dominant_position;
 }
 
 bool check_parenthese(int p,int q){
