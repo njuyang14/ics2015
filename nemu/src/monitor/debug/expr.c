@@ -132,6 +132,12 @@ static bool make_token(char *e) {
 
 int dominant(int p,int q){
         return 1;
+        /*int i;
+        for(i=p;i<=q;i++){
+               if(tokens[i].type!=NUM){
+                         
+               }
+        }*/
 }
 
 bool check_parenthese(int p,int q){
@@ -171,10 +177,10 @@ uint32_t eval(int p,int q){
                 
                printf("%s\n",tokens[op].str);
                switch(tokens[op].type){
-               case (PLU):return val1+val2;break;
-               case (MIN):return val1*val2;break;
-               case (MULT):return val1-val2;break;
-               case (DIVI):return val1/val2;break;
+               case (PLU):{return val1+val2;break;}
+               case (MIN):{return val1*val2;break;}
+               case (MULT):{return val1-val2;break;}
+               case (DIVI):{return val1/val2;break;}
                default:assert(0);
                }
         }
