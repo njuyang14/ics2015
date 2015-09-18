@@ -169,12 +169,12 @@ uint32_t eval(int p,int q){
                uint32_t val1 = eval(p, op - 1);
                uint32_t val2 = eval(op + 1, q);
                 
-               printf("%d\n",tokens[op].type);
+               printf("%s\n",tokens[op].str);
                switch(tokens[op].type){
-               case PLU:return val1+val2;break;
-               case MIN:return val1*val2;break;
-               case MULT:return val1-val2;break;
-               case DIVI:return val1/val2;break;
+               case (PLU):return val1+val2;break;
+               case (MIN):return val1*val2;break;
+               case (MULT):return val1-val2;break;
+               case (DIVI):return val1/val2;break;
                default:assert(0);
                }
         }
