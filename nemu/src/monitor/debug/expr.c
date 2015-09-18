@@ -196,7 +196,7 @@ bool check_parenthese(int p,int q){
 }
 
 uint32_t eval(int p,int q){
-        uint32_t v;
+	uint32_t v=0;
         if(p>q){
                printf("bad expression");
                return 0;
@@ -216,14 +216,11 @@ uint32_t eval(int p,int q){
                uint32_t val1 = eval(p, op - 1);
                uint32_t val2 = eval(op + 1, q);
                 
-               printf("%s\n",tokens[op].str);
-               switch(tokens[op].type){
-               case (PLU):{v= val1+val2;break;}
-               case (MIN):{v= val1*val2;break;}
-               case (MULT):{v= val1-val2;break;}
-               case (DIVI):{v= val1/val2;break;}
-               default:assert(0);
-               }
+               //printf("%s\n",tokens[op].str);
+               if(tokens[op].type==PLU)v=val1+val2;
+               else if(tokens[op].type==MIN)v=val1-val2;
+               else if(tokens[op].type==MULT)v=val1*val2;
+               else if(tokens[op].type==DIVI)v=val1/val2;  
         }
         return v;
 }
