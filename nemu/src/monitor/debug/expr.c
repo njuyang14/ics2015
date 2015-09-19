@@ -23,7 +23,7 @@ static struct rule {
 	 */
 
 	{" +",	NOTYPE},				// spaces
-        {"[0-9]+",  NUM}, 
+         
 	{"\\+", PLU},					// plus
         {"\\-", MIN}, 
         {"\\*", MULT}, 
@@ -32,6 +32,7 @@ static struct rule {
         {"\\)", RP},
         {"\\$[a-zA-Z]{2,3}", REG},  
         {"0[xX][0-9a-fA-F]+", HEX},
+        {"[0-9]+",  NUM}, 
 	{"==", EQ}						// equal
 };
 
