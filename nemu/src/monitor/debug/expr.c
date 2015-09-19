@@ -88,7 +88,7 @@ static bool make_token(char *e) {
                                         case(NOTYPE):break;
                                         case(NUM):{
                                                   strncpy(tokens[nr_token].str,substr_start,substr_len); 
-                                                  tokens[i].type=NUM;  
+                                                  tokens[nr_token].type=NUM;  
                                                   break;}
                                         case(PLU):{
                                                   strncpy(tokens[nr_token].str,substr_start,substr_len);
