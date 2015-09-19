@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-	NOTYPE = 256, EQ,NUM,PLU,MIN,MULT,DIVI,LP,RP
+	NOTYPE = 256, EQ,NUM,PLU,MIN,MULT,DIVI,LP,RP,REG,
         
 	/* TODO: Add more token types */
 
@@ -29,7 +29,8 @@ static struct rule {
         {"\\*", MULT}, 
         {"\\/", DIVI}, 
         {"\\(", LP}, 
-        {"\\)", RP}, 
+        {"\\)", RP},
+        {"$[a-zA-Z]{2,3})", REG},  
 	{"==", EQ}						// equal
 };
 
@@ -120,6 +121,16 @@ static bool make_token(char *e) {
                                                   strncpy(tokens[nr_token].str,substr_start,substr_len);
                                                   tokens[nr_token].type=RP;
                                                    
+                                                  break;}
+                                        case(REG):{
+                                                  strncpy(tokens[nr_token].str,substr_start,substr_len);
+                                                  int sz;
+                                                  for(sz=0;sz<substr_len-1;sz++){
+                                                           tokens[nr_token].str[sz]=tokens[nr_token].str[sz+1];
+                                                  } 
+                                                  tokens[nr_token].str[substr_len-1]='\0';
+                                                  printf("%s\n",tokens[nr_token].str);
+                                                  tokens[nr_token].type=REG;
                                                   break;}
 					default: panic("please implement me");
 				}
