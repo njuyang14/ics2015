@@ -129,7 +129,7 @@ static bool make_token(char *e) {
                                                            tokens[nr_token].str[sz]=tokens[nr_token].str[sz+1];
                                                   } 
                                                   tokens[nr_token].str[substr_len-1]='\0';
-                                                  printf("%s\n",tokens[nr_token].str);
+                                                  printf("reg=%s\n",tokens[nr_token].str);
                                                   tokens[nr_token].type=REG;
                                                   break;}
 					default: panic("please implement me");
