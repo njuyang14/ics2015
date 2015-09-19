@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-	NOTYPE = 256, EQ,NUM,PLU,MIN,MULT,DIVI,LP,RP,REG,
+	NOTYPE = 256, EQ,NUM,PLU,MIN,MULT,DIVI,LP,RP,REG,HEX,
         
 	/* TODO: Add more token types */
 
@@ -31,6 +31,7 @@ static struct rule {
         {"\\(", LP}, 
         {"\\)", RP},
         {"\\$[a-zA-Z]{2,3}", REG},  
+        {"0[xX][0-9a-fA-F]+", HEX},
 	{"==", EQ}						// equal
 };
 
@@ -132,6 +133,11 @@ static bool make_token(char *e) {
                                                   printf("reg=%s\n",tokens[nr_token].str);
                                                   tokens[nr_token].type=REG;
                                                   break;}
+                                        case(HEX):{
+                                                  strncpy(tokens[nr_token].str,substr_start,substr_len);
+                                                  tokens[nr_token].type=HEX;
+                                                  break;}
+
 					default: panic("please implement me");
 				}
                                 nr_token++;
@@ -221,9 +227,47 @@ uint32_t eval(int p,int q){
                return 0;
                }
         else if(p==q){
+               if(tokens[p].type==NUM){
                uint32_t val;
                sscanf(tokens[p].str,"%d",&val);
                return val;
+               }
+               else if(tokens[p].type==REG){
+                          if(strcmp(tokens[p].str,"eax")==0){
+                                      return cpu.eax;
+                          }
+                          else if(strcmp(tokens[p].str,"edx")==0){
+                                      return cpu.edx;
+                          }
+                          else if(strcmp(tokens[p].str,"ecx")==0){
+                                      return cpu.ecx;
+                          }
+                          else if(strcmp(tokens[p].str,"ebx")==0){
+                                      return cpu.ebx;
+                          }
+                          else if(strcmp(tokens[p].str,"ebp")==0){
+                                      return cpu.ebp;
+                          }
+                          else if(strcmp(tokens[p].str,"esi")==0){
+                                      return cpu.esi;
+                          }
+                          else if(strcmp(tokens[p].str,"edi")==0){
+                                      return cpu.edi;
+                          }
+                          else if(strcmp(tokens[p].str,"esp")==0){
+                                      return cpu.esp;
+                          }
+                          else 
+                                      return 0;
+              }
+              else if(tokens[p].type==HEX){
+                          uint32_t val;
+                          swaddr_t addr;
+                          sscanf(tokens[p].str,"%x",&addr);
+                          val=swaddr_read(addr,4);
+                          return val;
+              }
+              else return 0;
         }
 	else if(check_parenthese(p,q)==1){
         
