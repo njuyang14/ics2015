@@ -216,12 +216,13 @@ uint32_t eval(int p,int q){
                printf("op=%d\n",op);
                uint32_t val1 = eval(p, op - 1);
                uint32_t val2 = eval(op + 1, q);
-                
-               //printf("%s\n",tokens[op].str);
-               if(tokens[op].type==PLU)return val1+val2;
-               else if(tokens[op].type==MIN)return val1-val2;
-               else if(tokens[op].type==MULT)return val1*val2;
-               else if(tokens[op].type==DIVI)return val1/val2;
+               int op_type=tokens[op].type;
+  
+               printf("tokens[op]=%s\n",tokens[op].str);
+               if(op_type==PLU)return val1+val2;
+               else if(op_type==MIN)return val1-val2;
+               else if(op_type==MULT)return val1*val2;
+               else if(op_type==DIVI)return val1/val2;
                else assert(0);  
         }
      
