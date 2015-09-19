@@ -88,36 +88,41 @@ static bool make_token(char *e) {
                                         case(NOTYPE):break;
                                         case(NUM):{
                                                   strncpy(tokens[nr_token].str,substr_start,substr_len); 
-                                                  tokens[nr_token].type=NUM;  
+                                                  tokens[nr_token].type=NUM;
+                                                  nr_token++;  
                                                   break;}
                                         case(PLU):{
                                                   strncpy(tokens[nr_token].str,substr_start,substr_len);
-                                                  tokens[nr_token].type=PLU; 
+                                                  tokens[nr_token].type=PLU;
+                                                  nr_token++;  
                                                   break;}
                                         case(MIN):{
                                                   strncpy(tokens[nr_token].str,substr_start,substr_len);
                                                   tokens[nr_token].type=MIN;
+                                                  nr_token++; 
                                                   break;}
                                         case(MULT):{
                                                   strncpy(tokens[nr_token].str,substr_start,substr_len);
                                                   tokens[nr_token].type=MULT;
+                                                  nr_token++; 
                                                   break;}
                                         case(DIVI):{
                                                   strncpy(tokens[nr_token].str,substr_start,substr_len);
                                                   tokens[nr_token].type=DIVI;
+                                                  nr_token++; 
                                                   break;}
                                         case(LP):{
                                                   strncpy(tokens[nr_token].str,substr_start,substr_len);
                                                   tokens[nr_token].type=LP;
+                                                  nr_token++; 
                                                   break;}
                                         case(RP):{
                                                   strncpy(tokens[nr_token].str,substr_start,substr_len);
                                                   tokens[nr_token].type=RP;
+                                                  nr_token++; 
                                                   break;}
 					default: panic("please implement me");
 				}
-                                nr_token++;
-				break;
 			}
 		}
 

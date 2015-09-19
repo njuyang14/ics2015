@@ -105,8 +105,8 @@ static int cmd_x(char *args){
 }
 
 static int cmd_p(char *args){
-       bool make=true;
-       printf("%d",expr(args,&make));
+       bool make=1;
+       printf("Result is %d\n.",expr(args,&make));
        return 0;
 }
 
