@@ -30,7 +30,7 @@ static struct rule {
         {"\\/", DIVI}, 
         {"\\(", LP}, 
         {"\\)", RP},
-        {"$[a-zA-Z]{2,3})", REG},  
+        {"$[a-zA-Z]{2,3}", REG},  
 	{"==", EQ}						// equal
 };
 
