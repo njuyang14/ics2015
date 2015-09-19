@@ -214,7 +214,7 @@ uint32_t eval(int p,int q){
                sscanf(tokens[p].str,"%x",&val);
                return val;
         }
-        else if(check_parenthese(p,q)==true){
+        else if(check_parenthese(p,q)){
         
                return eval(p+1,q-1);
         }
