@@ -31,7 +31,7 @@ static struct rule {
         {"\\(", LP}, 
         {"\\)", RP},
         {"\\$[a-zA-Z]{2,3}", REG},  
-        {"\\0[xX][0-9a-fA-F]+", HEX},
+        {"0[xX][0-9a-fA-F]+", HEX},
 	{"==", EQ}						// equal
 };
 
