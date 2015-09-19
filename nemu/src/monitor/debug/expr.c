@@ -247,9 +247,9 @@ uint32_t expr(char *e, bool *success) {
                 printf("%s ",tokens[j].str);
         printf("\n");
         
-        eval(0,nr_token-1);
+        uint32_t result=eval(0,nr_token-1);
 	/* TODO: Insert codes to evaluate the expression. */
 	panic("please implement me");
-	return 0;
+	return result;
 }
 
