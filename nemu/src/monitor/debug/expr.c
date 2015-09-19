@@ -191,7 +191,7 @@ int dominant(int p,int q){
 int check_parenthese(int p,int q){
         int i;
         int count=0;
-        if(tokens[p].type!=LP||tokens[p].type!=RP)return 0;
+        if(tokens[p].type!=LP||tokens[q].type!=RP)return 0;
         for(i=p;i<q;i++){
                if(tokens[i].type==LP)
                          count++;
@@ -214,7 +214,7 @@ uint32_t eval(int p,int q){
                sscanf(tokens[p].str,"%x",&val);
                return val;
         }
-        else if(check_parenthese(p,q)){
+	else if(check_parenthese(p,q)==1){
         
                return eval(p+1,q-1);
         }
