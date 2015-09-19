@@ -136,8 +136,6 @@ typedef struct{
         char str[32]; 
 }temp_op;
 
-temp_op operator[32];
-int nr_op;
 
 int level(int type){
         if(type==PLU||type==MIN)return 1;
@@ -147,8 +145,9 @@ int level(int type){
 
 int dominant(int p,int q){
         //return 1;
+        temp_op operator[32]; 
         int i;
-        nr_op=0;
+        int nr_op=0;
         for(i=p;i<=q;i++){
                int count=0;
                if(tokens[i].type==LP){
