@@ -144,8 +144,8 @@ int level(int type){
 }
 
 int dominant(int p,int q){
-        //return 1;
-        temp_op operator[32]; 
+        return 1;
+        /*temp_op operator[32]; 
         int i;
         int nr_op=0;
         for(i=p;i<=q;i++){
@@ -178,7 +178,7 @@ int dominant(int p,int q){
                dominant_position=operator[k+1].add;
         }
         
-        return dominant_position;
+        return dominant_position;*/
 }
 
 bool check_parenthese(int p,int q){
