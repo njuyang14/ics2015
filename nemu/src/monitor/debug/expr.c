@@ -148,6 +148,7 @@ int level(int type){
 int dominant(int p,int q){
         //return 1;
         int i;
+        nr_op=0;
         for(i=p;i<=q;i++){
                int count=0;
                if(tokens[i].type==LP){
