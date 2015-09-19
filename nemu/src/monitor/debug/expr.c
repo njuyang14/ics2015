@@ -188,19 +188,19 @@ int dominant(int p,int q){
         return dominant_position;
 }
 
-bool check_parenthese(int p,int q){
+int check_parenthese(int p,int q){
         int i;
         int count=0;
-        if(tokens[p].type!=LP||tokens[p].type!=RP)return false;
+        if(tokens[p].type!=LP||tokens[p].type!=RP)return 0;
         for(i=p;i<q;i++){
                if(tokens[i].type==LP)
                          count++;
                else if(tokens[i].type==RP)
                          count--;
                if(count<=0)
-                         return false;                      
+                         return 0;                      
         }
-        return true;
+        return 1;
 }
 
 uint32_t eval(int p,int q){
