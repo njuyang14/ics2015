@@ -137,7 +137,7 @@ typedef struct{
 }temp_op;
 
 temp_op operator[32];
-int nr_op=0;
+int nr_op;
 
 int level(int type){
         if(type==PLU||type==MIN)return 1;
@@ -197,7 +197,7 @@ bool check_parenthese(int p,int q){
 }
 
 uint32_t eval(int p,int q){
-	uint32_t v=0;
+       //uint32_t v=0;
         if(p>q){
                printf("bad expression");
                return 0;
@@ -218,12 +218,13 @@ uint32_t eval(int p,int q){
                uint32_t val2 = eval(op + 1, q);
                 
                //printf("%s\n",tokens[op].str);
-               if(tokens[op].type==PLU)v=val1+val2;
-               else if(tokens[op].type==MIN)v=val1-val2;
-               else if(tokens[op].type==MULT)v=val1*val2;
-               else if(tokens[op].type==DIVI)v=val1/val2;  
+               if(tokens[op].type==PLU)return val1+val2;
+               else if(tokens[op].type==MIN)return val1-val2;
+               else if(tokens[op].type==MULT)return val1*val2;
+               else if(tokens[op].type==DIVI)return val1/val2;
+               else assert(0);  
         }
-        return v;
+     
 }
 
 
