@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-	NOTYPE = 256, EQ,NUM,PLU,MIN,MULT,DIVI,LP,RP,REG,HEX,
+	NOTYPE = 256, EQ,NUM,PLU,MIN,MULT,DIVI,LP,RP,REG,HEX,NEGA,
         
 	/* TODO: Add more token types */
 
@@ -268,6 +268,11 @@ uint32_t eval(int p,int q){
                           val=swaddr_read(addr,4);
                           return val;
               }
+              else if(tokens[p-1].type==NEGA){
+                          uint32_t val;
+                          sscanf(tokens[p].str,"%d",&val); 
+                          return -val;
+              }
               else return 0;
         }
 	else if(check_parenthese(p,q)==1){
@@ -275,18 +280,23 @@ uint32_t eval(int p,int q){
                return eval(p+1,q-1);
         }
         else{
-               int op=dominant(p,q);
-               printf("op=%d\n",op);
-               uint32_t val1 = eval(p, op - 1);
-               uint32_t val2 = eval(op + 1, q);
-               int op_type=tokens[op].type;
+               if(tokens[p].type==NEGA){
+                         return eval(p+1,q);
+               }
+               else{
+                         int op=dominant(p,q);
+                         printf("op=%d\n",op);
+                         uint32_t val1 = eval(p, op - 1);
+                         uint32_t val2 = eval(op + 1, q);
+                         int op_type=tokens[op].type;
   
-               printf("tokens[op]=%s\n",tokens[op].str);
-               if(op_type==PLU)return val1+val2;
-               else if(op_type==MIN)return val1-val2;
-               else if(op_type==MULT)return val1*val2;
-               else if(op_type==DIVI)return val1/val2;
-               else assert(0);  
+                         printf("tokens[op]=%s\n",tokens[op].str);
+                         if(op_type==PLU)return val1+val2;
+                         else if(op_type==MIN)return val1-val2;
+                         else if(op_type==MULT)return val1*val2;
+                         else if(op_type==DIVI)return val1/val2;
+                         else assert(0);  
+               }
         }
      
 }
@@ -297,11 +307,17 @@ uint32_t expr(char *e, bool *success) {
 		*success = false;
 		return 0;
 	}
+
         //test tokens[32].
-        int j;
-        for(j=0;j<=nr_token;j++)
-                printf("%s ",tokens[j].str);
+        int i;
+        for(i=0;i<=nr_token;i++){
+                if(tokens[i].type == MIN && (i == 0 || tokens[i - 1].type == PLU||tokens[i - 1].type ==MIN||tokens[i - 1].type ==MULT||tokens[i - 1].type ==DIVI||tokens[i - 1].type ==LP )){
+		tokens[i].type = NEGA;
+                }
+                printf("%s ",tokens[i].str);
+        }
         printf("\n");
+
         
         uint32_t result=eval(0,nr_token-1);
 	/* TODO: Insert codes to evaluate the expression. */
