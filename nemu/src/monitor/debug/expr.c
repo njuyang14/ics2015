@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-	NOTYPE = 256, EQ,NUM,PLU,MIN,MULT,DIVI,LP,RP,REG,HEX,NEGA,
+	NOTYPE = 256, EQ,NUM,PLU,MIN,MULT,DIVI,LP,RP,REG,HEX,NEGA,POINT,
         
 	/* TODO: Add more token types */
 
@@ -283,7 +283,7 @@ uint32_t eval(int p,int q){
                return eval(p+1,q-1);
         }
         else{
-               if(tokens[p].type==NEGA){
+               if(tokens[p].type==NEGA||tokens[p].type==POINT){
                          return eval(p+1,q);
                }
                else{
@@ -321,6 +321,11 @@ uint32_t expr(char *e, bool *success) {
         }
         printf("\n");
 
+        for(i=0;i<=nr_token;i++){
+                if(tokens[i].type == MULT && (i == 0 || tokens[i - 1].type == PLU||tokens[i - 1].type ==MIN||tokens[i - 1].type ==MULT||tokens[i - 1].type ==DIVI||tokens[i - 1].type ==LP )){
+                tokens[i].type =POINT ;
+                }
+        }
         
         uint32_t result=eval(0,nr_token-1);
 	/* TODO: Insert codes to evaluate the expression. */
