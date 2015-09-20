@@ -52,11 +52,11 @@ void init_regex(){
 		ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
 		if(ret != 0) {
 			regerror(ret, &re[i], error_msg, 128);
-<<<<<<< HEAD
+
 			Assert(ret != 0, "regex compilation failed: %s\n%s", error_msg, rules[i].regex);        //regcomp():compile the regex.
-=======
+
 			Assert(ret == 0, "regex compilation failed: %s\n%s", error_msg, rules[i].regex);
->>>>>>> 733c316c6ae82343693cee6ba523c97fdf15307d
+
 		}
 	}
 }
