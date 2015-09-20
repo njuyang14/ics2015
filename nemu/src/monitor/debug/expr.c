@@ -165,6 +165,7 @@ typedef struct{
 int level(int type){
         if(type==PLU||type==MIN)return 1;
         else if(type==MULT||type==DIVI)return 2;
+        else if(type==NEGA)return 5;
         else return 10;
 }
 
