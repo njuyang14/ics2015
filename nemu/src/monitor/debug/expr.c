@@ -230,9 +230,16 @@ uint32_t eval(int p,int q){
                }
         else if(p==q){
                if(tokens[p].type==NUM){
-               uint32_t val;
-               sscanf(tokens[p].str,"%d",&val);
-               return val;
+                    if(tokens[p-1].type==NEGA){
+                          uint32_t val;
+                          sscanf(tokens[p].str,"%d",&val);
+                          return -val;
+                    }
+                    else{
+                          uint32_t val;
+                          sscanf(tokens[p].str,"%d",&val);
+                          return val;
+                    }
                }
                else if(tokens[p].type==REG){
                           if(strcmp(tokens[p].str,"eax")==0){
@@ -268,11 +275,6 @@ uint32_t eval(int p,int q){
                           sscanf(tokens[p].str,"%x",&addr);
                           val=swaddr_read(addr,4);
                           return val;
-              }
-              else if(tokens[p-1].type==NEGA){
-                          uint32_t val;
-                          sscanf(tokens[p].str,"%d",&val); 
-                          return -val;
               }
               else return 0;
         }
