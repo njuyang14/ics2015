@@ -45,7 +45,7 @@ void printwatch(){
         {
               WP *temp;
               for(temp=head;temp!=NULL;temp=temp->next){
-                  printf("%d        %s        %x\n",temp->NO,temp->str,temp->val);
+                  printf("%d            %s          %x\n",temp->NO,temp->str,temp->val);
               }
         }
 
@@ -56,15 +56,20 @@ int wp_check(){
          int flag=0;
          bool success=true;
          if(head!=NULL){
-         WP*p=head;
-         uint32_t v=expr(p->str,&success);
-         for(;p!=NULL;p=p->next)
-         {
-               if(p->val!=v){
-                    flag=1; 
-                    break;
-               }
+                WP*p=head;
+                uint32_t v=expr(p->str,&success);
+                for(;p!=NULL;p=p->next){
+                      if(p->val!=v){
+                      flag=1; 
+                      break;
+                      }
+                }
          }
+         if(flag==1){
+                WP*q=head;
+                for(;q!=NULL;q=q->next){
+                       q->val=expr(q->str,&success);
+                }
          }
          return flag;
 }
