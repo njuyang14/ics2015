@@ -65,21 +65,15 @@ int wp_check(){
          int flag=0;
          bool success=true;
          WP*p=head;
-         uint32_t v=expr(p->str,&success);
          if(head!=NULL){
                 for(;p!=NULL;p=p->next){
-                      if(p->val!=v){
-                      flag=1; 
-                      p->val=v;
+                      uint32_t new_val=expr(p->str,&success);
+                      if(p->val!=new_val){
+                      flag=1;
+                      p->val=new_val;
                       }
                 }
          }
-         /*if(flag==1){
-                WP*q=head;
-                for(;q!=NULL;q=q->next){
-                       q->val=expr(q->str,&success);
-                }
-         }*/
          return flag;
 }
 
