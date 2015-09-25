@@ -15,6 +15,7 @@ int exec(swaddr_t);
 
 char assembly[80];
 char asm_buf[128];
+int wp_check();
 
 /* Used with exception handling. */
 jmp_buf jbuf;
@@ -73,8 +74,8 @@ void cpu_exec(volatile uint32_t n) {
 #endif
 
 		/* TODO: check watchpoints here. */
-
-
+                if(wp_check()==1)
+                       nemu_state=STOP;
 		if(nemu_state != RUNNING) { return; }
 	}
 

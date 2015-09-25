@@ -57,6 +57,7 @@ static int cmd_si(char *args){
         return 0;
 }
 
+void printwatch();
 static int cmd_info(char *args){
         if(strcmp(args,"r")==0){
                 printf("eax\t%p\t%x\n",&cpu.eax,cpu.eax);
@@ -71,7 +72,8 @@ static int cmd_info(char *args){
                 printf("xxx\n");     
         }//finish the 32bit register.
         else if(strcmp(args,"w")==0){
-        printf("waiting...");
+               printf("NO    What     value");
+               printwatch();
         }
         return 0;     
 }
@@ -110,6 +112,13 @@ static int cmd_p(char *args){
        return 0;
 }
 
+void new_wp(char *ex,uint32_t content);
+static int cmd_w(char *args){
+        bool success=1;
+        uint32_t pointdata=expr(args,&success);
+        new_wp(args,pointdata);                 
+        return 0;
+}
 static struct {
 	char *name;
 	char *description;
@@ -121,7 +130,8 @@ static struct {
         { "si", "single excecution: si [N]", cmd_si},
         { "i", "print register/watchpoint: i r/w", cmd_info}, 
         { "x", "examine memory: x [N] expr", cmd_x},
-        { "p", "evaluate expr: p expr", cmd_p},  
+        { "p", "evaluate expr: p expr", cmd_p},
+        { "w", "watchpoint: w expr", cmd_w},  
 	/* TODO: Add more commands */
 
 };
