@@ -83,7 +83,7 @@ static bool make_token(char *e) {
 				char *substr_start = e + position;
 				int substr_len = pmatch.rm_eo;
 
-				Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position, substr_len, substr_len, substr_start);
+				/*Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position, substr_len, substr_len, substr_start);*/
 				position += substr_len;
 
 				/* TODO: Now a new token is recognized with rules[i]. Add codes
@@ -197,10 +197,13 @@ int dominant(int p,int q){
                }
         }
 
-        int t;
+        /*int t;
         for(t=0;t<nr_op;t++){
                printf("%s ",operator[t].str);
-        }
+        }*/
+        //test the dominant function.
+
+
         int dominant_position=operator[0].add;
         int k;
         for(k=0;k<nr_op-1;k++){
@@ -339,7 +342,7 @@ uint32_t eval(int p,int q){
                }
                else{
                          int op=dominant(p,q);
-                         printf("op=%d\n",op);
+                         //printf("op=%d\n",op);
                          uint32_t val1 = eval(p, op - 1);
                          uint32_t val2 = eval(op + 1, q);
                          int op_type=tokens[op].type;
@@ -368,9 +371,9 @@ uint32_t expr(char *e, bool *success) {
                 if(tokens[i].type == MIN && (i == 0 || tokens[i - 1].type == PLU||tokens[i - 1].type ==MIN||tokens[i - 1].type ==MULT||tokens[i - 1].type ==DIVI||tokens[i - 1].type ==LP )){
 		tokens[i].type = NEGA;
                 }
-                printf("%s ",tokens[i].str);
+                //printf("%s ",tokens[i].str);
         }
-        printf("\n");
+        //printf("\n");
 
         for(i=0;i<=nr_token;i++){
                 if(tokens[i].type == MULT && (i == 0 || tokens[i - 1].type == PLU||tokens[i - 1].type ==MIN||tokens[i - 1].type ==MULT||tokens[i - 1].type ==DIVI||tokens[i - 1].type ==LP )){
