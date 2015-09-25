@@ -22,6 +22,8 @@ void init_wp_list() {
 
 void new_wp(char *ex,uint32_t content){
         WP *p=free_;
+        strcpy(p->str,ex);
+        p->val=content;
         free_=free_->next;
         p->next=head;
         head=p;
