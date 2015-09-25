@@ -53,6 +53,7 @@ void printwatch(){
 int wp_check(){
          int flag=0;
          bool success=true;
+         if(head!=NULL){
          WP*p=head;
          uint32_t v=expr(p->str,&success);
          for(;p!=NULL;p=p->next)
@@ -61,6 +62,7 @@ int wp_check(){
                     flag=1; 
                     break;
                }
+         }
          }
          return flag;
 }
