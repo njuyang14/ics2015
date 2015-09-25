@@ -229,7 +229,7 @@ int check_parenthese(int p,int q){
 uint32_t eval(int p,int q){
        //uint32_t v=0;
         if(p>q){
-               printf("bad expression");
+               printf("bad expression in eval()");
                return 0;
                }
         else if(p==q){
