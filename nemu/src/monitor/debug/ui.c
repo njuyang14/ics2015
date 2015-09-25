@@ -123,6 +123,7 @@ static int cmd_w(char *args){
 void free_del(int n);
 static int cmd_d(char *args){
         int no=atoi(args);
+        printf("no=%d\n",no);
         free_del(no);
         return 0;
 }
