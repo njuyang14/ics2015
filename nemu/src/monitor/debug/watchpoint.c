@@ -33,12 +33,39 @@ void new_wp(char *ex,uint32_t content){
 
 
 void free_wp(WP *wp){
-        WP*p=head;
-        if(head!=NULL){
-              head=p->next;
-              p->next=free_;
-              free_=p;
+        if(wp==head){
+              WP*p=head;
+              if(head!=NULL){
+                     head=p->next;
+                     p->next=free_;
+                     free_=p;
+              }
         }
+        else if(wp->next==NULL){
+              WP*p=head;
+              for(;p!=NULL;p=p->next){
+                     if(p->next->NO==wp->NO){
+                            WP*temp=p->next;
+                            p=NULL;
+                            temp->next=free_;
+                            free_=temp;
+                            break;
+                     }
+              }
+   
+        }
+        else{
+              WP*p=head;
+              for(;p->next!=NULL;p=p->next){
+                     if(p->next->NO==wp->NO){
+                            WP*temp=p->next;
+                            p=temp->next;
+                            temp->next=free_;
+                            free_=temp;
+                            break;
+                     }
+              }
+        } 
 }
 
 void free_del(int n){
