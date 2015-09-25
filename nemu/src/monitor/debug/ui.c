@@ -72,7 +72,7 @@ static int cmd_info(char *args){
                 printf("xxx\n");     
         }//finish the 32bit register.
         else if(strcmp(args,"w")==0){
-               printf("NO    What     value");
+               printf("NO           What           value\n");
                printwatch();
         }
         return 0;     
