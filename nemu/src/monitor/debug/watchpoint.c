@@ -55,7 +55,7 @@ int wp_check(){
          bool success=true;
          WP*p=head;
          uint32_t v=expr(p->str,&success);
-         for(;p->next!=NULL;p=p->next)
+         for(;p!=NULL;p=p->next)
          {
                if(p->val!=v){
                     flag=1; 
