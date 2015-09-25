@@ -119,6 +119,14 @@ static int cmd_w(char *args){
         new_wp(args,pointdata);                 
         return 0;
 }
+
+void free_del(int n);
+static int cmd_d(char *args){
+        int no=atoi(args);
+        free_del(no);
+        return 0;
+}
+
 static struct {
 	char *name;
 	char *description;
@@ -132,6 +140,7 @@ static struct {
         { "x", "examine memory: x [N] expr", cmd_x},
         { "p", "evaluate expr: p expr", cmd_p},
         { "w", "watchpoint: w expr", cmd_w},  
+        { "d", "delete watchpoint: d [N]", cmd_d},
 	/* TODO: Add more commands */
 
 };

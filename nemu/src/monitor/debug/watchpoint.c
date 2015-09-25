@@ -34,11 +34,20 @@ void new_wp(char *ex,uint32_t content){
 
 void free_wp(WP *wp){
         WP*p=head;
-        head=p->next;
-        p->next=free_;
-        free_=p;
+        if(head!=NULL){
+              head=p->next;
+              p->next=free_;
+              free_=p;
+        }
 }
 
+void free_del(int n){
+        WP*p=head;
+        for(;p!=NULL;p=p->next){
+              if(n==p->NO)break;
+        }
+        free_wp(p);
+}
 
 void printwatch(){
         if(head!=NULL)
