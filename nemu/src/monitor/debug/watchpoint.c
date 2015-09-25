@@ -45,10 +45,9 @@ void free_wp(WP *wp){
               WP*p=head;
               for(;p!=NULL;p=p->next){
                      if(p->next->NO==wp->NO){
-                            WP*temp=p->next;
-                            p=NULL;
-                            temp->next=free_;
-                            free_=temp;
+                            p->next=NULL;
+                            wp->next=free_;
+                            free_=wp;
                             break;
                      }
               }
@@ -58,10 +57,10 @@ void free_wp(WP *wp){
               WP*p=head;
               for(;p->next!=NULL;p=p->next){
                      if(p->next->NO==wp->NO){
-                            WP*temp=p->next;
-                            p=temp->next;
-                            temp->next=free_;
-                            free_=temp;
+                            //wp=p->next;
+                            p=wp->next;
+                            wp->next=free_;
+                            free_=wp;
                             break;
                      }
               }
