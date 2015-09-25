@@ -57,29 +57,29 @@ void printwatch(){
                   printf("%d            %s          %x\n",temp->NO,temp->str,temp->val);
               }
         }
-
- 
+        else
+             printf("There is no watchpoint.\n");
 }
 
 int wp_check(){
          int flag=0;
          bool success=true;
+         WP*p=head;
+         uint32_t v=expr(p->str,&success);
          if(head!=NULL){
-                WP*p=head;
-                uint32_t v=expr(p->str,&success);
                 for(;p!=NULL;p=p->next){
                       if(p->val!=v){
                       flag=1; 
-                      break;
+                      p->val=v;
                       }
                 }
          }
-         if(flag==1){
+         /*if(flag==1){
                 WP*q=head;
                 for(;q!=NULL;q=q->next){
                        q->val=expr(q->str,&success);
                 }
-         }
+         }*/
          return flag;
 }
 
