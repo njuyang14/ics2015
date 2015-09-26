@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-	NOTYPE = 256, EQ,NUM,PLU,MIN,MULT,DIVI,LP,RP,REG,HEX,NEGA,POINT,
+	NOTYPE = 256, EQ,NUM,PLU,MIN,MULT,DIVI,LP,RP,REG,HEX,NEGA,POINT,NOT,AND,OR,NOTEQ,
         
 	/* TODO: Add more token types */
 
@@ -32,8 +32,12 @@ static struct rule {
         {"\\)", RP},
         {"\\$[a-zA-Z]{2,3}", REG},  
         {"0[xX][0-9a-fA-F]+", HEX},
-        {"[0-9]+",  NUM}, 
-	{"==", EQ}						// equal
+        {"[0-9]+",  NUM},
+        {"\\!\\=",  NOTEQ},
+        {"\\!",  NOT},
+        {"\\&&",  AND},
+        {"\\|\\|",  OR}, 
+	{"\\=\\=", EQ}						// equal
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -142,7 +146,26 @@ static bool make_token(char *e) {
                                                   strncpy(tokens[nr_token].str,substr_start,substr_len);
                                                   tokens[nr_token].type=HEX;
                                                   break;}
-
+                                        case(NOT):{
+                                                  strncpy(tokens[nr_token].str,substr_start,substr_len);
+                                                  tokens[nr_token].type=NOT;
+                                                  break;}
+                                        case(AND):{
+                                                  strncpy(tokens[nr_token].str,substr_start,substr_len);
+                                                  tokens[nr_token].type=AND;
+                                                  break;}
+                                        case(NOTEQ):{
+                                                  strncpy(tokens[nr_token].str,substr_start,substr_len);
+                                                  tokens[nr_token].type=NOTEQ;
+                                                  break;}
+                                        case(EQ):{
+                                                  strncpy(tokens[nr_token].str,substr_start,substr_len);
+                                                  tokens[nr_token].type=EQ;
+                                                  break;}
+                                        case(OR):{
+                                                  strncpy(tokens[nr_token].str,substr_start,substr_len);
+                                                  tokens[nr_token].type=OR;
+                                                  break;}
 					default: panic("please implement me");
 				}
                                 nr_token++;
@@ -167,9 +190,13 @@ typedef struct{
 
 
 int level(int type){
-        if(type==PLU||type==MIN)return 1;
-        else if(type==MULT||type==DIVI)return 2;
-        else if(type==NEGA)return 5;
+        if(type==PLU||type==MIN)return 5;
+        else if(type==EQ||type==NOTEQ)return 3;//  ==
+        else if(type==OR)return 1;//  ||
+        else if(type==AND)return 2;//  &&
+        else if(type==NOT)return 7;//  !
+        else if(type==MULT||type==DIVI)return 6;
+        else if(type==NEGA||type==POINT)return 7;//  - *
         else return 10;
 }
 
@@ -337,7 +364,7 @@ uint32_t eval(int p,int q){
                return eval(p+1,q-1);
         }
         else{
-               if(tokens[p].type==NEGA||tokens[p].type==POINT){
+               if(tokens[p].type==NEGA||tokens[p].type==POINT||tokens[p].type==NOT){
                          return eval(p+1,q);
                }
                else{
@@ -352,6 +379,7 @@ uint32_t eval(int p,int q){
                          else if(op_type==MIN)return val1-val2;
                          else if(op_type==MULT)return val1*val2;
                          else if(op_type==DIVI)return val1/val2;
+                         //else if(op_type==)
                          else assert(0);  
                }
         }
