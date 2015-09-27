@@ -416,13 +416,13 @@ uint32_t eval(int p,int q){
         }
         else{
                          int op=dominant(p,q);
-                         printf("op=%d\n",op);
+                         //printf("op=%d\n",op);
                if(op!=p){
                          uint32_t val1 = eval(p, op - 1);
                          uint32_t val2 = eval(op + 1, q);
                          int op_type=tokens[op].type;
   
-                         printf("tokens[op]=%s\n",tokens[op].str);
+                         //printf("tokens[op]=%s\n",tokens[op].str);
                          if(op_type==PLU)return val1+val2;
                          else if(op_type==MIN)return val1-val2;
                          else if(op_type==MULT)return val1*val2;
