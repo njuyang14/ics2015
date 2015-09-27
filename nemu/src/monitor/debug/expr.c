@@ -276,8 +276,10 @@ uint32_t eval(int p,int q){
                    // }
                }
                else if(tokens[p].type==REG){
+                          swaddr_t addr;
+                          sscanf(tokens[p].str,"%x",&addr);
                           if(strcmp(tokens[p].str,"eax")==0){
-                                      return cpu.eax;
+                                      return swaddr_read(addr,4);
                           }
                           else if(strcmp(tokens[p].str,"edx")==0){
                                       return cpu.edx;
