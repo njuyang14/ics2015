@@ -80,7 +80,7 @@ void printwatch(){
         {
               WP *temp;
               for(temp=head;temp!=NULL;temp=temp->next){
-                  printf("%d            %s          %x\n",temp->NO,temp->str,temp->val);
+                  printf("%d\t\t%s\t\t%x\n",temp->NO,temp->str,temp->val);
               }
         }
         else

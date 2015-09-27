@@ -354,7 +354,7 @@ uint32_t eval(int p,int q){
                           else 
                                       return 0;
               }
-              else if(tokens[p].type==HEX&&tokens[p-1].type!=POINT){
+              else if(tokens[p].type==HEX){
                           uint32_t val;
                           //swaddr_t addr;
                           sscanf(tokens[p].str,"%x",&val);

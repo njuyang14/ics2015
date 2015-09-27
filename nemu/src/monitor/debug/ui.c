@@ -87,7 +87,7 @@ static int cmd_info(char *args){
                 printf("bh\t%p\t%x\n",&cpu.gpr[3]._8[1],cpu.gpr[3]._8[1]);
         }//finish the 32bit register.
         else if(strcmp(args,"w")==0){
-               printf("NO           What           value\n");
+               printf("NO\t\tWhat\t\tvalue\n");
                printwatch();
         }
         return 0;     
