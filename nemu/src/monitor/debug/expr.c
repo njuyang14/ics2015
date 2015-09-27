@@ -309,7 +309,7 @@ uint32_t eval(int p,int q){
                           sscanf(tokens[p].str,"%x",&val);
                           return val;
               }
-              else if((tokens[p].type==HEX||tokens[p].type==REG)&&tokens[p-1].type==POINT){
+/*              else if((tokens[p].type==HEX||tokens[p].type==REG)&&tokens[p-1].type==POINT){
               swaddr_t addr;
               if(tokens[p].type==HEX){
                           //uint32_t val;
@@ -356,7 +356,7 @@ uint32_t eval(int p,int q){
               }
                           return swaddr_read(addr,4);
 
-              }
+              }*/
               else return 0;
         }
 	else if(check_parenthese(p,q)==1){
@@ -364,8 +364,15 @@ uint32_t eval(int p,int q){
                return eval(p+1,q-1);
         }
         else{
-               if(tokens[p].type==NEGA||tokens[p].type==POINT||tokens[p].type==NOT){
-                         return eval(p+1,q);
+               if(tokens[p].type==NEGA){
+                         return -eval(p+1,q);
+               }
+               else if(tokens[p].type==POINT){
+                         swaddr_t temp=eval(p+1,q);
+                         return swaddr_read(temp,4);
+               }
+               else if(tokens[p].type==NOT){
+                         return (eval(p+1,q)==0)?1:0;
                }
                else{
                          int op=dominant(p,q);
@@ -378,10 +385,9 @@ uint32_t eval(int p,int q){
                          if(op_type==PLU)return val1+val2;
                          else if(op_type==MIN)return val1-val2;
                          else if(op_type==MULT)return val1*val2;
-                         else if(op_type==DIVI)return val1/val2;
-                         //else if(op_type==)
+                         else if(op_type==DIVI)return val1/val2; 
                          else assert(0);  
-               }
+              }
         }
      
 }
