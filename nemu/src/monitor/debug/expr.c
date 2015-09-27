@@ -264,16 +264,16 @@ uint32_t eval(int p,int q){
                }
         else if(p==q){
                if(tokens[p].type==NUM){
-                    if(tokens[p-1].type==NEGA){
+                    /*if(tokens[p-1].type==NEGA){
                           uint32_t val;
                           sscanf(tokens[p].str,"%d",&val);
                           return -val;
                     }
-                    else{
+                    else{*/
                           uint32_t val;
                           sscanf(tokens[p].str,"%d",&val);
                           return val;
-                    }
+                   // }
                }
                else if(tokens[p].type==REG){
                           if(strcmp(tokens[p].str,"eax")==0){
