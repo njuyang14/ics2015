@@ -376,18 +376,34 @@ uint32_t eval(int p,int q){
                          else if(op_type==MIN)return val1-val2;
                          else if(op_type==MULT)return val1*val2;
                          else if(op_type==DIVI)return val1/val2; 
+                         else if(op_type==EQ){
+                                  if(val1==val2)return 1;
+                                  else return 0;
+                         }
+                         else if(op_type==NOTEQ){
+                                  if(val1==val2)return 0;
+                                  else return 1;
+                         }
+                         else if(op_type==AND){
+                                  if(val1==1&&val2==1)return 1;
+                                  else return 0;
+                         }
+                         else if(op_type==OR){
+                                  if(val1==1||val2==1)return 1;
+                                  else return 0;
+                         }
                          else assert(0);  
               }
-               if(tokens[p].type==NEGA){
+              if(tokens[p].type==NEGA){
                          return -eval(p+1,q);
-               }
-               else if(tokens[p].type==POINT){
+              }
+              else if(tokens[p].type==POINT){
                          swaddr_t temp=eval(p+1,q);
                          return swaddr_read(temp,4);
-               }
-               else if(tokens[p].type==NOT){
+              }
+              else if(tokens[p].type==NOT){
                          return (eval(p+1,q)==0)?1:0;
-               }
+              }
 
         }
       return 0;
