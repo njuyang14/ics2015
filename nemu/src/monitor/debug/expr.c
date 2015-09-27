@@ -376,7 +376,7 @@ uint32_t eval(int p,int q){
                }
                else{
                          int op=dominant(p,q);
-                         //printf("op=%d\n",op);
+                         printf("op=%d\n",op);
                          uint32_t val1 = eval(p, op - 1);
                          uint32_t val2 = eval(op + 1, q);
                          int op_type=tokens[op].type;
