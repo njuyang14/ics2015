@@ -282,7 +282,7 @@ uint32_t eval(int p,int q){
                                       return swaddr_read(addr,4);
                           }
                           else if(strcmp(tokens[p].str,"edx")==0){
-                                      return cpu.edx;
+                                      return swaddr_read(addr,4);
                           }
                           else if(strcmp(tokens[p].str,"ecx")==0){
                                       return cpu.ecx;
