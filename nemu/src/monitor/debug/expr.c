@@ -364,19 +364,9 @@ uint32_t eval(int p,int q){
                return eval(p+1,q-1);
         }
         else{
-               if(tokens[p].type==NEGA){
-                         return -eval(p+1,q);
-               }
-               else if(tokens[p].type==POINT){
-                         swaddr_t temp=eval(p+1,q);
-                         return swaddr_read(temp,4);
-               }
-               else if(tokens[p].type==NOT){
-                         return (eval(p+1,q)==0)?1:0;
-               }
-               else{
                          int op=dominant(p,q);
                          printf("op=%d\n",op);
+               if(op!=p){
                          uint32_t val1 = eval(p, op - 1);
                          uint32_t val2 = eval(op + 1, q);
                          int op_type=tokens[op].type;
@@ -388,7 +378,19 @@ uint32_t eval(int p,int q){
                          else if(op_type==DIVI)return val1/val2; 
                          else assert(0);  
               }
+               if(tokens[p].type==NEGA){
+                         return -eval(p+1,q);
+               }
+               else if(tokens[p].type==POINT){
+                         swaddr_t temp=eval(p+1,q);
+                         return swaddr_read(temp,4);
+               }
+               else if(tokens[p].type==NOT){
+                         return (eval(p+1,q)==0)?1:0;
+               }
+
         }
+      return 0;
      
 }
 
