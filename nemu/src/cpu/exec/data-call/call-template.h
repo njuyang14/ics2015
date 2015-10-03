@@ -10,7 +10,7 @@
 //make_instr_helper(rel32)
 
 make_helper(concat(call_rel32_, SUFFIX)){
-        print_asm_template2();  
+        print_asm_template1();  
         return 5; 
 }
 
