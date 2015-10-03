@@ -4,6 +4,9 @@
 #include "data-mov/xchg.h"
 
 #include "data-sub/sub.h"
+#include "data-cmp/cmp.h"
+
+
 
 #include "arith/dec.h"
 #include "arith/inc.h"
