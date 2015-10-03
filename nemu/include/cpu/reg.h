@@ -26,6 +26,18 @@ typedef struct {
 
 	struct {uint32_t eax, ecx, edx, ebx, esp, ebp, esi, edi;};
         };
+        union{
+               uint32_t eflag;
+               struct{
+                       unsigned CF:1;
+                       unsigned PF:1;
+                       unsigned ZF:1;
+                       unsigned SF:1;
+                       unsigned IF:1;
+                       unsigned DF:1;
+                       unsigned OF:1;
+               };
+        };
 	swaddr_t eip;
 
 } CPU_state;
