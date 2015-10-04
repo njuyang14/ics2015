@@ -10,7 +10,7 @@
 //make_instr_helper(rel32)
 
 make_helper(concat(call_rel32_, SUFFIX)){
-        eip+=instr_fetch(eip+1,4);
+        cpu.eip+=instr_fetch(cpu.eip+1,4);
         print_asm_template1();  
         return 5; 
 }
