@@ -3,7 +3,14 @@
 #define instr cmp
 
 static void do_execute() {
-        OPERAND_W(op_dest, op_src->val);
+        //OPERAND_W(op_dest, op_src->val);
+        swaddr_t temp=op_src->val-op_dest->val;
+        if(temp==0){
+               cpu.EFLAGS.ZF=1;
+        }
+        else{
+               cpu.EFLAGS.ZF=0;
+        }
         print_asm_template2();
 }
 
