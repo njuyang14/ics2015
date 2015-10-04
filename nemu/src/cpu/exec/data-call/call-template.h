@@ -10,6 +10,7 @@
 //make_instr_helper(rel32)
 
 make_helper(concat(call_rel32_, SUFFIX)){
+        MEM_W(cpu.esp,cpu.eip);
         swaddr_t temp_addr=instr_fetch(cpu.eip+1,4);
         cpu.eip=cpu.eip+temp_addr;
         print_asm_template1();  
