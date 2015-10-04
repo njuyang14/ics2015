@@ -10,8 +10,6 @@ static void do_execute() {
 make_instr_helper(r)
 
 /*make_helper(concat(push_r_, SUFFIX)){
-        //swaddr_t temp_addr=instr_fetch(cpu.eip+1,4);
-        //cpu.eip=cpu.eip+temp_addr;
         print_asm_template1();
         return 1;
 }*/
