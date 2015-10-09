@@ -14,7 +14,10 @@ make_helper(concat(call_rel32_, SUFFIX)){
         MEM_W(cpu.esp,cpu.eip);
         swaddr_t temp_addr=instr_fetch(cpu.eip+1,4);
         cpu.eip=cpu.eip+temp_addr;
-        print_asm_template1();  
+#ifdef DEBUG
+        snprintf(op_src->str, OP_STR_SIZE, "%x <main>", cpu.eip);
+#endif
+        //print_asm_template1();  
         return 5; 
 }
 
