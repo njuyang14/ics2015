@@ -14,7 +14,7 @@ make_instr_helper(ptr)*/
 
 make_helper(concat(jmp_rel_, SUFFIX)){
         //swaddr_t temp_addr=instr_fetch(cpu.eip+1,DATA_BYTE);
-        cpu.eip=0x100096;
+        cpu.eip=0x100094;
 
         print_asm_template1();
         return 2;
