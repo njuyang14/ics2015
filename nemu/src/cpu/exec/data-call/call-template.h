@@ -15,8 +15,8 @@ make_helper(concat(call_rel32_, SUFFIX)){
         swaddr_t temp_addr=instr_fetch(cpu.eip+1,4);
         cpu.eip=cpu.eip+temp_addr;
 
-        snprintf(op_src->str, OP_STR_SIZE, "%x <main>", cpu.eip);
-        //print_asm_template1();  
+        //snprintf(op_src->str, OP_STR_SIZE, "%x <main>", cpu.eip);
+        print_asm_template1();  
         return 5; 
 }
 
