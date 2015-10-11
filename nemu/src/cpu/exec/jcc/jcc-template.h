@@ -1,8 +1,9 @@
 #include "cpu/exec/template-start.h"
 
-#define instr jcc
+
 
 make_helper(concat(jbe_rel_,SUFFIX)){
+#define instr jcc
 	        if(cpu.EFLAGS.CF==1||cpu.EFLAGS.ZF==1){
 				swaddr_t temp_addr=instr_fetch(cpu.eip+1,DATA_BYTE);
 				cpu.eip=cpu.eip+temp_addr;
