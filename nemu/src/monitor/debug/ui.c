@@ -90,6 +90,17 @@ static int cmd_info(char *args){
                printf("NO\t\tWhat\t\tvalue\n");
                printwatch();
         }
+		else if(strcmp(args,"flag")==0){
+		       printf("CF\t%d\n",cpu.EFLAGS.CF);
+			   printf("PF\t%d\n",cpu.EFLAGS.PF);
+			   printf("AF\t%d\n",cpu.EFLAGS.AF);
+			   printf("ZF\t%d\n",cpu.EFLAGS.ZF);
+			   printf("SF\t%d\n",cpu.EFLAGS.SF);
+			   printf("TF\t%d\n",cpu.EFLAGS.TF);
+			   printf("IF\t%d\n",cpu.EFLAGS.IF);
+			   printf("OF\t%d\n",cpu.EFLAGS.OF);
+			   printf("CF\t%d\n",cpu.EFLAGS.CF);
+		}
         return 0;     
 }
 
