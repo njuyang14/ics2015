@@ -1,6 +1,6 @@
 #include "cpu/exec/template-start.h"
 
-//#define instr jcc
+#define instr jcc
 
 make_helper(concat(jbe_rel_,SUFFIX)){
 	        if(cpu.EFLAGS.CF==1||cpu.EFLAGS.ZF==1){
