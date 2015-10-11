@@ -5,11 +5,21 @@
 static void do_execute() {
         //OPERAND_W(op_dest, op_src->val);
         swaddr_t temp=op_dest->val-op_src->val;
+		int s_dest=op_dest->val>>31&1;
+		int s_src=op_src->val>>31&1;
+		int s_temp=temp>>31&1;
+		int dest_and_src=!(s_dest^s_src);
+		int dest_and_temp=!(s_dest^s_temp);
+		cpu.EFLAGS.OF=dest_and_src|dest_and_temp;
+		cpu.EFLAGS.SF=s_temp;
+
         if(temp==0){
                cpu.EFLAGS.ZF=1;
         }
         else{
                cpu.EFLAGS.ZF=0;
+			   if(temp<0)cpu.EFLAGS.CF=1;
+			   else if(temp>0)cpu.EFLAGS.CF=0;
         }
         print_asm_template2();
 }
