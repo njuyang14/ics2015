@@ -10,6 +10,7 @@ make_helper(concat(jbe_rel_,SUFFIX)){
 				swaddr_t temp_addr=instr_fetch(cpu.eip+1,DATA_BYTE);
 				printf("addr=%x\n",temp_addr);
 				int shift=32-(DATA_BYTE<<3);
+				printf("%d\n",shift);
 				temp_addr=(temp_addr<<shift)>>shift;
 				printf("addr=%x\n",temp_addr); 
 				cpu.eip=cpu.eip+temp_addr;
