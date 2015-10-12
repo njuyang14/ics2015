@@ -4,7 +4,7 @@
 
 make_helper(concat(jbe_rel_,SUFFIX)){
 #define instr jbe
-	        cpu.EFLAGS.CF=1;
+	        //cpu.EFLAGS.CF=1;
 	        if(cpu.EFLAGS.CF==1||cpu.EFLAGS.ZF==1){
 				printf("eip=%x\n",cpu.eip);
 				int temp_addr=instr_fetch(cpu.eip+1,DATA_BYTE);
