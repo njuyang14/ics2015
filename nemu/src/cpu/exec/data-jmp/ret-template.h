@@ -15,7 +15,7 @@ make_helper(concat(ret_imm_, SUFFIX)) {
 		cpu.esp=cpu.esp+addr;
 		if(DATA_BYTE==2)cpu.eip=cpu.eip&0x0000FFFF;
 		print_asm_template1();
-		return 1;
+		return 2;
 }
 
 
