@@ -2,7 +2,7 @@
 
 
 make_helper(concat(ret_, SUFFIX)) {
-        cpu.eip=cpu.esp;
+        MEM_W(cpu.eip,MEM_R(cpu.esp));
 		cpu.esp=cpu.esp+DATA_BYTE;
 		if(DATA_BYTE==2)cpu.eip=cpu.eip&0x0000FFFF;
 		print_asm("ret\n");
