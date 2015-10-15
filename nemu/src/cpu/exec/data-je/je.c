@@ -15,4 +15,4 @@
 /* for instruction encoding overloading */
 
 
-make_helper_v(je_rel8)
+//make_helper_v(je_rel8)
