@@ -11,7 +11,7 @@
 
 make_helper(concat(call_rel32_, SUFFIX)){
         cpu.esp=cpu.esp-4;
-        MEM_W(cpu.esp,cpu.eip+DATA_BYTE);
+        MEM_W(cpu.esp,cpu.eip+DATA_BYTE+1);
         swaddr_t temp_addr=instr_fetch(cpu.eip+1,4);
         cpu.eip=cpu.eip+temp_addr;
 
