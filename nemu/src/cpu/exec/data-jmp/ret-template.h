@@ -3,7 +3,7 @@
 
 make_helper(concat(ret_, SUFFIX)) {
         cpu.eip=swaddr_read(cpu.esp,DATA_BYTE);
-		printf("eip=%x\n",cpu.eip);
+		printf("eip=%x,databyte=%d\n",cpu.eip,DATA_BYTE);
 		cpu.esp=cpu.esp+DATA_BYTE;
 		if(DATA_BYTE==2)cpu.eip=cpu.eip&0x0000FFFF;
 		print_asm("ret");
