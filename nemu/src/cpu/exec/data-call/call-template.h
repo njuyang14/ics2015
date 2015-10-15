@@ -16,7 +16,7 @@ make_helper(concat(call_rel32_, SUFFIX)){
         cpu.eip=cpu.eip+temp_addr;
 
         //snprintf(op_src->str, OP_STR_SIZE, "%x <main>", cpu.eip);
-        print_asm_template1();  
+        print_asm("call %x",cpu.eip);  
         return 5; 
 }
 
