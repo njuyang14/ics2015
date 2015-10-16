@@ -15,4 +15,9 @@
 /* for instruction encoding overloading */
 
 
-make_helper_v(jbe_rel)
+make_helper_v(jcc_jbe)
+make_helper_v(jcc_jne)
+
+
+
+
