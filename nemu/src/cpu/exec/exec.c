@@ -64,22 +64,22 @@ make_group(group2_cl_v,
 
 /* 0xf6 */
 make_group(group3_b,
-	test_i2rm_b, inv, inv, inv, 
-	inv, inv, inv, inv)
+	test_i2rm_b, inv, inv, neg_rm_b, 
+	mul_rm_b, inv, inv, inv)
 
 /* 0xf7 */
 make_group(group3_v,
-	test_i2rm_v, inv, inv, inv, 
-	inv, inv, inv, inv)
+	test_i2rm_v, inv, inv, neg_rm_v, 
+	mul_rm_v, inv, inv, inv)
 
 /* 0xfe */
 make_group(group4,
-	inv, inv, inv, inv, 
+	inv, dec_rm_b, inv, inv, 
 	inv, inv, inv, inv)
 
 /* 0xff */
 make_group(group5,
-	inc_rm_b, inv, inv, inv, 
+	inc_rm_b, dec_rm_v, inv, inv, 
 	jmp_rm_v, jmp_m16_v, inc_rm_v, inv)
 
 make_group(group6,
@@ -112,8 +112,8 @@ helper_fun opcode_table [256] = {
 /* 0x3c */	cmp_i2a_b, cmp_i2a_v, inv, inv,
 /* 0x40 */	inc_r_v, inc_r_v, inc_r_v, inc_r_v,
 /* 0x44 */  inc_r_v, inc_r_v, inc_r_v, inc_r_v,
-/* 0x48 */	inv, inv, inv, inv,
-/* 0x4c */	inv, inv, inv, inv,
+/* 0x48 */	dec_r_v,dec_r_v,dec_r_v,dec_r_v,
+/* 0x4c */	dec_r_v, dec_r_v, dec_r_v, dec_r_v,
 /* 0x50 */	push_r_v, push_r_v, push_r_v, push_r_v,
 /* 0x54 */	push_r_v, push_r_v, push_r_v, push_r_v,
 /* 0x58 */	pop_r_v, pop_r_v, pop_r_v, pop_r_v,
