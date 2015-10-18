@@ -4,6 +4,8 @@
 #include "data-mov/xchg.h"
 #include "data-mov/pop.h"
 #include "data-mov/leave.h"
+#include "data-mov/movzx.h"
+
 #include "data-jmp/ret.h"
 
 #include "data-sub/sub.h"
