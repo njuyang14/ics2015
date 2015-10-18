@@ -36,7 +36,16 @@ make_helper(concat(jcc_jle_,SUFFIX)){
 				return 2;
 }
 
-
+make_helper(concat(jcc_jg_,SUFFIX)){
+	            if(cpu.EFLAGS.ZF==0||(cpu.EFLAGS.SF==cpu.EFLAGS.OF)){
+				int temp_addr=instr_fetch(cpu.eip+1,DATA_BYTE);
+				int shift=32-(DATA_BYTE<<3);
+				temp_addr=(temp_addr<<shift)>>shift;
+				cpu.eip=cpu.eip+temp_addr;
+			    }
+				print_asm("jg %x",cpu.eip);
+				return 2;
+}
 
 
 
