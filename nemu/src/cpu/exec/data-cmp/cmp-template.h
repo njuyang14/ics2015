@@ -4,7 +4,7 @@
 
 static void do_execute() {
         //OPERAND_W(op_dest, op_src->val);
-        int temp=op_dest->val-op_src->val;
+        DATA_TYPE_S temp=op_dest->val-op_src->val;
 		int s_dest=(op_dest->val>>31)&1;
 		int s_src=(op_src->val>>31)&1;
 		int s_temp=(temp>>31)&1;
