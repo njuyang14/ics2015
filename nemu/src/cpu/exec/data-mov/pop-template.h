@@ -5,8 +5,10 @@
 //#if DATA_BYTE==2||DATA_BYTE==4
 
 static void do_execute() {
-	    OPERAND_W(op_dest,MEM_R(cpu.esp));
+	    printf("src=%x,dest=%x\n",op_src->val,op_dest->val);
+	    OPERAND_W(op_src,swaddr_read(cpu.esp,DATA_BYTE));
 		cpu.esp=cpu.esp+DATA_BYTE;
+		printf("esp=%x\n",cpu.esp);
 		print_asm_template1();
 
 }
