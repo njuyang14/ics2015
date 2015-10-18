@@ -10,7 +10,7 @@ static void do_execute() {
 		int s_temp=(temp>>31)&1;
 		int dest_and_src=!(s_dest^s_src);
 		int dest_and_temp=!(s_dest^s_temp);
-		cpu.EFLAGS.OF=dest_and_src|dest_and_temp;
+		cpu.EFLAGS.OF=!(dest_and_src|dest_and_temp);
 		cpu.EFLAGS.SF=s_temp;
 
         if(temp==0){
