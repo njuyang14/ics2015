@@ -3,8 +3,16 @@
 #define instr add
 
 static void do_execute() {
-	        OPERAND_W(op_dest,op_dest->val+op_src->val);
-			        print_asm_template2();
+	        DATA_TYPE result=op_dest->val+op_src->val;
+	        OPERAND_W(op_dest,result);
+			if(result==0)cpu.EFLAGS.ZF=1;
+			else
+			    cpu.EFLAGS.ZF=0;
+			cpu.EFLAGS.SF=(result>>31)&1;
+			DATA_TYPE ssrc=(op_src->val>>31)&1;
+		    DATA_TYPE sdest=(op_dest->val>>31)&1;
+			if(ssrc==sdest&&ssrc!=cpu.EFLAGS.SF)cpu.EFLAGS.OF=1;
+			print_asm_template2();
 }
 
 make_instr_helper(rm2r)
