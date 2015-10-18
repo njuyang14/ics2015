@@ -10,7 +10,7 @@ make_helper(concat(jcc_jbe_,SUFFIX)){
 				temp_addr=(temp_addr<<shift)>>shift;
 				cpu.eip=cpu.eip+temp_addr;
             }
-			print_asm("jbe %x",cpu.eip);
+			print_asm("jbe %x",cpu.eip+DATA_BYTE);
 			return 2;
 }
 
@@ -21,7 +21,7 @@ make_helper(concat(jcc_jne_,SUFFIX)){
 				temp_addr=(temp_addr<<shift)>>shift;
 				cpu.eip=cpu.eip+temp_addr;
 		        }
-				print_asm("jne %x",cpu.eip);
+				print_asm("jne %x",cpu.eip+DATA_BYTE);
 				return 2;
 }
 
@@ -32,18 +32,18 @@ make_helper(concat(jcc_jle_,SUFFIX)){
 				temp_addr=(temp_addr<<shift)>>shift;
 		        cpu.eip=cpu.eip+temp_addr;
 				}
-				print_asm("jle %x",cpu.eip);
+				print_asm("jle %x",cpu.eip+DATA_BYTE);
 				return 2;
 }
 
 make_helper(concat(jcc_jg_,SUFFIX)){
-	            if(cpu.EFLAGS.ZF==0||(cpu.EFLAGS.SF==cpu.EFLAGS.OF)){
+	            if(cpu.EFLAGS.ZF==0&&(cpu.EFLAGS.SF==cpu.EFLAGS.OF)){
 				int temp_addr=instr_fetch(cpu.eip+1,DATA_BYTE);
 				int shift=32-(DATA_BYTE<<3);
 				temp_addr=(temp_addr<<shift)>>shift;
 				cpu.eip=cpu.eip+temp_addr;
 			    }
-				print_asm("jg %x",cpu.eip);
+				print_asm("jg %x",cpu.eip+DATA_BYTE);
 				return 2;
 }
 
