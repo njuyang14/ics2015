@@ -3,11 +3,25 @@
 #define instr xor
 
 static void do_execute () {
-	DATA_TYPE result = op_dest->val ^ op_src->val;
-	OPERAND_W(op_dest, result);
+	DATA_TYPE src=op_src->val;
+    DATA_TYPE dest=op_dest->val;
+	DATA_TYPE result=dest^src;
+
+	DATA_TYPE_S result_s=result;
+
+	OPERAND_W(op_dest,result);
+
+    cpu.EFLAGS.SF=(result_s>>(DATA_BYTE*8-1))&1;
+
+	if(result_s==0)
+		cpu.EFLAGS.ZF=1;
+	else
+		cpu.EFLAGS.ZF=0;
 
 	/* TODO: Update EFLAGS. */
-	panic("please implement me");
+	cpu.EFLAGS.CF=0;
+	cpu.EFLAGS.OF=0;
+	//panic("please implement me");
 
 	print_asm_template2();
 }
