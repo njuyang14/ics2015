@@ -12,7 +12,7 @@ make_helper(concat(jcc_jbe_,SUFFIX)){
 				cpu.eip=eip+temp_addr;
 				printf("eip=%x\n",cpu.eip);
             }
-			print_asm("jbe %x",eip+DATA_BYTE+1);
+			print_asm("jbe %x",cpu.eip+DATA_BYTE+1);
 			return DATA_BYTE+1;
 }
 
