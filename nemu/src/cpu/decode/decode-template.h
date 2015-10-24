@@ -32,7 +32,16 @@ make_helper(concat(decode_si_, SUFFIX)) {
 	 *
 	op_src->simm = ???
 	 */
-        op_src->simm =instr_fetch(eip,DATA_BYTE);
+        unsigned value=instr_fetch(eip,DATA_BYTE);
+		unsigned s=value>>(DATA_BYTE*8-1);
+		if(s==1){
+			value=value-(0x1<<(DATA_BYTE*8-1));
+			op_src->simm=-value;
+		}
+		else
+		{
+			op_src->simm=value;
+		}
 		//DATA_TYPE temp=op_src->simm;
 
 	//panic("please implement me");
