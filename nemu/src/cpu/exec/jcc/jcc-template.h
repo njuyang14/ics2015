@@ -9,8 +9,8 @@ make_helper(concat(jcc_jbe_,SUFFIX)){
 				int shift=32-(DATA_BYTE<<3);
 				printf("addr=%x\n",temp_addr);
 				temp_addr=(temp_addr<<shift)>>shift;
-				eip=eip+temp_addr;
-				printf("eip=%x\n",eip);
+				cpu.eip=eip+temp_addr;
+				printf("eip=%x\n",cpu.eip);
             }
 			print_asm("jbe %x",eip+DATA_BYTE+1);
 			return DATA_BYTE+1;
