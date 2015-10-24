@@ -9,13 +9,28 @@ static void do_execute() {
 		cpu.EFLAGS.ZF=1;
 	else
 	    cpu.EFLAGS.ZF=0;
+    DATA_TYPE_S result_s=result;
+	cpu.EFLAGS.SF=(result_s>>(DATA_BYTE*8-1))&1;
 
-	cpu.EFLAGS.SF=(result>>31)&1;
-	DATA_TYPE ssrc=(op_src->val>>31)&1;
-	DATA_TYPE sdest=(op_dest->val>>31)&1;
+	DATA_TYPE_S ssrc=(op_src->val>>(DATA_BYTE*8-1))&1;
+	DATA_TYPE_S sdest=(op_dest->val>>(DATA_BYTE*8-1))&1;
 	if(ssrc==sdest&&ssrc!=cpu.EFLAGS.SF)
 		cpu.EFLAGS.OF=1;
-	    print_asm_template2();
+	else
+		cpu.EFLAGS.OF=0;
+    if(cpu.EFLAGS.CF==0){
+	    if(result<op_src->val&&result<op_dest->val)
+	        cpu.EFLAGS.CF=1;
+	    else
+		    cpu.EFLAGS.CF=0;
+	}
+	else{
+		if(result<=op_src->val&&result<=op_dest->val)
+		    cpu.EFLAGS.CF=1;
+		else
+		    cpu.EFLAGS.CF=0;
+	}
+	print_asm_template2();
 }
 
 make_instr_helper(rm2r)
