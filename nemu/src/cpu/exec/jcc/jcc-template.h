@@ -4,12 +4,13 @@
 
 
 make_helper(concat(jcc_jbe_,SUFFIX)){
+	if(cpu.eip+1==eip)cpu.eip=eip;
 	        if(cpu.EFLAGS.CF==1||cpu.EFLAGS.ZF==1){
-				int temp_addr=instr_fetch(eip+1,DATA_BYTE);
+				int temp_addr=instr_fetch(cpu.eip+1,DATA_BYTE);
 				int shift=32-(DATA_BYTE<<3);
 				printf("addr=%x\n",temp_addr);
 				temp_addr=(temp_addr<<shift)>>shift;
-				cpu.eip=eip+temp_addr;
+				cpu.eip=cpu.eip+temp_addr;
 				printf("eip=%x\n",cpu.eip);
             }
 			print_asm("jbe %x",cpu.eip+DATA_BYTE+1);
