@@ -42,6 +42,7 @@
 
 #include "string/rep.h"
 #include "string/movs.h"
+#include "string/cmps.h"
 
 #include "misc/misc.h"
 
