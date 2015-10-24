@@ -10,8 +10,8 @@ make_helper(concat(jcc_jbe_,SUFFIX)){
 				temp_addr=(temp_addr<<shift)>>shift;
 				cpu.eip=cpu.eip+temp_addr;
             }
-			print_asm("jbe %x",cpu.eip+DATA_BYTE);
-			return 2;
+			print_asm("jbe %x",cpu.eip+DATA_BYTE+1);
+			return DATA_BYTE+1;
 }
 
 make_helper(concat(jcc_jne_,SUFFIX)){
