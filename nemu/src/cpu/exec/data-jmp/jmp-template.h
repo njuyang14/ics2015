@@ -7,7 +7,7 @@ make_helper(concat(jmp_rel_, SUFFIX)){
         cpu.eip=cpu.eip+temp_addr;
 		if(DATA_BYTE==2)cpu.eip=cpu.eip&0x0000FFFF;
         //printf("databute=%d\n",DATA_BYTE);
-        print_asm("%x ",cpu.eip+DATA_BYTE+1);
+        print_asm("jmp %x",cpu.eip+DATA_BYTE+1);
         return DATA_BYTE+1;
 }
 
