@@ -31,7 +31,7 @@ static struct rule {
         {"\\(", LP}, 
         {"\\)", RP},
         {"\\$[a-zA-Z]{2,3}", REG},
-		{"[a-z,0-9,A-Z,_]", VAR},	
+		{"[a-z0-9A-Z_]+", VAR},	
         {"0[xX][0-9a-fA-F]+", HEX},
         {"[0-9]+",  NUM},
         {"\\!\\=",  NOTEQ},
