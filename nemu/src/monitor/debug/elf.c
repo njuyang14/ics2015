@@ -97,7 +97,7 @@ uint32_t print_var(char *s){
 				break;
 			}
 		}
-		if(strtab[symtab[i].st_name+j]!=s[j])flag=0;
+		//if(strtab[symtab[i].st_name+j]!=s[j])flag=0;
 		if(flag==1){
 			return symtab[i].st_value;
 		}
