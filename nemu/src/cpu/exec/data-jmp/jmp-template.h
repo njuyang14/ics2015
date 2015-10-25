@@ -12,7 +12,7 @@ make_helper(concat(jmp_rel_, SUFFIX)){
 
 make_helper(concat(jmp_rm_, SUFFIX)){
 	swaddr_t temp_addr=cpu.eax;//instr_fetch(cpu.eip+1,1);
-	cpu.eip=MEM_R(temp_addr);
+	cpu.eip=temp_addr;
 	if(DATA_BYTE==2)cpu.eip=cpu.eip&0x0000FFFF;
 	print_asm("jmp %x",cpu.eip+DATA_BYTE+1);
 	return 2;
