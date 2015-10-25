@@ -31,14 +31,14 @@ static struct rule {
         {"\\(", LP}, 
         {"\\)", RP},
         {"\\$[a-zA-Z]{2,3}", REG},
-		{"[a-z0-9A-Z_]+", VAR},	
         {"0[xX][0-9a-fA-F]+", HEX},
         {"[0-9]+",  NUM},
         {"\\!\\=",  NOTEQ},
         {"\\!",  NOT},
         {"\\&&",  AND},
         {"\\|\\|",  OR}, 
-	{"\\=\\=", EQ}						// equal
+	{"\\=\\=", EQ},						// equal
+	{"[a-z0-9A-Z_]+", VAR},
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -284,7 +284,8 @@ uint32_t eval(int p,int q){
                    // }
                }
 			   else if(tokens[p].type==VAR){
-				   return print_var(tokens[p].str);
+				   uint32_t val=print_var(tokens[p].str);
+				   return val;
 				   //panic("please implement\n");
 			   }
                else if(tokens[p].type==REG){
