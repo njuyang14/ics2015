@@ -96,8 +96,10 @@ uint32_t print_var(char*str){
 		}
 	}
 	if(flag==1)return symtab[i].st_value;
-	else
+	else{
+		printf("The var is invalid.\n");
 		return 0;
+	}
 }
 
 
