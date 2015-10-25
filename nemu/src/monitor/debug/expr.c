@@ -262,6 +262,8 @@ int check_parenthese(int p,int q){
         return 1;
 }
 
+uint32_t print_var(char*str);
+
 uint32_t eval(int p,int q){
        //uint32_t v=0;
         if(p>q){
@@ -282,8 +284,9 @@ uint32_t eval(int p,int q){
                    // }
                }
 			   else if(tokens[p].type==VAR){
-
-				   panic("please implement\n");
+				   char *str=tokens[p].str;
+				   return print_var(str);
+				   //panic("please implement\n");
 			   }
                else if(tokens[p].type==REG){
                           if(strcmp(tokens[p].str,"eax")==0){
