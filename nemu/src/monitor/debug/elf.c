@@ -98,6 +98,7 @@ uint32_t print_var(char *s){
 		}
 		if(flag==1){
 			return symtab[i].st_value;
+			break;
 		}
 	}
 
