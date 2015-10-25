@@ -262,7 +262,7 @@ int check_parenthese(int p,int q){
         return 1;
 }
 
-uint32_t print_var(char*str);
+uint32_t print_var(char s[]);
 
 uint32_t eval(int p,int q){
        //uint32_t v=0;
@@ -284,8 +284,7 @@ uint32_t eval(int p,int q){
                    // }
                }
 			   else if(tokens[p].type==VAR){
-				   char *str=tokens[p].str;
-				   return print_var(str);
+				   return print_var(tokens[p].str);
 				   //panic("please implement\n");
 			   }
                else if(tokens[p].type==REG){
