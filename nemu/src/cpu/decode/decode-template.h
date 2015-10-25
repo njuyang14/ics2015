@@ -32,6 +32,8 @@ make_helper(concat(decode_si_, SUFFIX)) {
 	 *
 	op_src->simm = ???
 	 */
+
+	op_src->imm = instr_fetch(eip, DATA_BYTE);
 #if DATA_BYTE==1
     if(op_src->simm>>7==1)op_src->simm|=0xFFFFFF00;
 #endif
