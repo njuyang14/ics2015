@@ -87,7 +87,7 @@ uint32_t print_var(char *s){
 	int i=0,j=0;
 	for(;i<nr_symtab_entry;i++){
 		int flag=0;
-		for(;s[i]!='\0'&&strtab[symtab[i].st_name+j]!='\0';j++){
+		for(;s[j]!='\0'&&strtab[symtab[i].st_name+j]!='\0';j++){
 			if(strtab[symtab[i].st_name+j]==s[j]){
 				flag=1;
 			}
