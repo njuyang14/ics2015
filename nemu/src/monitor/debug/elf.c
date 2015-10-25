@@ -85,10 +85,10 @@ void load_elf_tables(int argc, char *argv[]) {
 
 uint32_t print_var(char *s){
 	int i=0,j=0;
-	for(i=0;i<nr_symtab_entry;i++){
+	for(;i<nr_symtab_entry;i++){
 		int flag=0;
 		//index=i;
-		for(j=0;s[i]!='\0'&&strtab[symtab[i].st_name+j]!='\0';j++){
+		for(;s[i]!='\0'&&strtab[symtab[i].st_name+j]!='\0';j++){
 			if(strtab[symtab[i].st_name+j]==s[j]){
 				flag=1;
 			}
