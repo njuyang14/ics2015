@@ -262,7 +262,7 @@ int check_parenthese(int p,int q){
         return 1;
 }
 
-uint32_t print_var(char s[]);
+uint32_t print_var(char *s);
 
 uint32_t eval(int p,int q){
        //uint32_t v=0;

@@ -83,7 +83,7 @@ void load_elf_tables(int argc, char *argv[]) {
 	fclose(fp);
 }
 
-uint32_t print_var(char s[]){
+uint32_t print_var(char *s){
 	int i=0,j=0;
 	for(;i<nr_symtab_entry;i++){
 		int flag=0;
