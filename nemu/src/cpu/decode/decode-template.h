@@ -32,17 +32,17 @@ make_helper(concat(decode_si_, SUFFIX)) {
 	 *
 	op_src->simm = ???
 	 */
-        unsigned value=instr_fetch(eip,DATA_BYTE);
-		unsigned s=value>>(DATA_BYTE*8-1);
-		if(s==1){
-			value=value-(0x1<<(DATA_BYTE*8-1));
-			op_src->simm=-value;
-		}
-		else
-		{
-			op_src->simm=value;
-		}
-		//DATA_TYPE temp=op_src->simm;
+#if DATA_BYTE==1
+    if(op_src->simm>>7==1)op_src->simm|=0xFFFFFF00;
+#endif
+
+#if DATA_BYTE==2
+    if(op_src->simm>>15==1)op_src->simm|=0xFFFF0000;
+#endif
+
+#if DATA_BYTE==4
+    if(op_src->simm>>31==1)op_src->simm|=0xFF000000;
+#endif
 
 	//panic("please implement me");
 
