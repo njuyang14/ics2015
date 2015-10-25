@@ -98,6 +98,8 @@ uint32_t print_var(char s[]){
 			}
 		}
 		if(flag==1){
+			i=0;
+			j=0;
 			return symtab[i].st_value;
 		}
 	}
