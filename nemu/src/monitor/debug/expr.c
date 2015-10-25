@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-	NOTYPE = 256, EQ,NUM,PLU,MIN,MULT,DIVI,LP,RP,REG,HEX,NEGA,POINT,NOT,AND,OR,NOTEQ,
+	NOTYPE = 256, EQ,NUM,PLU,MIN,MULT,DIVI,LP,RP,REG,HEX,NEGA,POINT,NOT,AND,OR,NOTEQ,VAR,
         
 	/* TODO: Add more token types */
 
@@ -30,7 +30,8 @@ static struct rule {
         {"\\/", DIVI}, 
         {"\\(", LP}, 
         {"\\)", RP},
-        {"\\$[a-zA-Z]{2,3}", REG},  
+        {"\\$[a-zA-Z]{2,3}", REG},
+		{"[a-z,0-9,A-Z,_]", VAR},	
         {"0[xX][0-9a-fA-F]+", HEX},
         {"[0-9]+",  NUM},
         {"\\!\\=",  NOTEQ},
@@ -166,6 +167,11 @@ static bool make_token(char *e) {
                                                   strncpy(tokens[nr_token].str,substr_start,substr_len);
                                                   tokens[nr_token].type=OR;
                                                   break;}
+										case(VAR):{
+													  strncpy(tokens[nr_token].str,substr_start,substr_len);
+													  tokens[nr_token].type=VAR;
+													  break;
+												  }
 					default: panic("please implement me");
 				}
                                 nr_token++;
@@ -275,6 +281,10 @@ uint32_t eval(int p,int q){
                           return val;
                    // }
                }
+			   else if(tokens[p].type==VAR){
+
+				   panic("please implement\n");
+			   }
                else if(tokens[p].type==REG){
                           if(strcmp(tokens[p].str,"eax")==0){
                                       return cpu.eax;
