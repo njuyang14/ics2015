@@ -81,14 +81,13 @@ void load_elf_tables(int argc, char *argv[]) {
 	assert(strtab != NULL && symtab != NULL);
 
 	fclose(fp);
-	printf("load elf ok\n");
 }
 
 uint32_t print_var(char s[]){
-	int i,j;
-	for(i=0;i<nr_symtab_entry;i++){
+	int i=0,j=0;
+	for(;i<nr_symtab_entry;i++){
 		int flag=0;
-		for(j=0;s[j]!='\0'&&strtab[symtab[i].st_name+j!='\0'];j++){
+		for(;s[j]!='\0'&&strtab[symtab[i].st_name+j!='\0'];j++){
 			if(strtab[symtab[i].st_name+j]==s[j]){
 				flag=1;
 			}
@@ -98,8 +97,6 @@ uint32_t print_var(char s[]){
 			}
 		}
 		if(flag==1){
-			i=0;
-			j=0;
 			return symtab[i].st_value;
 		}
 	}
