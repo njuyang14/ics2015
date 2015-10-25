@@ -88,15 +88,16 @@ uint32_t print_var(char s[]){
 	int i,j;
 	for(i=0;i<nr_symtab_entry;i++){
 		int flag=0;
-		for(j=0;j<strlen(s);j++){
-			if(strtab[symtab[i].st_name+j]!=s[j]){
+		for(j=0;s[j]!='\0'&&strtab[symtab[i].st_name+j!='\0'];j++){
+			if(strtab[symtab[i].st_name+j]==s[j]){
+				flag=1;
+			}
+			else{
 				flag=0;
 				break;
 			}
-			else
-				flag=1;
 		}
-		if(flag==1&&j==strlen(s)){
+		if(flag==1){
 			return symtab[i].st_value;
 		}
 	}
