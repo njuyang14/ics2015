@@ -122,14 +122,33 @@ void print_stack_frame(){
 			
 			  int name_addr=symtab[i].st_name;
 			  int j=0;
+			  printf("in ");
 			  while(strtab[name_addr+j]!='\0'){
-		          printf("%c ",strtab[name_addr+j]);
+		          printf("%c",strtab[name_addr+j]);
 				    j++;
 			  }
 
+			  printf("(");
+
+			  printf(")\n");
 		  }
 		  else if(symtab[i].st_info==18&&ret_addr<func_addr&&ret_addr>symtab[i].st_value){
-			  printf("func");
+		       printf("#%d ",no);
+               no++;
+
+		       printf("%x ",prebp);
+			   prebp=swaddr_read(prebp,4);
+
+			   int name_addr=symtab[i].st_name;
+			   int j=0;
+			   printf("in ");
+			   while(strtab[name_addr+j]!='\0'){
+			       printf("%c",strtab[name_addr+j]);
+			       j++;
+		       }
+
+		       printf("(");
+               printf(")\n");					  
 		  }
 	  }
 	}
