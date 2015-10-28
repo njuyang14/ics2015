@@ -109,11 +109,12 @@ uint32_t print_var(char *s){
 void print_stack_frame(){
 	int i=0,no=0;
 	uint32_t prebp=cpu.ebp;
-	//uint32_t ret_addr=swaddr_read(prebp+4,4);
 	while(prebp!=0){
 	  for(;i<nr_symtab_entry;i++){
 		  int func_addr=symtab[i].st_value+symtab[i].st_size;
+
 		  uint32_t ret_addr=swaddr_read(prebp+4,4);
+
 		  if(symtab[i].st_info==18&&cpu.eip<=func_addr&&cpu.eip>=symtab[i].st_value){
 			  printf("#%d ",no);
 			  no++;
