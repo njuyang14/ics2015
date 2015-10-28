@@ -137,7 +137,7 @@ void print_stack_frame(){
 				  k++;
 			  }
 			  printf(")\n");
-			  
+			  prebp=swaddr_read(prebp,4);
 		  }
 		  else if(symtab[i].st_info==18&&ret_addr<=func_addr&&ret_addr>=symtab[i].st_value){
 		       printf("#%d ",no);
@@ -160,10 +160,10 @@ void print_stack_frame(){
 		           temp+=4;
 				   k++;
 			   }
-               printf(")\n");	 
+               printf(")\n");
+			   prebp=swaddr_read(prebp,4);
 		  }
 	  }
-	  prebp=swaddr_read(prebp,4);
 	}
 }
 
