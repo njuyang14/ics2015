@@ -1,4 +1,5 @@
 #include "common.h"
+#include "nemu.h"
 #include <stdlib.h>
 #include <elf.h>
 
@@ -105,7 +106,34 @@ uint32_t print_var(char *s){
 	return 0;
 }
 
+void print_stack_frame(){
+	int i=0,no=0;
+	uint32_t prebp=cpu.ebp;
+	while(prebp!=0){
+	  for(;i<nr_symtab_entry;i++){
+		  uint32_t ret_addr=prebp+4;
+		  int func_addr=symtab[i].st_value+symtab[i].st_size;
+		  if(symtab[i].st_info==STT_FUNC&&cpu.eip<func_addr&&cpu.eip>symtab[i].st_value){
+			  printf("#%d ",no);
+			  no++;
 
+			  printf("%x ",prebp);
+			  prebp=swaddr_read(prebp,4);
+			
+			  int name_addr=symtab[i].st_name;
+			  int j=0;
+			  while(strtab[name_addr+j]!='\0'){
+		          printf("%c ",strtab[name_addr+j]);
+				    j++;
+			  }
+
+		  }
+		  else if(symtab[i].st_info==STT_FUNC&&ret_addr<func_addr&&ret_addr>symtab[i].st_value){
+			  printf("func");
+		  }
+	  }
+	}
+}
 
 
 
