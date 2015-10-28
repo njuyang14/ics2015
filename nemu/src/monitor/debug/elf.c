@@ -111,14 +111,13 @@ void print_stack_frame(){
 	uint32_t prebp=cpu.ebp;
 	while(prebp!=0){
 	  for(;i<nr_symtab_entry;i++){
-		  uint32_t ret_addr=prebp+4;
+		  uint32_t ret_addr=swaddr_read(prebp+4,4);
 		  int func_addr=symtab[i].st_value+symtab[i].st_size;
 		  if(symtab[i].st_info==18&&cpu.eip<func_addr&&cpu.eip>symtab[i].st_value){
 			  printf("#%d ",no);
 			  no++;
 
 			  printf("%x ",prebp);
-			  prebp=swaddr_read(prebp,4);
 			
 			  int name_addr=symtab[i].st_name;
 			  int j=0;
@@ -129,15 +128,21 @@ void print_stack_frame(){
 			  }
 
 			  printf("(");
-
+			  int k=0;
+			  uint32_t temp=prebp;
+			  while(k<4){
+				  printf("%x ",swaddr_read(temp,4));
+				  temp+=4;
+				  k++;
+			  }
 			  printf(")\n");
+			  prebp=swaddr_read(prebp,4);
 		  }
 		  else if(symtab[i].st_info==18&&ret_addr<func_addr&&ret_addr>symtab[i].st_value){
 		       printf("#%d ",no);
                no++;
 
 		       printf("%x ",prebp);
-			   prebp=swaddr_read(prebp,4);
 
 			   int name_addr=symtab[i].st_name;
 			   int j=0;
@@ -146,9 +151,10 @@ void print_stack_frame(){
 			       printf("%c",strtab[name_addr+j]);
 			       j++;
 		       }
-
 		       printf("(");
-               printf(")\n");					  
+
+               printf(")\n");	
+               prebp=swaddr_read(prebp,4);			   
 		  }
 	  }
 	}
