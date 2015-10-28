@@ -110,7 +110,7 @@ void print_stack_frame(){
 	int i=0,no=0;
 	uint32_t prebp=cpu.ebp;
     while(prebp!=0){
-	  for(;i<nr_symtab_entry;i++){
+	  while(i<nr_symtab_entry){
 		  int func_addr=symtab[i].st_value+symtab[i].st_size;
 		  uint32_t ret_addr=swaddr_read(prebp+4,4);
 		  if(symtab[i].st_info==18&&cpu.eip<=func_addr&&cpu.eip>=symtab[i].st_value){
@@ -162,6 +162,7 @@ void print_stack_frame(){
                printf(")\n");
 			   break;
 		  }
+		  i++;
 	  }
 	  prebp=swaddr_read(prebp,4);
 	}
