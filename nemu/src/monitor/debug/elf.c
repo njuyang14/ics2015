@@ -153,7 +153,13 @@ void print_stack_frame(){
 			       j++;
 		       }
 		       printf("(");
-
+               int k=0;
+			   uint32_t temp=prebp;
+			   while(k<4){
+				   printf("%x ",swaddr_read(temp+8,4));
+		           temp+=4;
+				   k++;
+			   }
                printf(")\n");	 
 		  }
 	  }
