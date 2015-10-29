@@ -135,7 +135,7 @@ void print_stack_frame(){
 				  k++;
 			  }
 			  printf(")\n");
-			  i++;
+			  //i++;
 			  break;
 		  }
 		  else if(symtab[i].st_info==18&&ret_addr<=func_addr&&ret_addr>=symtab[i].st_value){
@@ -161,7 +161,7 @@ void print_stack_frame(){
 				   k++;
 			   }
                printf(")\n");
-			   i++;
+			   //i++;
 			   break;
 		  }
 		  i++;
