@@ -113,7 +113,7 @@ void print_stack_frame(){
 	  while(i<nr_symtab_entry){
 		  int func_addr=symtab[i].st_value+symtab[i].st_size;
 		  uint32_t ret_addr=swaddr_read(prebp+4,4);
-		  if(symtab[i].st_info==18&&cpu.eip<=func_addr&&cpu.eip>=symtab[i].st_value){
+		  if(no==0&&symtab[i].st_info==18&&cpu.eip<=func_addr&&cpu.eip>=symtab[i].st_value){
 			  
 			  printf("#%d ",no);
 			  no++;
@@ -138,7 +138,7 @@ void print_stack_frame(){
 			  //i++;
 			  break;
 		  }
-		  else if(symtab[i].st_info==18&&ret_addr<=func_addr&&ret_addr>=symtab[i].st_value){
+		  else if(no>0&&symtab[i].st_info==18&&ret_addr<=func_addr&&ret_addr>=symtab[i].st_value){
 			  
 		       printf("##%d ",no);
                no++;
