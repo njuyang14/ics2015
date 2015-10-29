@@ -138,7 +138,7 @@ void print_stack_frame(){
 			  //i++;
 			  break;
 		  }
-		  else if(no>0&&symtab[i].st_info==18&&ret_addr<=func_addr&&ret_addr>=symtab[i].st_value){
+		  else if(symtab[i].st_info==18&&ret_addr<=func_addr&&ret_addr>=symtab[i].st_value){
 			  
 		       printf("##%d ",no);
                no++;
