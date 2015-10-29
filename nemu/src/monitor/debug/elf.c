@@ -167,6 +167,7 @@ void print_stack_frame(){
 		  i++;
 	  }
 	  prebp=swaddr_read(prebp,4);
+	  i=0;
 	}
 }
 
