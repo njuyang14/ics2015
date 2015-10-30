@@ -9,6 +9,10 @@ static void do_execute () {
 	/* TODO: Update EFLAGS. */
 	cpu.EFLAGS.CF=0;
 	cpu.EFLAGS.OF=0;
+	if(result==0)cpu.EFLAGS.ZF=1;
+	else
+		cpu.EFLAGS.ZF=0;
+	cpu.EFLAGS.SF=(result>>(DATA_BYTE*8-1))&1;
 	//panic("please implement me");
 	print_asm_template2();
 }

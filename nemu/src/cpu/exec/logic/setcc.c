@@ -15,4 +15,4 @@
 /* for instruction encoding overloading */
 
 
-make_helper_v(setcc_setne)
+//make_helper_v(setcc_setne)

@@ -13,7 +13,7 @@ static void do_execute () {
 	else
 		cpu.EFLAGS.ZF=0;
 
-	 cpu.EFLAGS.SF=(result>>31)&1;
+	 cpu.EFLAGS.SF=(result>>(DATA_BYTE*8-1))&1;
     //panic("please implement me");
 
 	print_asm_template2();
