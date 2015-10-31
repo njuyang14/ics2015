@@ -4,11 +4,15 @@
 
 static void do_execute() {
 	DATA_TYPE addr=op_src->val;
-	int shift=32-(DATA_BYTE<<3);
-	addr=(addr<<shift)>>shift;
-
-	if(DATA_BYTE==1)addr&=0x000000FF;
-	else if(DATA_BYTE==4)addr&=0x0000FFFF;
+	swaddr_t opcode=instr_fetch(cpu.eip+1,1);
+	if(opcode==0xb6){
+	addr=(addr<<24)>>24;
+	addr&=0x000000FF;
+	}
+	else if(opcode==0xb7){
+		addr=addr<<16>>16;
+		addr&=0x0000FFFF;
+	}
 	OPERAND_W(op_dest, addr);
 	print_asm_template2();
 }
