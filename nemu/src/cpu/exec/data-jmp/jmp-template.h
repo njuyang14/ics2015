@@ -41,8 +41,8 @@ static void do_execute() {
 		if(DATA_BYTE==2)cpu.eip=cpu.eip&0x0000FFFF;
 	}
 	else{
-		cpu.eip=op_src->val;
-		//if(DATA_BYTE==2)cpu.eip=cpu.eip&0x0000FFFF;
+		cpu.eip=op_src->val-2;
+		//To do: reason of cpu.eip-2.
 	}
 	//print_asm("jmp %x",cpu.eip+DATA_BYTE+1);
 	print_asm_template1();
