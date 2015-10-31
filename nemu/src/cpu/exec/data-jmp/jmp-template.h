@@ -42,7 +42,7 @@ static void do_execute() {
 	}
 	else{
 		cpu.eip=addr;
-		if(DATA_BYTE==2)cpu.eip=cpu.eip&0x0000FFFF;
+		//if(DATA_BYTE==2)cpu.eip=cpu.eip&0x0000FFFF;
 	}
 	//print_asm("jmp %x",cpu.eip+DATA_BYTE+1);
 	print_asm_template1();
