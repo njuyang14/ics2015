@@ -18,9 +18,11 @@ static void do_execute() {
         }
         else{
                cpu.EFLAGS.ZF=0;
-			   if(temp<0)cpu.EFLAGS.CF=1;
-			   else if(temp>0)cpu.EFLAGS.CF=0;
         }
+
+		if(op_dest->val<op_src->val)cpu.EFLAGS.CF=1;
+		else
+			cpu.EFLAGS.CF=0;
         print_asm_template2();
 }
 
