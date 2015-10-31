@@ -10,7 +10,7 @@ static void do_execute() {
 	addr&=0x000000FF;
 	}
 	else if(opcode==0xb7){
-		addr=addr<<16>>16;
+		addr=(addr<<16)>>16;
 		addr&=0x0000FFFF;
 	}
 	OPERAND_W(op_dest, addr);
