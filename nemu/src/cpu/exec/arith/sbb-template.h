@@ -30,13 +30,13 @@ static void do_execute() {
 		cpu.EFLAGS.ZF=0;
 
 	if(cpu.EFLAGS.CF==0){
-		if(dest_s<src_s)
+		if(dest<src)
 			cpu.EFLAGS.CF=1;
 		else
 			cpu.EFLAGS.CF=0;
 	}
 	else{
-		if(dest_s<=src_s)
+		if(dest<=src)
 			cpu.EFLAGS.CF=1;
 		else
 			cpu.EFLAGS.CF=0;
