@@ -3,8 +3,10 @@
 #define instr push
 
 static void do_execute() {
-        //OPERAND_W(op_dest, op_src->val);
-        cpu.esp=cpu.esp-4;
+        if(DATA_BYTE==4||DATA_BYTE==1)
+            cpu.esp=cpu.esp-4;
+		else if(DATA_BYTE==2)
+			cpu.esp=cpu.esp-2;
         MEM_W(cpu.esp,op_src->val);
         print_asm_template1();
 }
