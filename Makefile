@@ -9,7 +9,8 @@ CFLAGS := -MMD -Wall -Werror -c
 LIB_COMMON_DIR := lib-common
 NEWLIBC_DIR := $(LIB_COMMON_DIR)/newlib
 NEWLIBC := $(NEWLIBC_DIR)/libc.a
-#FLOAT := obj/$(LIB_COMMON_DIR)/FLOAT.a
+
+FLOAT := obj/$(LIB_COMMON_DIR)/FLOAT.a
 
 include config/Makefile.git
 include config/Makefile.build
@@ -53,7 +54,9 @@ clean: clean-cpp
 ##### some convinient rules #####
 
 USERPROG := obj/testcase/add-longlong
-ENTRY := $(USERPROG)
+
+#ENTRY := $(USERPROG)
+ENTRY := $(kernel_BIN)
 
 entry: $(ENTRY)
 	objcopy -S -O binary $(ENTRY) entry
