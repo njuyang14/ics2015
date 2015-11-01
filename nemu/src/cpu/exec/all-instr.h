@@ -44,6 +44,7 @@
 #include "string/movs.h"
 #include "string/cmps.h"
 #include "string/stos.h"
+#include "string/cld.h"
 
 #include "misc/misc.h"
 
