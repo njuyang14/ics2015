@@ -16,7 +16,7 @@ make_helper(concat(ret_imm_, SUFFIX)) {
 	    swaddr_t addr=instr_fetch(cpu.eip+1,DATA_BYTE);
 	    cpu.eip=swaddr_read(cpu.esp,4);
 		cpu.esp=cpu.esp+addr;
-		//if(DATA_BYTE==2)cpu.eip=cpu.eip&0x0000FFFF;
+		if(DATA_BYTE==2)cpu.eip=cpu.eip&0x0000FFFF;
 		print_asm_template1();
 		return 3;
 }
