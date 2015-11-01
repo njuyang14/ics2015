@@ -26,6 +26,6 @@ make_helper(concat(cmps_m_, SUFFIX)) {
 		else if(temp>0)cpu.EFLAGS.CF=0;
 	}
 	print_asm("cmps");
-	return 1;
+	return DATA_BYTE;
 }
 #include "cpu/exec/template-end.h"
