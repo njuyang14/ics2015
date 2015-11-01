@@ -1,5 +1,5 @@
 #include "cpu/exec/template-start.h"
-
+#define instr ret
 
 make_helper(concat(ret_, SUFFIX)) {
         cpu.eip=swaddr_read(cpu.esp,4);
