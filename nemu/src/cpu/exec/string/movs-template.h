@@ -24,7 +24,7 @@ make_helper(concat(movs_m_, SUFFIX)) {
 			cpu.edi-=2;
 		}
 	}
-	else if(DATA_BYTE==2){
+	else if(DATA_BYTE==4){
 	    if(cpu.EFLAGS.DF==0){
 			cpu.edi+=4;
 			cpu.esi+=4;
@@ -34,7 +34,7 @@ make_helper(concat(movs_m_, SUFFIX)) {
 			cpu.edi-=4;
 		}
 	}
-	print_asm("movs");
-	return 1;
+	print_asm_template2();
+	return DATA_BYTE;
 }
 #include "cpu/exec/template-end.h"
