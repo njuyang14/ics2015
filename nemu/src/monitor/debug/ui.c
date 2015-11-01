@@ -99,6 +99,7 @@ static int cmd_info(char *args){
 			   printf("TF\t%d\n",cpu.EFLAGS.TF);
 			   printf("IF\t%d\n",cpu.EFLAGS.IF);
 			   printf("OF\t%d\n",cpu.EFLAGS.OF);
+			   printf("DF\t%d\n",cpu.EFLAGS.DF);
 			   //printf("CF\t%d\n",cpu.EFLAGS.CF);
 		}
         return 0;     
