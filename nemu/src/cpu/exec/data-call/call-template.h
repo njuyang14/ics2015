@@ -18,7 +18,8 @@ static void do_execute() {
 		cpu.eip=op_src->val;
 		if(DATA_BYTE==2)cpu.eip&=0x0000FFFF;
         //OPERAND_W(op_dest, op_src->val);
-        print_asm_template2();
+		if(op_src->type==OP_TYPE_REG)cpu.eip-=2;
+        print_asm_template1();
 	}
 }
 
