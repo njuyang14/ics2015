@@ -35,7 +35,7 @@ make_helper(concat(jmp_ptr_, SUFFIX)){
 }*/
 static void do_execute() {
 	swaddr_t opcode=instr_fetch(cpu.eip,1);
-    swaddr_t addr=instr_fetch(cpu.eip+1,DATA_BYTE);
+    DATA_TYPE_S addr=instr_fetch(cpu.eip+1,DATA_BYTE);
 	if(opcode==0xeb||opcode==0xe9){
 		cpu.eip=cpu.eip+addr;
 		if(DATA_BYTE==2)cpu.eip=cpu.eip&0x0000FFFF;
