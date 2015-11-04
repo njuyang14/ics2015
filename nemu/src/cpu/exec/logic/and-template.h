@@ -7,12 +7,13 @@ static void do_execute () {
 	OPERAND_W(op_dest, result);
 
 	/* TODO: Update EFLAGS. */
+	DATA_TYPE_S result_s=result;
 	cpu.EFLAGS.CF=0;
 	cpu.EFLAGS.OF=0;
 	if(result==0)cpu.EFLAGS.ZF=1;
 	else
 		cpu.EFLAGS.ZF=0;
-	cpu.EFLAGS.SF=(result>>(DATA_BYTE*8-1))&1;
+	cpu.EFLAGS.SF=(result_s>>(DATA_BYTE*8-1))&1;
 	//panic("please implement me");
 	print_asm_template2();
 }

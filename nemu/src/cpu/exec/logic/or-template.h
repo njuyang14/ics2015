@@ -5,6 +5,7 @@
 static void do_execute () {
 	DATA_TYPE result = op_dest->val | op_src->val;
 	OPERAND_W(op_dest, result);
+	DATA_TYPE_S result_s=result;
 
 	/* TODO: Update EFLAGS. */
 	cpu.EFLAGS.CF=0;
@@ -13,7 +14,7 @@ static void do_execute () {
 	else
 		cpu.EFLAGS.ZF=0;
 
-	 cpu.EFLAGS.SF=(result>>(DATA_BYTE*8-1))&1;
+	 cpu.EFLAGS.SF=(result_s>>(DATA_BYTE*8-1))&1;
     //panic("please implement me");
 
 	print_asm_template2();
