@@ -1,23 +1,41 @@
 #include "FLOAT.h"
 
 FLOAT F_mul_F(FLOAT a, FLOAT b) {
-	nemu_assert(0);
-	return (a*b)>>16;
+	//nemu_assert(0);
+	long long tmp=(long long)a*(long long)b;
+	if(tmp>=0)
+		return (FLOAT)(tmp>>16);
+	else
+		return (FLOAT)-(-tmp>>16);
 }
 
 FLOAT F_div_F(FLOAT a, FLOAT b) {
-	nemu_assert(0);
-	return (a/b)<<16;
+	//nemu_assert(0);
+	return (a<<8)/(b>>8);
 }
 
 FLOAT f2F(float a) {
-	nemu_assert(0);
-	return 0;
+	int aint=*((int*)&a);
+	int exp=((aint>>23)&0xFF)-127;//
+	//int f=aint&0x7FFFFF;//frac
+	int s=(aint>>31)&1;
+	
+	int f2=(aint&0x7fff)|0x800000;
+	int offset=23-exp;
+	int t=((f2>>offset)<<16)&0x7fff0000;
+	f2=((f2<<(32-offset))>>16)&0x0000FFFF;
+	int F=f2+t;
+	if(s==1)return -F;
+	else
+		return F;
+	//nemu_assert(0);
 }
 
 FLOAT Fabs(FLOAT a) {
-	nemu_assert(0);
-	return 0;
+	//nemu_assert(0);
+	if(a>=0)return a;
+	else
+		return -a;
 }
 
 FLOAT sqrt(FLOAT x) {
