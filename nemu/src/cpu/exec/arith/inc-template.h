@@ -7,10 +7,11 @@ static void do_execute () {
 	OPERAND_W(op_src, result);
 
 	/* TODO: Update EFLAGS. */
+	DATA_TYPE_S result_s=result;
 	if(result==0)cpu.EFLAGS.ZF=1;
 	else
 	    cpu.EFLAGS.ZF=0;
-	cpu.EFLAGS.SF=(result>>31)&1;
+	cpu.EFLAGS.SF=(result_s>>31)&1;
 	DATA_TYPE ssrc=(op_src->val>>31)&1;
 	
 	if(ssrc==0&&ssrc!=cpu.EFLAGS.SF)cpu.EFLAGS.OF=1;
