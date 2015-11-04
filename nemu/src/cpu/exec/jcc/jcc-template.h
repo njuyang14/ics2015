@@ -80,5 +80,16 @@ make_helper(concat(jcc_ja_,SUFFIX)){
 				return DATA_BYTE+1;
 }
 
+make_helper(concat(jcc_js_,SUFFIX)){
+	            if(cpu.EFLAGS.SF==1){
+						int temp_addr=instr_fetch(eip+1,DATA_BYTE);
+						int shift=32-(DATA_BYTE<<3);
+						temp_addr=(temp_addr<<shift)>>shift;
+						cpu.eip=cpu.eip+temp_addr;
+				}
+				print_asm("js %x",cpu.eip+DATA_BYTE+1);
+				return DATA_BYTE+1;
+}
+
 
 #include "cpu/exec/template-end.h"
