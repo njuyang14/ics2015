@@ -24,6 +24,13 @@ make_helper_v(jcc_jl)
 make_helper_v(jcc_ja)
 make_helper_v(jcc_js)
 make_helper_v(jcc_jae)
+make_helper_v(jcc_jns)
+//make_helper_v(jcc_jo)
+//make_helper_v(jcc_jno)
+//make_helper_v(jcc_j)
+//make_helper_v(jcc_jae)
+//make_helper_v(jcc_jae)
+//make_helper_v(jcc_jae)
 
 
 
