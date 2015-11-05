@@ -7,7 +7,7 @@ static void do_execute() {
 	DATA_TYPE_S addr=instr_fetch(cpu.eip+1,DATA_BYTE);
 	if(opcode==0xe8){
 		cpu.esp-=DATA_BYTE;
-		MEM_W(cpu.esp,cpu.eip+DATA_BYTE);
+		MEM_W(cpu.esp,cpu.eip+DATA_BYTE+1);
 		cpu.eip=cpu.eip+addr;
 		if(DATA_BYTE==2)cpu.eip&=0x0000FFFF;
 		print_asm("call %x",cpu.eip);
