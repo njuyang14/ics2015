@@ -373,54 +373,6 @@ uint32_t eval(int p,int q){
                           sscanf(tokens[p].str,"%x",&val);
                           return val;
               }
-/*              else if((tokens[p].type==HEX||tokens[p].type==REG)&&tokens[p-1].type==POINT){
-              swaddr_t addr;
-              if(tokens[p].type==HEX){
-                          //uint32_t val;
-                          sscanf(tokens[p].str,"%x",&addr);
-                              
-              }
-              else if(tokens[p].type==REG){
-                          if(strcmp(tokens[p].str,"eax")==0){
-                                       sscanf(tokens[p].str,"%x",&addr);
-                          }
-                          else if(strcmp(tokens[p].str,"edx")==0){
-                                       sscanf(tokens[p].str,"%x",&addr);
-                          }
-                          
-                          else if(strcmp(tokens[p].str,"ecx")==0){
-                                       sscanf(tokens[p].str,"%x",&addr);
-                          }
-                          
-                          else if(strcmp(tokens[p].str,"ebx")==0){
-                                       sscanf(tokens[p].str,"%x",&addr);
-                          }
-                          
-                          else if(strcmp(tokens[p].str,"ebp")==0){
-                                       sscanf(tokens[p].str,"%x",&addr);
-                          }
-                          
-                          else if(strcmp(tokens[p].str,"esi")==0){
-                                       sscanf(tokens[p].str,"%x",&addr);
-                          }
-                         
-                          else if(strcmp(tokens[p].str,"edi")==0){
-                                       sscanf(tokens[p].str,"%x",&addr);
-                          }
-                          
-                          else if(strcmp(tokens[p].str,"esp")==0){
-                                       sscanf(tokens[p].str,"%x",&addr);
-                          }
-                          
-                          else if(strcmp(tokens[p].str,"eip")==0){
-                                       sscanf(tokens[p].str,"%x",&addr);
-                          }
-                          else addr=0;
-
-              }
-                          return swaddr_read(addr,4);
-
-              }*/
               else return 0;
         }
 	else if(check_parenthese(p,q)==1){
