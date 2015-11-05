@@ -42,6 +42,7 @@ static void do_execute() {
 	}
 	else{
 		cpu.eip=op_src->val-2;
+		//printf("eip=\n",cpu.eip);
 		//To do: reason of cpu.eip-2.
 	}
 	//print_asm("jmp %x",cpu.eip+DATA_BYTE+1);
