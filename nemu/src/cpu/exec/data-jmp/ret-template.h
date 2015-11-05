@@ -2,7 +2,7 @@
 #define instr ret
 
 make_helper(concat(ret_, SUFFIX)) {
-        cpu.eip=swaddr_read(cpu.esp,4);
+        cpu.eip=swaddr_read(cpu.esp,4)-1;
 		if(DATA_BYTE==2)
 		    cpu.esp=cpu.esp+2;
 		else if(DATA_BYTE==4||DATA_BYTE==1)
