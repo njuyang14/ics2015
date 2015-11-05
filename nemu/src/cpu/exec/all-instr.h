@@ -9,6 +9,7 @@
 #include "data-mov/cwd.h"
 
 #include "data-jmp/ret.h"
+#include "cmov/cmov.h"
 
 #include "data-sub/sub.h"
 #include "data-cmp/cmp.h"
