@@ -222,7 +222,7 @@ int dominant(int p,int q){
                          }
                          i=j;
                }
-               else if(tokens[i].type!=NUM){
+               else if(tokens[i].type!=NUM&&tokens[i].type!=HEX&&tokens[i].type!=REG&&tokens[i].type!=VAR){
                          strcpy(operator[nr_op].str,tokens[i].str);
                          operator[nr_op].add=i;
                          operator[nr_op].type=tokens[i].type;
