@@ -41,7 +41,11 @@ static void do_execute() {
 		if(DATA_BYTE==2)cpu.eip=cpu.eip&0x0000FFFF;
 	}
 	else{
-		cpu.eip=op_src->val-2;
+		cpu.eip=op_src->val;
+		if(op_src->type==OP_TYPE_REG)
+			cpu.eip-=2;
+		else
+			cpu.eip-=7;
 		//printf("eip=\n",cpu.eip);
 		//To do: reason of cpu.eip-2.
 	}
