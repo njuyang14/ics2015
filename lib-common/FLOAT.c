@@ -11,7 +11,7 @@ FLOAT F_mul_F(FLOAT a, FLOAT b) {
 
 FLOAT F_div_F(FLOAT a, FLOAT b) {
 	//nemu_assert(0);
-	return (a<<3)/(b>>13);
+	return (a<<8)/(b>>8);
 }
 
 FLOAT f2F(float a) {
