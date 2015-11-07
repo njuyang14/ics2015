@@ -2,7 +2,7 @@
 
 #define instr setcc
 
-
+/*
 #if DATA_BYTE==1
 static void do_execute() {
 	DATA_TYPE opcode=instr_fetch(cpu.eip+1,1);
@@ -75,9 +75,9 @@ static void do_execute() {
 }
 
 make_instr_helper(rm)
-#endif
+#endif */
 
-/*make_helper(concat(setcc_setne_,SUFFIX)){
+make_helper(concat(setcc_setne_,SUFFIX)){
 	            if(cpu.EFLAGS.ZF==0){
 				cpu.gpr[0]._16=1;									
 				}
@@ -85,6 +85,6 @@ make_instr_helper(rm)
 					cpu.gpr[0]._16=0; 
 				print_asm("setne %%al");
 				return 2;
-}*/
+}
 
 #include "cpu/exec/template-end.h"

@@ -2,7 +2,7 @@
 #define __SETCC_H__
 
 
-make_helper(setcc_rm_b);
+make_helper(setcc_setne_b);
 
 
 #endif
