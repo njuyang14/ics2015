@@ -96,6 +96,8 @@ void init_eflags(){
 
 }
 
+void init_cache();
+
 void restart() {
 	/* Perform some initialization to restart a program */
 #ifdef USE_RAMDISK
@@ -111,7 +113,10 @@ void restart() {
 
         /* Init the EFLAGS register*/
         init_eflags();     
-
+    
 	/* Initialize DRAM. */
 	init_ddr3();
+    /*Initialize cache*/
+	init_cache();
+
 }
