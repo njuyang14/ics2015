@@ -30,7 +30,7 @@ void init_cache(){
 		    L2[i][j].valid=0;
 }
 
-uint32_t check_cache1(hwaddr_t addr,size_t len){
+uint32_t check_cache1(hwaddr_t addr, size_t len){
 	uint8_t tag_in_dram = addr >> 15;
 	uint8_t cache_no = ( addr >> 8 ) & 0x7f;
 	//uint8_t offset = addr & 0xff;
@@ -60,13 +60,22 @@ void  read_cache1_miss(hwaddr_t addr,size_t len){
 }
 
 uint32_t read_cache1_hit(hwaddr_t addr,size_t len){
-	/*uint8_t tag_in_dram = addr >> 15;
+    int block_no=0;
+	
+	uint8_t tag_in_dram = addr >> 15;
 	uint8_t cache_no = ( addr >> 8 ) & 0x7f;
-	uint8_t offset = addr & 0xff;*/
+	uint8_t offset = addr & 0xff;
 
-	uint32_t data = dram_read(addr+len-1,1);
+    int i;
+    for( i=0; i<8; i++){
+		if(tag_in_dram==L1[cache_no][i].tag&&L1[cache_no][i].valid==1){
+			block_no=i;
+		}
+	}
+
+	uint32_t data = L1[cache_no][block_no].offset[offset];//dram_read(addr+len-1,1);
 	while(len-1>0){
-		data = ( data << 8 ) + dram_read(addr+len-2,1);
+		data = ( data << 8 ) + L1[cache_no][block_no].offset[--offset];
 		len--;
 	}
 	return data;
