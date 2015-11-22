@@ -72,6 +72,7 @@ uint32_t read_cache1_hit(hwaddr_t addr,size_t len){
     for( i=0; i<8; i++){
 		if(tag_in_dram==L1[cache_no][i].tag&&L1[cache_no][i].valid==1){
 			block_no=i;
+			break;
 		}
 	}
 
@@ -83,7 +84,26 @@ uint32_t read_cache1_hit(hwaddr_t addr,size_t len){
 }
 
 
-
+void write_hit_cache1(hwaddr_t addr, size_t len, uint32_t data){
+	/* write through */
+	/* write dram*/
+	dram_write(addr, len, data);
+	/* write cache*/
+	uint8_t tag_in_dram = addr >> 13;
+	uint8_t cache_no = ( addr >> 6 ) & 0x7f;
+	uint8_t offset = addr & 0x3f;
+	int i,block_no=0;
+	for( i=0; i<8; i++){
+		if(tag_in_dram==L1[cache_no][i].tag&&L1[cache_no][i].valid==1){
+			block_no=i;
+			break;
+		}
+	}
+	while(len>0){
+		L1[cache_no][block_no].offset[offset+len-1]=(data>>((len-1)*8))&0xff;
+		len--;
+	}
+}
 
 
 
