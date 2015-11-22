@@ -48,7 +48,7 @@ void  read_cache1_miss(hwaddr_t addr,size_t len){
 	uint8_t cache_no = ( addr >> 6 ) & 0x7f;
 	uint8_t offset = addr & 0x3f;
 
-	srand(time(0)+clock());
+	srand(time(0)/*+clock()*/);
 	int i=(rand()%8)+1;
     printf("rand=%d\n",i);
 
