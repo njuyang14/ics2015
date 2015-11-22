@@ -13,12 +13,12 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 	//return dram_read(addr, len) & (~0u >> ((4 - len) << 3));
 	
 	if(check_cache1(addr,len)==1){
-		printf("hit cache\n");
+		printf("read hit cache\n");
 		return read_cache1_hit(addr,len);
 	}
 	//else if(check_cache2(addr,len)==1){}
 	else{
-		printf("miss cache\n");
+		printf("read miss cache\n");
 		read_cache1_miss(addr,len);
 		return dram_read(addr, len) & (~0u >> ((4 - len) << 3));
 	}
@@ -29,10 +29,12 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
 	//dram_write(addr, len, data);
 	if(check_cache1(addr,len)==1){
 		write_hit_cache1(addr, len, data);
+		printf("write hit cache1\n");
 	}
 	//else if(write_hit_cache1()==1)
 	else{
 		dram_write(addr, len, data);
+		printf("write miss cache1\n"); 
 	}
 }
 
