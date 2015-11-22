@@ -50,6 +50,7 @@ void  read_cache1_miss(hwaddr_t addr,size_t len){
 
 	srand((unsigned)time(0));
 	int i=(rand()%(8-0+1))+ 0;
+    printf("rand=%d\n",i);
 
 	L1[cache_no][i].valid = 1;
 	L1[cache_no][i].tag=tag_in_dram;
