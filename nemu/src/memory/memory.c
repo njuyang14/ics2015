@@ -10,7 +10,7 @@ void write_hit_cache1(hwaddr_t addr, size_t len, uint32_t data);
 /* Memory accessing interfaces */
 
 uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
-	return dram_read(addr, len) & (~0u >> ((4 - len) << 3));
+	//return dram_read(addr, len) & (~0u >> ((4 - len) << 3));
 	
 	if(check_cache1(addr,len)==1){
 		//printf("read hit cache1\n");
@@ -26,7 +26,7 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 }
 
 void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
-	dram_write(addr, len, data);
+	//dram_write(addr, len, data);
 	if(check_cache1(addr,len)==1){
 		write_hit_cache1(addr, len, data);
 	//	printf("write hit cache1\n");
