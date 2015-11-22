@@ -37,7 +37,7 @@ uint32_t check_cache1(hwaddr_t addr, size_t len){
 	int i;
 	for( i=0; i<8; i++){
 		if(tag_in_dram==L1[cache_no][i].tag&&L1[cache_no][i].valid==1){
-			printf("hit cache\n"); 
+			//printf("hit cache\n"); 
 			return 1;
 		}
 	}
