@@ -75,7 +75,7 @@ uint32_t read_cache1_hit(hwaddr_t addr,size_t len){
 		}
 	}
 
-	uint32_t data = L1[cache_no][block_no].offset[offset+len-1];//dram_read(addr+len-1,1);
+	uint32_t data = L1[cache_no][block_no].offset[offset+len-1];
 	while(len-1>0){
 		data=(data<<8)+L1[cache_no][block_no].offset[offset+(--len)-1];
 	}
