@@ -49,7 +49,7 @@ void  read_cache1_miss(hwaddr_t addr,size_t len){
 	uint8_t offset = addr & 0x3f;
 
 	srand(time(0)+clock());
-	int i=(rand()%8)+1;
+	int i=(rand()%8+clock())+1;
     printf("rand=%d\n",i);
 
 	L1[cache_no][i].valid = 1;
