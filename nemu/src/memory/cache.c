@@ -91,7 +91,8 @@ uint32_t read_cache1_hit(hwaddr_t addr,size_t len){
 		printf("cnt=%d\n",cnt);
 		int j=0;
 		while(j<cnt){
-			data=(data<<8)+L1[cache_no][block_no].offset[offset_tmp--];
+			data=(data<<8)+L1[cache_no][block_no].offset[offset_tmp];
+			offset_tmp--;
 			j++;
 		}
 		printf("nextaddr=%x\n",((addr+0x40)>>6)<<6);
