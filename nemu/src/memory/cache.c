@@ -50,7 +50,7 @@ void  read_cache1_miss(hwaddr_t addr,size_t len){
 
 	srand(time(0)+clock());
 	int i=(rand()%8)+1;
-    printf("rand=%d\n",i);
+    //printf("rand=%d\n",i);
 
 	L1[cache_no][i].valid = 1;
 	L1[cache_no][i].tag=tag_in_dram;
@@ -60,6 +60,8 @@ void  read_cache1_miss(hwaddr_t addr,size_t len){
 		L1[cache_no][i].offset[j]=dram_read(addr+j,1);
 	}
 }
+
+uint32_t hwaddr_read(hwaddr_t addr, size_t len);
 
 uint32_t read_cache1_hit(hwaddr_t addr,size_t len){
     int block_no=0;
@@ -75,23 +77,25 @@ uint32_t read_cache1_hit(hwaddr_t addr,size_t len){
 			break;
 		}
 	}
-    
-	uint32_t data = L1[cache_no][block_no].offset[offset+len-1];
+	uint32_t data;
 	if(offset+len<=64){
+		data = L1[cache_no][block_no].offset[offset+len-1];
 	    while(len-1>0){
 		    data=(data<<8)+L1[cache_no][block_no].offset[offset+(--len)-1];
 	    }
 	}
 	else{
-		for( i=0; i<8; i++){
-			if(tag_in_dram==L1[cache_no+1][i].tag&&L1[cache_no][i].valid==1){
-				block_no=i;
-				break;
-			}
+		int offset_tmp=63;
+		data = L1[cache_no][block_no].offset[offset_tmp];
+		int cnt=len-(offset+len-64);
+		printf("cnt=%d\n",cnt);
+		int j=0;
+		while(j<cnt){
+			data=(data<<8)+L1[cache_no][block_no].offset[(--offset_tmp)];
+			j++;
 		}
-		while(len-1>0){
-			data=(data<<8)+L1[cache_no+1][block_no].offset[(--len)-1];
-		}
+		uint32_t temp=hwaddr_read(((addr+0x40)>>6)<<6,offset+len-64);
+		data=(temp<<((offset+len-64)*8))+data;
 	}
 
 	return data;
