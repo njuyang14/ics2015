@@ -161,6 +161,27 @@ static int cmd_bt(char*args){
 		return 0;
 }
 
+/*static int cmd_cache(char *args){
+	swaddr_t addr;
+	sscanf(args,"%x",&addr);
+	uint8_t tag_in_dram = addr >> 13;
+	uint8_t cache_no = ( addr >> 6 ) & 0x7f;
+	//uint8_t offset = addr & 0x3f;
+	int i,block_no=0,j;
+	for( i=0; i<8; i++){
+		if(tag_in_dram==L1[cache_no][i].tag&&L1[cache_no][i].valid==1){
+			block_no=i;
+			for(j=0;j<64;j++){
+				printf("%x\0",L1[cache_no][block_no].offset[j]);
+		    }
+			break;
+		}
+	}
+	printf("\n");
+	return 0;
+}*/
+
+
 static struct {
 	char *name;
 	char *description;
@@ -176,6 +197,7 @@ static struct {
         { "w", "watchpoint: w expr", cmd_w},  
         { "d", "delete watchpoint: d [N]", cmd_d},
 		{ "bt", "print stack frame", cmd_bt},
+		//{ "cache", "print cache block cache ADDR", cmd_cache},
 	/* TODO: Add more commands */
 
 };
