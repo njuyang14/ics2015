@@ -89,7 +89,7 @@ uint32_t read_cache1_hit(hwaddr_t addr,size_t len){
 		data = L1[cache_no][block_no].offset[offset_tmp];
 		int cnt=len-(offset+len-64);
 		printf("cnt=%d\n",cnt);
-		int j=0;
+		int j=1;
 		while(j<cnt){
 			data=(data<<8)+L1[cache_no][block_no].offset[offset_tmp];
 			offset_tmp--;
