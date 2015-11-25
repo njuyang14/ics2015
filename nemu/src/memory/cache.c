@@ -31,7 +31,7 @@ void init_cache(){
 }
 
 uint32_t check_cache1(hwaddr_t addr, size_t len){
-	uint8_t tag_in_dram = addr >> 13;
+	uint16_t tag_in_dram = addr >> 13;
 	uint8_t cache_no = ( addr >> 6 ) & 0x7f;
 	//uint8_t offset = addr & 0x3f;
 	int i;
@@ -44,7 +44,7 @@ uint32_t check_cache1(hwaddr_t addr, size_t len){
 	return 0;
 }
 void  read_cache1_miss(hwaddr_t addr,size_t len){
-	uint8_t tag_in_dram = addr >> 13;
+	uint16_t tag_in_dram = addr >> 13;
 	uint8_t cache_no = ( addr >> 6 ) & 0x7f;
 	uint8_t offset = addr & 0x3f;
 
@@ -66,7 +66,7 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len);
 uint32_t read_cache1_hit(hwaddr_t addr,size_t len){
     int block_no=0;
 	
-	uint8_t tag_in_dram = addr >> 13;
+	uint16_t tag_in_dram = addr >> 13;
 	uint8_t cache_no = ( addr >> 6 ) & 0x7f;
 	uint8_t offset = addr & 0x3f;
 
@@ -110,7 +110,7 @@ void write_hit_cache1(hwaddr_t addr, size_t len, uint32_t data){
 	/* write dram*/
 	dram_write(addr, len, data);
 	/* write cache*/
-	uint8_t tag_in_dram = addr >> 13;
+	uint16_t tag_in_dram = addr >> 13;
 	uint8_t cache_no = ( addr >> 6 ) & 0x7f;
 	uint8_t offset = addr & 0x3f;
 	int i,block_no=0;
