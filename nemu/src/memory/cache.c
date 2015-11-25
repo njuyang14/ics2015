@@ -77,9 +77,22 @@ uint32_t read_cache1_hit(hwaddr_t addr,size_t len){
 	}
     
 	uint32_t data = L1[cache_no][block_no].offset[offset+len-1];
+	if(offset+len<=64){
 	    while(len-1>0){
 		    data=(data<<8)+L1[cache_no][block_no].offset[offset+(--len)-1];
 	    }
+	}
+	else{
+		for( i=0; i<8; i++){
+			if(tag_in_dram==L1[cache_no+1][i].tag&&L1[cache_no][i].valid==1){
+				block_no=i;
+				break;
+			}
+		}
+		while(len-1>0){
+			data=(data<<8)+L1[cache_no+1][block_no].offset[(--len)-1];
+		}
+	}
 
 	return data;
 }
