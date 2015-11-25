@@ -49,7 +49,7 @@ void  read_cache1_miss(hwaddr_t addr,size_t len){
 	uint8_t offset = addr & 0x3f;
 
 	srand(time(0)+clock());
-	int i=(rand()%8)+1;
+	int i=rand()%8;
     //printf("rand=%d\n",i);
 
 	L1[cache_no][i].valid = 1;
@@ -91,13 +91,13 @@ uint32_t read_cache1_hit(hwaddr_t addr,size_t len){
 		printf("cnt=%d\n",cnt);
 		int j=1;
 		while(j<cnt){
-			data=(data<<8)+L1[cache_no][block_no].offset[offset_tmp];
 			offset_tmp--;
+			data=(data<<8)+L1[cache_no][block_no].offset[offset_tmp];
 			j++;
 		}
 		printf("nextaddr=%x\n",((addr+0x40)>>6)<<6);
 		uint32_t temp=hwaddr_read(((addr+0x40)>>6)<<6,offset+len-64);
-		data=(temp<<((offset+len-64)*8))+data;
+		data=(temp<<((len-(offset+len-64))*8))+data;
 		printf("data=%x\n",data);
 	}
 
