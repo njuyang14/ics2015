@@ -148,7 +148,7 @@ void write_hit_cache1(hwaddr_t addr, size_t len, uint32_t data){
 		L2[cache_no2][block_no].offset[offset2+len-1]=(data>>((len-1)*8))&0xff;
 		len--;
 	}
-	printf("hit cache1\n");
+	//printf("hit cache1\n");
 }
 
 uint32_t check_cache2(hwaddr_t addr, size_t len){
@@ -204,7 +204,7 @@ void read_cache2_miss(hwaddr_t addr,size_t len){
 	uint8_t cache_no = ( addr >> 6 ) & 0xfff;
 	uint8_t offset = addr & 0x3f;
 	srand(time(0)+clock());
-	int i=rand()%8;
+	int i=rand()%16;
 	L2[cache_no][i].valid = 1;
     L2[cache_no][i].tag=tag_in_dram;
 	int j;
