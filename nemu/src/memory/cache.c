@@ -239,6 +239,9 @@ void write_hit_cache2(hwaddr_t addr, size_t len, uint32_t data){
 		    len--;
 	    }
 	}
+	else{
+		printf("fuck\n");
+	}
 }
 
 
