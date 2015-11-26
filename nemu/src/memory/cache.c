@@ -50,15 +50,25 @@ void  read_cache1_miss(hwaddr_t addr,size_t len){
 	uint8_t cache_no = ( addr >> 6 ) & 0x7f;
 	uint8_t offset = addr & 0x3f;
 
+	uint16_t tag_in_dram2 = addr >> 18;
+	uint8_t cache_no2 = ( addr >> 6 ) & 0xfff;
+	//uint8_t offset2 = addr & 0x3f;
+
 	srand(time(0)+clock());
 	int i=rand()%8;
     //printf("rand=%d\n",i);
 	L1[cache_no][i].valid = 1;
 	L1[cache_no][i].tag=tag_in_dram;
-	int j;
+	int j,block_no=0;
 	addr = addr - offset;
+	for(j=0;j<16;j++){
+		if(tag_in_dram2==L2[cache_no2][j].tag&&L2[cache_no2][j].valid==1){
+			block_no=j;
+			break;
+		}
+	}
 	for(j=0;j<64;j++){
-		L1[cache_no][i].offset[j]=dram_read(addr+j,1);
+		L1[cache_no][i].offset[j]=L2[cache_no2][block_no].offset[j];
 	}
 }
 
