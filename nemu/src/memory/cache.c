@@ -39,13 +39,13 @@ uint32_t check_cache1(hwaddr_t addr, size_t len){
 	int i;
 	for( i=0; i<8; i++){
 		if(tag_in_dram==L1[cache_no][i].tag&&L1[cache_no][i].valid==1){
-			//printf("hit cache\n"); 
 			return 1;
 		}
 	}
 	return 0;
 }
-void  read_cache1_miss(hwaddr_t addr,size_t len){
+
+void read_cache1_miss(hwaddr_t addr,size_t len){
 	uint16_t tag_in_dram = addr >> 13;
 	uint8_t cache_no = ( addr >> 6 ) & 0x7f;
 	uint8_t offset = addr & 0x3f;
@@ -111,7 +111,6 @@ uint32_t read_cache1_hit(hwaddr_t addr,size_t len){
 		data=(temp<<((len-(offset+len-64))*8))+data;
 		//printf("data=%x\n",data);
 	}
-
 	return data;
 }
 
@@ -123,6 +122,7 @@ void write_hit_cache1(hwaddr_t addr, size_t len, uint32_t data){
 	uint16_t tag_in_dram = addr >> 13;
 	uint8_t cache_no = ( addr >> 6 ) & 0x7f;
 	uint8_t offset = addr & 0x3f;
+	size_t tmplen=len;
 	int i,block_no=0;
 	for( i=0; i<8; i++){
 		if(tag_in_dram==L1[cache_no][i].tag&&L1[cache_no][i].valid==1){
@@ -144,9 +144,10 @@ void write_hit_cache1(hwaddr_t addr, size_t len, uint32_t data){
 		    break;
 		}
 	}
-	while(len>0){
+	//printf("len2=%d\n",len+offset2);
+	while(tmplen>0){
 		L2[cache_no2][block_no].offset[offset2+len-1]=(data>>((len-1)*8))&0xff;
-		len--;
+		tmplen--;
 	}
 	//printf("hit cache1\n");
 }
@@ -205,7 +206,7 @@ void read_cache2_miss(hwaddr_t addr,size_t len){
 	uint8_t offset = addr & 0x3f;
 	srand(time(0)+clock());
 	int i=rand()%16;
-	printf("rand=%d\n",i);
+	//printf("rand=%d\n",i);
 	L2[cache_no][i].valid = 1;
     L2[cache_no][i].tag=tag_in_dram;
 	int j;
@@ -243,7 +244,7 @@ void write_allocate(hwaddr_t addr, size_t len, uint32_t data){
 	
 	int i,idx=0;
 	srand(time(0)+clock());
-	i=rand()%8;
+	i=rand()%16;
 	uint32_t init_addr=(addr>>6)<<6;               
 	if(L2[cache_no][i].dirty==1){
 		while(idx<64){
