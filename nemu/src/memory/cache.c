@@ -203,8 +203,9 @@ void read_cache2_miss(hwaddr_t addr,size_t len){
 	uint16_t tag_in_dram = addr >> 18;
 	uint8_t cache_no = ( addr >> 6 ) & 0xfff;
 	uint8_t offset = addr & 0x3f;
-	//srand(time(0)+clock());
+	srand(time(0)+clock());
 	int i=rand()%16;
+	printf("rand=%d\n",i);
 	L2[cache_no][i].valid = 1;
     L2[cache_no][i].tag=tag_in_dram;
 	int j;
