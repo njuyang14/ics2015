@@ -6,6 +6,12 @@ uint32_t check_cache1(hwaddr_t addr,size_t len);
 void  read_cache1_miss(hwaddr_t addr,size_t len);
 uint32_t read_cache1_hit(hwaddr_t addr,size_t len);
 
+uint32_t check_cache2(hwaddr_t addr, size_t len);
+void read_cache2_miss(hwaddr_t addr,size_t len);
+uint32_t read_cache2_hit(hwaddr_t addr,size_t len);
+void write_hit_cache2(hwaddr_t addr, size_t len, uint32_t data);
+void write_allocate(hwaddr_t addr, size_t len, uint32_t data);
+
 void write_hit_cache1(hwaddr_t addr, size_t len, uint32_t data);
 /* Memory accessing interfaces */
 
@@ -16,9 +22,13 @@ uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
 		//printf("read hit cache1\n");
 		return read_cache1_hit(addr,len);
 	}
-	//else if(check_cache2(addr,len)==1){}
+	else if(check_cache2(addr,len)==1){
+		read_cache1_miss(addr,len);
+		return read_cache2_hit(addr,len);
+	}
 	else{
 		//printf("read miss cache1\n");
+		read_cache2_miss(addr,len);
 		read_cache1_miss(addr,len);
 		return dram_read(addr, len) & (~0u >> ((4 - len) << 3));
 	}
@@ -31,9 +41,12 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
 		write_hit_cache1(addr, len, data);
 	//	printf("write hit cache1\n");
 	}
-	//else if(write_hit_cache1()==1)
+	else if(check_cache2(addr,len)==1){
+		write_hit_cache2(addr, len, data);//write back
+	}
 	else{
-		dram_write(addr, len, data);
+		write_allocate(addr, len, data);
+		//dram_write(addr, len, data);
 	//	printf("write miss cache1\n"); 
 	}
 }
