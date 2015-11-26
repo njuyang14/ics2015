@@ -233,9 +233,11 @@ void write_hit_cache2(hwaddr_t addr, size_t len, uint32_t data){
 		}
 	}
 	L2[cache_no][i].dirty=1;
-	while(len>0){
-		L2[cache_no][block_no].offset[offset+len-1]=(data>>((len-1)*8))&0xff;
-		len--;
+	if(offset+len<=64){
+	    while(len>0){
+		    L2[cache_no][block_no].offset[offset+len-1]=(data>>((len-1)*8))&0xff;
+		    len--;
+	    }
 	}
 }
 
