@@ -148,6 +148,7 @@ void write_hit_cache1(hwaddr_t addr, size_t len, uint32_t data){
 		L2[cache_no2][block_no].offset[offset2+len-1]=(data>>((len-1)*8))&0xff;
 		len--;
 	}
+	printf("hit cache1\n");
 }
 
 uint32_t check_cache2(hwaddr_t addr, size_t len){
