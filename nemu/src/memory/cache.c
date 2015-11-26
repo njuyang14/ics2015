@@ -144,7 +144,7 @@ void write_hit_cache1(hwaddr_t addr, size_t len, uint32_t data){
 		    break;
 		}
 	}
-	//printf("len2=%d\n",len+offset2);
+	printf("len=%d\n",tmplen+offset2);
 	while(tmplen>0){
 		L2[cache_no2][block_no].offset[offset2+len-1]=(data>>((len-1)*8))&0xff;
 		tmplen--;
