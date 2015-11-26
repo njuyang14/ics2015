@@ -213,6 +213,7 @@ void read_cache2_miss(hwaddr_t addr,size_t len){
 	int j;
 	addr = addr - offset;
 	for(j=0;j<64;j++){
+		printf("no judge dirty\n");
 		L2[cache_no][i].offset[j]=dram_read(addr+j,1);
 	}
 }
