@@ -130,9 +130,11 @@ void write_hit_cache1(hwaddr_t addr, size_t len, uint32_t data){
 			break;
 		}
 	}
-	while(len>0){
-		L1[cache_no][block_no].offset[offset+len-1]=(data>>((len-1)*8))&0xff;
-		len--;
+	if(offset+len<=64){
+	    while(len>0){
+		    L1[cache_no][block_no].offset[offset+len-1]=(data>>((len-1)*8))&0xff;
+		    len--;
+	    }
 	}
 	/* write cache2 */
 	uint16_t tag_in_dram2 = addr >> 18;
@@ -144,10 +146,12 @@ void write_hit_cache1(hwaddr_t addr, size_t len, uint32_t data){
 		    break;
 		}
 	}
-	printf("len=%d\n",tmplen+offset2);
-	while(tmplen>0){
-		L2[cache_no2][block_no].offset[offset2+len-1]=(data>>((len-1)*8))&0xff;
-		tmplen--;
+	//printf("len=%d\n",tmplen+offset2);
+	if(offset2+tmplen<=64){
+	    while(tmplen>0){
+		    L2[cache_no2][block_no].offset[offset2+len-1]=(data>>((len-1)*8))&0xff;
+		    tmplen--;
+	    }
 	}
 	//printf("hit cache1\n");
 }
