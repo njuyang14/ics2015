@@ -209,6 +209,7 @@ void read_cache2_miss(hwaddr_t addr,size_t len){
 	//printf("rand=%d\n",i);
 	L2[cache_no][i].valid = 1;
     L2[cache_no][i].tag=tag_in_dram;
+	L2[cache_no][i].dirty=0;
 	int j;
 	addr = addr - offset;
 	for(j=0;j<64;j++){
