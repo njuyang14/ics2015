@@ -207,13 +207,10 @@ void read_cache2_miss(hwaddr_t addr,size_t len){
 	srand(time(0)+clock());
 	int i=rand()%16;
 	//printf("rand=%d\n",i);
-	L2[cache_no][i].valid = 1;
-    L2[cache_no][i].tag=tag_in_dram;
-
-	if(L2[cache_no][i].dirty==1){
+	if(L2[cache_no][i].dirty==1&&L2[cache_no][i].valid == 1){
 	    L2[cache_no][i].dirty=0;
 		/* to do: write dram */
-		uint32_t init_addr=(addr>>6)<<6;
+		uint32_t init_addr=(L2[cache_no][i].tag<<18)+(cache_no<<6);
 		int idx=0;
 		while(idx<64){
 			dram_write(init_addr,1,L2[cache_no][i].offset[idx]);
@@ -221,6 +218,8 @@ void read_cache2_miss(hwaddr_t addr,size_t len){
 			init_addr++;
 		}
 	}
+	L2[cache_no][i].valid = 1;
+	L2[cache_no][i].tag=tag_in_dram;
 	int j;
 	addr = addr - offset;
 	for(j=0;j<64;j++){
@@ -259,16 +258,18 @@ void write_allocate(hwaddr_t addr, size_t len, uint32_t data){
 	int i,idx=0;
 	srand(time(0)+clock());
 	i=rand()%16;
-	uint32_t init_addr=(addr>>6)<<6;
-    L2[cache_no][i].tag=tag_in_dram;	
-	if(L2[cache_no][i].dirty==1){
+	uint32_t init_addr=(L2[cache_no][i].tag<<18)+(cache_no<<6);
+	
+	if(L2[cache_no][i].dirty==1&&L2[cache_no][i].valid==1){
 		while(idx<64){
 		    dram_write(init_addr,1,L2[cache_no][i].offset[idx]);
 			idx++;
 			init_addr++;
 		}
 	}
-
+	L2[cache_no][i].tag=tag_in_dram;
+	L2[cache_no][i].dirty=0;
+	L2[cache_no][i].valid=1;
 	addr=addr-offset;
 	int j;
 	for(j=0;j<64;j++){
