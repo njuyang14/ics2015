@@ -73,6 +73,7 @@ void read_cache1_miss(hwaddr_t addr,size_t len){
 }
 
 uint32_t hwaddr_read(hwaddr_t addr, size_t len);
+void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data);
 
 uint32_t read_cache1_hit(hwaddr_t addr,size_t len){
     int block_no=0;
@@ -117,12 +118,13 @@ uint32_t read_cache1_hit(hwaddr_t addr,size_t len){
 
 void write_hit_cache1(hwaddr_t addr, size_t len, uint32_t data){
 	/* write through */
-	//dram_write(addr, len, data);
+
 	/* write cache1*/
 	uint16_t tag_in_dram = addr >> 13;
 	uint8_t cache_no = ( addr >> 6 ) & 0x7f;
 	uint8_t offset = addr & 0x3f;
 	size_t tmplen=len;
+	uint32_t data2=data;
 	int i,block_no=0;
 	for( i=0; i<8; i++){
 		if(tag_in_dram==L1[cache_no][i].tag&&L1[cache_no][i].valid==1){
@@ -130,10 +132,25 @@ void write_hit_cache1(hwaddr_t addr, size_t len, uint32_t data){
 			break;
 		}
 	}
+	int j,cnt;
+	if(offset+len<=64){
 	    while(len>0){
 		    L1[cache_no][block_no].offset[offset+len-1]=(data>>((len-1)*8))&0xff;
 		    len--;
 	    }
+	}
+	else{
+		//int offset_tmp=63;
+		cnt=len-(offset+len-64);
+		j=0;
+		while(j<cnt){
+			L1[cache_no][block_no].offset[offset]=data&0xff;
+			data=data>>8;
+			j++;
+			offset++;
+		}
+		hwaddr_write(((addr+0x40)>>6)<<6, len-cnt, data);
+	}
 	/* write cache2 */
 	uint16_t tag_in_dram2 = addr >> 18;
 	uint8_t cache_no2 = ( addr >> 6 ) & 0xfff;
@@ -144,11 +161,23 @@ void write_hit_cache1(hwaddr_t addr, size_t len, uint32_t data){
 		    break;
 		}
 	}
-	//printf("len=%d\n",tmplen+offset2);
+	if(offset2+tmplen<=64){
 	    while(tmplen>0){
-		    L2[cache_no2][block_no].offset[offset2+tmplen-1]=(data>>((tmplen-1)*8))&0xff;
+		    L2[cache_no2][block_no].offset[offset2+tmplen-1]=(data2>>((tmplen-1)*8))&0xff;
 		    tmplen--;
 	    }
+	}
+	else{
+		cnt=tmplen-(offset2+tmplen-64);
+		j=0;
+		while(j<cnt){
+			L2[cache_no2][block_no].offset[offset2]=data2&0xff;
+			data2=data2>>8;
+			j++;
+			offset2++;
+		}
+		hwaddr_write(((addr+0x40)>>6)<<6, len-cnt, data2);
+	}
 	//printf("hit cache1\n");
 }
 
@@ -223,7 +252,6 @@ void read_cache2_miss(hwaddr_t addr,size_t len){
 	int j;
 	addr = addr - offset;
 	for(j=0;j<64;j++){
-		//printf("no judge dirty\n");
 		L2[cache_no][i].offset[j]=dram_read(addr+j,1);
 	}
 }
@@ -241,10 +269,23 @@ void write_hit_cache2(hwaddr_t addr, size_t len, uint32_t data){
 		}
 	}
 	L2[cache_no][i].dirty=1;
+	int cnt=len-(offset+len-64);
+	int j=0;
+	if(offset+len<=64){
 	    while(len>0){
 		    L2[cache_no][block_no].offset[offset+len-1]=(data>>((len-1)*8))&0xff;
 		    len--;
 	    }
+	}
+	else{
+		while(j<cnt){
+		    L2[cache_no][block_no].offset[offset]=data&0xff;
+			data=data>>8;
+			j++;
+			offset++;
+	    }
+		hwaddr_write(((addr+0x40)>>6)<<6, len-cnt, data);
+	}
 	
 }
 
