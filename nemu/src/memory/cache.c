@@ -213,6 +213,13 @@ void read_cache2_miss(hwaddr_t addr,size_t len){
 	if(L2[cache_no][i].dirty==1){
 	    L2[cache_no][i].dirty=0;
 		/* to do: write dram */
+		uint32_t init_addr=(addr>>6)<<6;
+		int idx=0;
+		while(idx<64){
+			dram_write(init_addr,1,L2[cache_no][i].offset[idx]);
+			idx++;
+			init_addr++;
+		}
 	}
 	int j;
 	addr = addr - offset;
