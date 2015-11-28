@@ -196,7 +196,7 @@ uint32_t check_cache2(hwaddr_t addr, size_t len){
 uint32_t read_cache2_hit(hwaddr_t addr,size_t len){
     int block_no=0;
     uint16_t tag_in_dram = addr >> 18;
-	uint8_t cache_no = ( addr >> 6 ) & 0xfff;
+	uint16_t cache_no = ( addr >> 6 ) & 0xfff;
     uint8_t offset = addr & 0x3f;
 
 	int i;
@@ -231,7 +231,7 @@ uint32_t read_cache2_hit(hwaddr_t addr,size_t len){
 
 void read_cache2_miss(hwaddr_t addr,size_t len){
 	uint16_t tag_in_dram = addr >> 18;
-	uint8_t cache_no = ( addr >> 6 ) & 0xfff;
+	uint16_t cache_no = ( addr >> 6 ) & 0xfff;
 	uint8_t offset = addr & 0x3f;
 	srand(time(0)+clock());
 	int i=rand()%16;
@@ -259,7 +259,7 @@ void read_cache2_miss(hwaddr_t addr,size_t len){
 void write_hit_cache2(hwaddr_t addr, size_t len, uint32_t data){
 	/* write back */
     uint16_t tag_in_dram = addr >> 18;
-	uint8_t cache_no = ( addr >> 6 ) & 0xfff;
+	uint16_t cache_no = ( addr >> 6 ) & 0xfff;
 	uint8_t offset = addr & 0x3f;
 	int i,block_no=0;
 	for( i=0; i<16; i++){
@@ -292,7 +292,7 @@ void write_hit_cache2(hwaddr_t addr, size_t len, uint32_t data){
 
 void write_allocate(hwaddr_t addr, size_t len, uint32_t data){
 	uint16_t tag_in_dram = addr >> 18;
-	uint8_t cache_no = ( addr >> 6 ) & 0xfff;
+	uint16_t cache_no = ( addr >> 6 ) & 0xfff;
 	uint8_t offset = addr & 0x3f;
     dram_write(addr,len,data);
 	
