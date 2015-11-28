@@ -153,7 +153,7 @@ void write_hit_cache1(hwaddr_t addr, size_t len, uint32_t data){
 	}
 	/* write cache2 */
 	uint16_t tag_in_dram2 = addr >> 18;
-	uint8_t cache_no2 = ( addr >> 6 ) & 0xfff;
+	uint16_t cache_no2 = ( addr >> 6 ) & 0xfff;
 	uint8_t offset2 = addr & 0x3f;
 	for( i=0; i<16; i++){
 	    if(tag_in_dram2==L2[cache_no2][i].tag&&L2[cache_no2][i].valid==1){
