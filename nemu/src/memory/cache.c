@@ -51,7 +51,7 @@ void read_cache1_miss(hwaddr_t addr,size_t len){
 	uint8_t offset = addr & 0x3f;
 
 	uint16_t tag_in_dram2 = addr >> 18;
-	uint8_t cache_no2 = ( addr >> 6 ) & 0xfff;
+	uint16_t cache_no2 = ( addr >> 6 ) & 0xfff;
 	//uint8_t offset2 = addr & 0x3f;
 
 	srand(time(0)+clock());
