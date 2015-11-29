@@ -47,6 +47,18 @@ typedef struct {
                  uint8_t VM:1;
                  unsigned blank5:17;
                }EFLAGS;
+
+		struct{
+			uint16_t selector;
+			uint32_t descriptor;
+		}cs,ds,es,ss;
+
+		struct{
+			uint32_t base;
+			uint16_t len;
+		}gdtr;
+
+		//CR0 cr0;
 	swaddr_t eip;
 
 } CPU_state;
