@@ -96,6 +96,23 @@ void init_eflags(){
 
 }
 
+void init_cr0(){
+	cpu.cr0.protect_enable=0;
+	cpu.cr0.monitor_coprocessor=0;
+	cpu.cr0.emulation=0;
+	cpu.cr0.task_switched=0;
+	cpu.cr0.extension_type=0;
+	cpu.cr0.numeric_error=0;
+	cpu.cr0.pad0=0;
+	cpu.cr0.write_protect=0;
+	cpu.cr0.pad1=0;
+	cpu.cr0.alignment_mask=0;
+	cpu.cr0.pad2=0;
+	cpu.cr0.no_write_through=0;
+	cpu.cr0.cache_disable=0;
+	cpu.cr0.paging=0;
+}
+
 void init_cache();
 
 void restart() {
@@ -111,8 +128,11 @@ void restart() {
 	/* Set the initial instruction pointer. */
 	cpu.eip = ENTRY_START;
 
-        /* Init the EFLAGS register*/
-        init_eflags();     
+    /* Init the EFLAGS register*/
+    init_eflags(); 
+
+    /* Init CR0*/
+    init_cr0();	
     
 	/* Initialize DRAM. */
 	init_ddr3();
