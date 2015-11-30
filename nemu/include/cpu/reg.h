@@ -55,8 +55,8 @@ typedef struct {
 		}cs,ds,es,ss;
 
 		struct{
+			uint16_t limit;
 			uint32_t base;
-			uint16_t len;
 		}gdtr;
 
 		CR0 cr0;

@@ -8,6 +8,7 @@
 #include "data-mov/movsx.h"
 #include "data-mov/cwd.h"
 
+#include "lgdt/lgdt.h"
 #include "data-jmp/ret.h"
 #include "cmov/cmov.h"
 
