@@ -3,7 +3,15 @@
 #define instr mov
 
 static void do_execute() {
-	OPERAND_W(op_dest, op_src->val);
+	uint8_t opcode = instr_fetch(cpu.eip+1,1);
+	if(opcode==0x20){
+		OPERAND_W(op_dest,cpu.cr0.val);
+	}
+	else if(opcode==0x22){
+		cpu.cr0.val=op_src->val;
+	}
+	else
+	    OPERAND_W(op_dest, op_src->val);
 	print_asm_template2();
 }
 
