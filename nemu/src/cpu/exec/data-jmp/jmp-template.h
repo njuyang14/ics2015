@@ -66,7 +66,7 @@ make_helper(concat(jmp_ptr_, SUFFIX)) {
 	DATA_TYPE_S addr=instr_fetch(cpu.eip+1,DATA_BYTE);
 	swaddr_t segr = instr_fetch(cpu.eip+DATA_BYTE+1,2);
 	cpu.cs.selector=segr;
-	cpu.eip=addr;
+	cpu.eip=addr-7;
 	if(DATA_BYTE==2)cpu.eip=cpu.eip&0x0000ffff;
 	print_asm("ljmp");
 	return DATA_BYTE+3;
