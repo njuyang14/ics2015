@@ -113,6 +113,10 @@ void init_cr0(){
 	cpu.cr0.paging=0;
 }
 
+void init_seg(){
+	cpu.cs.descriptor=0xffffffff;
+}
+
 void init_cache();
 
 void restart() {
@@ -133,6 +137,8 @@ void restart() {
 
     /* Init CR0*/
     init_cr0();	
+
+	init_seg();
     
 	/* Initialize DRAM. */
 	init_ddr3();
