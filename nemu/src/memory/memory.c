@@ -1,4 +1,5 @@
 #include "common.h"
+#include "nemu.h"
 
 uint32_t dram_read(hwaddr_t, size_t);
 void dram_write(hwaddr_t, size_t, uint32_t);
@@ -58,17 +59,35 @@ void lnaddr_write(lnaddr_t addr, size_t len, uint32_t data) {
 	hwaddr_write(addr, len, data);
 }
 
-uint32_t swaddr_read(swaddr_t addr, size_t len) {
-#ifdef DEBUG
-	assert(len == 1 || len == 2 || len == 4);
-#endif
-	return lnaddr_read(addr, len);
+uint32_t seg_translate(swaddr_t addr, size_t len, uint8_t sreg){
+	uint16_t index;
+	if(sreg==0)
+		index=cpu.es.selector>>3;
+	else if(sreg==1)
+		index=cpu.cs.selector>>3;
+	else if(sreg==2)
+		index=cpu.ss.selector>>3;
+	else //if(sreg==3)
+		index=cpu.ds.selector>>3;
+    uint32_t base0=lnaddr_read(cpu.gdtr.base+index*8+2,2);
+	uint32_t base1=lnaddr_read(cpu.gdtr.base+index*8+4,1);
+	uint32_t base2=lnaddr_read(cpu.gdtr.base+index*8+7,1);
+	return base0+base1+base2+addr;
 }
 
-void swaddr_write(swaddr_t addr, size_t len, uint32_t data) {
+uint32_t swaddr_read(swaddr_t addr, size_t len, uint8_t sreg) {
 #ifdef DEBUG
 	assert(len == 1 || len == 2 || len == 4);
 #endif
-	lnaddr_write(addr, len, data);
+	lnaddr_t lnaddr = seg_translate(addr, len, sreg);
+	return lnaddr_read(lnaddr, len);
+}
+
+void swaddr_write(swaddr_t addr, size_t len, uint32_t data,uint8_t sreg) {
+#ifdef DEBUG
+	assert(len == 1 || len == 2 || len == 4);
+#endif
+	lnaddr_t lnaddr = seg_translate(addr, len, sreg);
+	lnaddr_write(lnaddr, len, data);
 }
 

@@ -2,7 +2,7 @@
 #define instr ret
 
 make_helper(concat(ret_, SUFFIX)) {
-        cpu.eip=swaddr_read(cpu.esp,4)-1;
+        cpu.eip=swaddr_read(cpu.esp,4,1)-1;
 		if(DATA_BYTE==2)
 		    cpu.esp=cpu.esp+2;
 		else if(DATA_BYTE==4||DATA_BYTE==1)
@@ -14,7 +14,7 @@ make_helper(concat(ret_, SUFFIX)) {
 
 make_helper(concat(ret_imm_, SUFFIX)) {
 	    swaddr_t addr=instr_fetch(cpu.eip+1,DATA_BYTE);
-	    cpu.eip=swaddr_read(cpu.esp,4)-3;
+	    cpu.eip=swaddr_read(cpu.esp,4,1)-3;
 		cpu.esp=cpu.esp+addr;
 		if(DATA_BYTE==2)cpu.eip=cpu.eip&0x0000FFFF;
 		print_asm_template1();

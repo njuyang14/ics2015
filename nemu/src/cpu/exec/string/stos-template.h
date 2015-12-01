@@ -3,6 +3,7 @@
 #define instr stos
 
 make_helper(concat(stos_m_, SUFFIX)) {
+	int sreg=0;
 	if(DATA_BYTE==1){
 		MEM_W(cpu.edi,cpu.gpr[0]._8[0]);
 		if(cpu.EFLAGS.DF==0)

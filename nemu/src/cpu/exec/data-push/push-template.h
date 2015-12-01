@@ -3,6 +3,7 @@
 #define instr push
 
 static void do_execute() {
+	int sreg=2;
         if(DATA_BYTE==4||DATA_BYTE==1)
             cpu.esp=cpu.esp-4;
 		else if(DATA_BYTE==2)

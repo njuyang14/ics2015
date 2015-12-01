@@ -5,6 +5,7 @@
 static void do_execute() {
 	swaddr_t opcode=instr_fetch(cpu.eip,1);
 	DATA_TYPE_S addr=instr_fetch(cpu.eip+1,DATA_BYTE);
+	int sreg=1;
 	if(opcode==0xe8){
 		cpu.esp-=DATA_BYTE;
 		MEM_W(cpu.esp,cpu.eip+DATA_BYTE+1);
@@ -27,14 +28,7 @@ make_instr_helper(i)
 make_instr_helper(rm)
 
 /*make_helper(concat(call_rel32_, SUFFIX)){
-        cpu.esp=cpu.esp-4;
-        MEM_W(cpu.esp,cpu.eip+DATA_BYTE);
-        swaddr_t temp_addr=instr_fetch(cpu.eip+1,4);
-        cpu.eip=cpu.eip+temp_addr;
-
-        //snprintf(op_src->str, OP_STR_SIZE, "%x <main>", cpu.eip);
-        print_asm("call %x",cpu.eip);  
-        return 5; 
+ *
 }*/
 
 #include "cpu/exec/template-end.h"

@@ -4,6 +4,7 @@
 
 
 make_helper(concat(leave_, SUFFIX)) {
+	int sreg=2;
 	        if(DATA_BYTE==4){
 			cpu.esp=cpu.ebp;
 			cpu.ebp=MEM_R(cpu.esp);

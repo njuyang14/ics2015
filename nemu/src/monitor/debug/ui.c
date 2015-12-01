@@ -122,7 +122,7 @@ static int cmd_x(char *args){
         if(i%5==0) 
              printf("%x : ",addr);
 
-        uint32_t memory_value=swaddr_read(addr,1);
+        uint32_t memory_value=swaddr_read(addr,1,3);
 
         printf("%02x ",memory_value);
         addr+=1;

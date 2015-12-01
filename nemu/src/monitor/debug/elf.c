@@ -128,7 +128,7 @@ void print_stack_frame(){
 			  int k=0;
 			  uint32_t temp=prebp;
 			  while(k<4){
-				  printf("%x ",swaddr_read(temp+8,4));
+				  printf("%x ",swaddr_read(temp+8,4,2));
 				  temp+=4;
 				  k++;
 			  }
@@ -153,7 +153,7 @@ void print_stack_frame(){
                int k=0;
 			   uint32_t temp=prebp;
 			   while(k<4){
-				   printf("%x ",swaddr_read(temp+8,4));
+				   printf("%x ",swaddr_read(temp+8,4,2));
 		           temp+=4;
 				   k++;
 			   }
@@ -161,8 +161,8 @@ void print_stack_frame(){
 			   break;
 		  }
 	  }
-	  ret_addr=swaddr_read(prebp+4,4); 
-	  prebp=swaddr_read(prebp,4);
+	  ret_addr=swaddr_read(prebp+4,4,2); 
+	  prebp=swaddr_read(prebp,4,2);
 	  i=0;
 	}
 }

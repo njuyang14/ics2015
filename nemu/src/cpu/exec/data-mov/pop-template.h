@@ -3,7 +3,8 @@
 #define instr pop
 
 static void do_execute() {
-	    OPERAND_W(op_src,swaddr_read(cpu.esp,DATA_BYTE));
+	int sreg=2;
+	    OPERAND_W(op_src,swaddr_read(cpu.esp,DATA_BYTE,sreg));
 		cpu.esp=cpu.esp+DATA_BYTE;
 		//printf("esp=%x\n",cpu.esp);
 		print_asm_template1();

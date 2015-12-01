@@ -3,7 +3,8 @@
 #define instr movs
 
 make_helper(concat(movs_m_, SUFFIX)) {
-	MEM_W(cpu.edi,swaddr_read(cpu.esi,DATA_BYTE));
+	int sreg=0;
+	MEM_W(cpu.edi,swaddr_read(cpu.esi,DATA_BYTE,3));
 	if(DATA_BYTE==1){
 		if(cpu.EFLAGS.DF==0){
 		    cpu.edi++;
