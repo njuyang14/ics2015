@@ -68,7 +68,7 @@ make_helper(concat(jmp_ptr_, SUFFIX)) {
 	cpu.cs.selector=segr;
 	cpu.eip=addr-7;
 	if(DATA_BYTE==2)cpu.eip=cpu.eip&0x0000ffff;
-	print_asm("ljmp");
+	print_asm("ljmp $%x 0x%x",segr,cpu.eip);
 	return DATA_BYTE+3;
 }
 
