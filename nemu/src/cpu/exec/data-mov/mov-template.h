@@ -3,13 +3,13 @@
 #define instr mov
 
 static void do_execute() {
-	Log("hehe\n");
+	Log("hehe");
 	uint8_t opcode = instr_fetch(cpu.eip+1,1);
 	if(opcode==0x20){
 		OPERAND_W(op_dest,cpu.cr0.val);
 	}
 	else if(opcode==0x22){
-		Log("in...\n");
+		Log("%x",opcode);
 		cpu.cr0.val=op_src->val;
 	}
 	else
