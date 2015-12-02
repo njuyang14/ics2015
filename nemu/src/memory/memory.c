@@ -75,8 +75,8 @@ lnaddr_t seg_translate(swaddr_t addr, size_t len, uint8_t sreg){
 		index=cpu.ds.selector >> 3;
 
     uint32_t base0 = lnaddr_read(cpu.gdtr.base+index*8+2,2);
-	uint32_t base1 = lnaddr_read(cpu.gdtr.base+index*8+4,1)>>16;
-	uint32_t base2 = lnaddr_read(cpu.gdtr.base+index*8+7,1)>>24;
+	uint32_t base1 = lnaddr_read(cpu.gdtr.base+index*8+4,1)<<16;
+	uint32_t base2 = lnaddr_read(cpu.gdtr.base+index*8+7,1)<<24;
 	return (lnaddr_t)(base0 + base1 + base2 + addr);
 }
 
