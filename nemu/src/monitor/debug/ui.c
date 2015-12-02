@@ -69,7 +69,10 @@ static int cmd_info(char *args){
                 printf("esi\t%p\t%x\n",&cpu.esi,cpu.esi); 
                 printf("edi\t%p\t%x\n",&cpu.edi,cpu.edi); 
                 printf("eip\t%p\t%x\n",&cpu.eip,cpu.eip);
-                printf("ax\t%p\t%x\n",&cpu.gpr[0]._16,cpu.gpr[0]._16);
+				printf("gdtr.limit\t%p\t%x\n",&cpu.gdtr.limit,cpu.gdtr.limit);
+				printf("gdtr.base\t%p\t%x\n",&cpu.gdtr.base,cpu.gdtr.base);
+				printf("cr0.PE\t%p\t%x\n",&cpu.cr0,cpu.cr0.val);
+                /* printf("ax\t%p\t%x\n",&cpu.gpr[0]._16,cpu.gpr[0]._16);
                 printf("dx\t%p\t%x\n",&cpu.gpr[1]._16,cpu.gpr[1]._16);
                 printf("cx\t%p\t%x\n",&cpu.gpr[2]._16,cpu.gpr[2]._16);
                 printf("bx\t%p\t%x\n",&cpu.gpr[3]._16,cpu.gpr[3]._16);
@@ -85,6 +88,7 @@ static int cmd_info(char *args){
                 printf("ch\t%p\t%x\n",&cpu.gpr[2]._8[1],cpu.gpr[2]._8[1]);
                 printf("bl\t%p\t%x\n",&cpu.gpr[3]._8[0],cpu.gpr[3]._8[0]);
                 printf("bh\t%p\t%x\n",&cpu.gpr[3]._8[1],cpu.gpr[3]._8[1]);
+				*/
         }//finish the 32bit register.
         else if(strcmp(args,"w")==0){
                printf("NO\t\tWhat\t\tvalue\n");
