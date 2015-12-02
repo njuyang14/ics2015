@@ -20,7 +20,8 @@ make_helper_v(mov_r2rm)
 make_helper_v(mov_rm2r)
 make_helper_v(mov_a2moffs)
 make_helper_v(mov_moffs2a)
-make_helper_v(mov_rm)
+make_helper_v(mov_r2c)
+make_helper_v(mov_c2r)
 
 
 
