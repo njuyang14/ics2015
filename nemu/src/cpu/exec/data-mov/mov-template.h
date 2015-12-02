@@ -11,6 +11,7 @@ static void do_execute() {
 	else if(opcode==0x22){
 		Log("%x",opcode);
 		cpu.cr0.val=op_src->val;
+		Log("...");
 	}
 	else
 	    OPERAND_W(op_dest, op_src->val);
