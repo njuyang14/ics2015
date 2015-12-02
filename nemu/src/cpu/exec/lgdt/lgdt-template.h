@@ -16,6 +16,7 @@ make_helper(concat(lgdt_i_, SUFFIX)) {
 		cpu.gdtr.limit=limit;
 		cpu.gdtr.base=base;
 	}
+	print_asm("lgdt ");
 	return 6;
 }
 
