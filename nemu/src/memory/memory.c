@@ -60,7 +60,7 @@ void lnaddr_write(lnaddr_t addr, size_t len, uint32_t data) {
 }
 
 uint32_t seg_translate(swaddr_t addr, size_t len, uint8_t sreg){
-	/*if(cpu.cr0.protect_enable==0)*/return addr;
+	if(cpu.cr0.protect_enable==0)return addr;
 	uint16_t index;
 #ifdef DEBUG
 	    assert(sreg == 0 || sreg == 1 || sreg == 2 || sreg == 3);
@@ -74,8 +74,8 @@ uint32_t seg_translate(swaddr_t addr, size_t len, uint8_t sreg){
 	else //if(sreg==3)
 		index=cpu.ds.selector>>3;
     uint32_t base0=lnaddr_read(cpu.gdtr.base+index*8+2,2);
-	uint32_t base1=lnaddr_read(cpu.gdtr.base+index*8+4,1);
-	uint32_t base2=lnaddr_read(cpu.gdtr.base+index*8+7,1);
+	uint32_t base1=lnaddr_read(cpu.gdtr.base+index*8+4,1)>>16;
+	uint32_t base2=lnaddr_read(cpu.gdtr.base+index*8+7,1)>>24;
 	return base0+base1+base2+addr;
 }
 
