@@ -50,8 +50,9 @@ typedef struct {
                }EFLAGS;
 
 		struct{
-			uint16_t selector;
-			uint32_t descriptor;
+			uint16_t selector:16;
+			uint32_t base:32;
+			uint32_t limit:32;//20B
 		}cs,ds,es,ss;
 
 		struct{

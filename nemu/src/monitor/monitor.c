@@ -114,7 +114,8 @@ void init_cr0(){
 }
 
 void init_seg(){
-	cpu.cs.descriptor=0xffffffff;
+	cpu.cs.base=0;
+	cpu.cs.limit=0xffffffff;
 }
 
 void init_cache();
