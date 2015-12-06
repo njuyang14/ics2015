@@ -61,6 +61,9 @@ typedef struct {
 		}gdtr;
 
 		CR0 cr0;
+
+		CR3 cr3;
+
 	swaddr_t eip;
 
 } CPU_state;
