@@ -51,15 +51,15 @@ uint32_t loader() {
 		/* Scan the program header table, load each segment into memory */
 		if(ph[i].p_type == PT_LOAD) {
 
-			mm_malloc(ph[i].p_vaddr, ph[i].p_memsz);
+			uint32_t va=mm_malloc(ph[i].p_vaddr, ph[i].p_memsz);
 			/* TODO: read the content of the segment from the ELF file 
 			 * to the memory region [VirtAddr, VirtAddr + FileSiz)
 			 */	
-			 ramdisk_read((void*)ph[i].p_vaddr,ph[i].p_offset, ph[i].p_filesz);
+			 ramdisk_read((void*)va,ph[i].p_offset, ph[i].p_filesz);
 			/* TODO: zero the memory region 
 			 * [VirtAddr + FileSiz, VirtAddr + MemSiz)
 			 */
-			 memset((void*)(ph[i].p_vaddr+ph[i].p_filesz),0,ph[i].p_memsz-ph[i].p_filesz);
+			 memset((void*)(va+ph[i].p_filesz),0,ph[i].p_memsz-ph[i].p_filesz);
 
 #ifdef IA32_PAGE
 			/* Record the program break for future use. */
