@@ -51,6 +51,7 @@ uint32_t loader() {
 		/* Scan the program header table, load each segment into memory */
 		if(ph[i].p_type == PT_LOAD) {
 
+			mm_malloc(ph[i].p_vaddr, ph[i].p_memsz);
 			/* TODO: read the content of the segment from the ELF file 
 			 * to the memory region [VirtAddr, VirtAddr + FileSiz)
 			 */	
