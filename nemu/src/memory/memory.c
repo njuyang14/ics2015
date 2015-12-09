@@ -55,7 +55,7 @@ hwaddr_t page_translate(lnaddr_t addr){
 	if(cpu.cr0.protect_enable==0||cpu.cr0.paging==0)
 		return addr;
 	/* IA32_PAGE */
-	Log("page\n");
+	//Log("page\n");
 	uint16_t dir = addr >> 22;
 	uint16_t page = ( addr >> 12 )& 0x3ff;
 	uint16_t offset = addr & 0xfff;
