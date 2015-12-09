@@ -53,12 +53,12 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
 
 hwaddr_t page_translate(lnaddr_t addr){
 	if(cpu.cr0.protect_enable==0||cpu.cr0.paging==0)
-		return addr;
+		return (hwaddr_t)addr;
 	/* IA32_PAGE */
 	uint16_t dir = addr >> 22;
 	uint16_t page = ( addr >> 12 )& 0x3ff;
 	uint16_t offset = addr & 0xfff;
-	uint32_t page_base=hwaddr_read(cpu.cr3.page_directory_base+dir*4,4)>>12;
+	uint32_t page_base=hwaddr_read((cpu.cr3.page_directory_base<<12)+dir*4,4)>>12;
 	//Assert((page_base&1)==1,"ad=%x\n",page_base);
     return offset+((hwaddr_read((page_base<<12)+page*4,4)>>12)<<12);
 }
