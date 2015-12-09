@@ -35,24 +35,34 @@ make_helper(concat(mov_r2sr_, SUFFIX)) {
 	uint8_t reg_code=instr_fetch(eip+2,1);
 	int len=decode_rm_l(eip+1);
 	if(reg_code==0xd8){
-		cpu.ds.selector=REG(op_src->reg);
-	    uint8_t index=cpu.ds.selector;
-		cpu.ds.limit=lnaddr_read(cpu.gdtr.base+index*8,2);
-		cpu.ds.base=lnaddr_read(cpu.gdtr.base+index*8+2,2)+(lnaddr_read(cpu.gdtr.base+index*8+4,1)<<16)+(lnaddr_read(cpu.gdtr.base+index*8+7,1)<<24);
-        print_asm("mov %%%s ds",REG_NAME(op_src->reg));
+		cpu.ds.val=REG(op_src->reg);
+	    uint8_t index=cpu.ds.index;
+		cpu.segdesc[3].limit_15_0=(lnaddr_read(cpu.gdtr.base+index*8,2)&0xffff);
+		cpu.segdesc[3].limit_19_16=(lnaddr_read(cpu.gdtr.base+index*8+6,1)&0xf);
+		//uint32_t base=lnaddr_read(cpu.gdtr.base+index*8+2,2)+(lnaddr_read(cpu.gdtr.base+index*8+4,1)<<16)+(lnaddr_read(cpu.gdtr.base+index*8+7,1)<<24);
+        cpu.segdesc[3].base_15_0=lnaddr_read(cpu.gdtr.base+index*8+2,2);
+		cpu.segdesc[3].base_23_16=lnaddr_read(cpu.gdtr.base+index*8+4,1);
+		cpu.segdesc[3].base_31_24=lnaddr_read(cpu.gdtr.base+index*8+7,1);
+		print_asm("mov %%%s ds",REG_NAME(op_src->reg));
 	}
 	else if(reg_code==0xc0){
-		cpu.es.selector=REG(op_src->reg);
-		uint8_t index=cpu.es.selector;
-		cpu.es.limit=lnaddr_read(cpu.gdtr.base+index*8,2);
-		cpu.es.base=lnaddr_read(cpu.gdtr.base+index*8+2,2)+(lnaddr_read(cpu.gdtr.base+index*8+4,1)<<16)+(lnaddr_read(cpu.gdtr.base+index*8+7,1)<<24);
-	    print_asm("mov %%%s es",REG_NAME(op_src->reg));
+		cpu.es.val=REG(op_src->reg);
+		uint8_t index=cpu.es.index;
+		cpu.segdesc[0].limit_15_0=(lnaddr_read(cpu.gdtr.base+index*8,2)&0xffff);
+		cpu.segdesc[0].limit_19_16=(lnaddr_read(cpu.gdtr.base+index*8+6,1)&0xf);
+		cpu.segdesc[0].base_15_0=lnaddr_read(cpu.gdtr.base+index*8+2,2);
+		cpu.segdesc[0].base_23_16=lnaddr_read(cpu.gdtr.base+index*8+4,1);
+		cpu.segdesc[0].base_31_24=lnaddr_read(cpu.gdtr.base+index*8+7,1);
+		print_asm("mov %%%s es",REG_NAME(op_src->reg));
 	}
 	else if(reg_code==0xd0){
-		cpu.ss.selector=REG(op_src->reg);
-		uint8_t index=cpu.ss.selector;
-		cpu.ss.limit=lnaddr_read(cpu.gdtr.base+index*8,2);
-		cpu.ss.base=lnaddr_read(cpu.gdtr.base+index*8+2,2)+(lnaddr_read(cpu.gdtr.base+index*8+4,1)<<16)+(lnaddr_read(cpu.gdtr.base+index*8+7,1)<<24);
+		cpu.ss.val=REG(op_src->reg);
+		uint8_t index=cpu.ss.index;
+		cpu.segdesc[2].limit_15_0=(lnaddr_read(cpu.gdtr.base+index*8,2)&0xffff);
+		cpu.segdesc[2].limit_19_16=(lnaddr_read(cpu.gdtr.base+index*8+6,1)&0xf);
+		cpu.segdesc[2].base_15_0=lnaddr_read(cpu.gdtr.base+index*8+2,2);
+		cpu.segdesc[2].base_23_16=lnaddr_read(cpu.gdtr.base+index*8+4,1);
+		cpu.segdesc[2].base_31_24=lnaddr_read(cpu.gdtr.base+index*8+7,1);
 	    print_asm("mov %%%s ss",REG_NAME(op_src->reg));
 	}
 	return len+1;

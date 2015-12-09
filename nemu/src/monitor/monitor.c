@@ -114,8 +114,11 @@ void init_cr0(){
 }
 
 void init_seg(){
-	cpu.cs.base=0;
-	cpu.cs.limit=0xffffffff;
+	cpu.segdesc[1].base_15_0=0;
+	cpu.segdesc[1].base_23_16=0;
+	cpu.segdesc[1].base_31_24=0;
+	cpu.segdesc[1].limit_15_0=0xffff;
+	cpu.segdesc[1].limit_19_16=0xf;
 }
 
 void init_cache();
