@@ -16,7 +16,7 @@ static void do_execute() {
 	else{
 		cpu.esp-=DATA_BYTE;
 		MEM_W(cpu.esp,cpu.eip+2);
-		cpu.eip=0xc0100460;//op_src->val;
+		cpu.eip=op_src->val;
 		Log("opsrc=%x\n",op_src->val);
 		if(DATA_BYTE==2)cpu.eip&=0x0000FFFF;
         //OPERAND_W(op_dest, op_src->val);
