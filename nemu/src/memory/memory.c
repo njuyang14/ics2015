@@ -60,7 +60,7 @@ hwaddr_t page_translate(lnaddr_t addr){
 	uint16_t page = ( addr >> 12 )& 0x3ff;
 	uint16_t offset = addr & 0xfff;
 	uint32_t page_base=hwaddr_read(cpu.cr3.page_directory_base+dir*4,4)>>12;
-	Assert((page_base&1)==1,"ad=%x\n",page_base);
+	//Assert((page_base&1)==1,"ad=%x\n",page_base);
     return offset+((hwaddr_read((page_base<<12)+page*4,4)>>12)<<12);
 }
 
