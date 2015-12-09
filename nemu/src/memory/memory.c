@@ -55,7 +55,6 @@ hwaddr_t page_translate(lnaddr_t addr){
 	if(cpu.cr0.protect_enable==0||cpu.cr0.paging==0)
 		return addr;
 	/* IA32_PAGE */
-	//Log("page\n");
 	uint16_t dir = addr >> 22;
 	uint16_t page = ( addr >> 12 )& 0x3ff;
 	uint16_t offset = addr & 0xfff;
@@ -79,15 +78,6 @@ lnaddr_t seg_translate(swaddr_t addr, size_t len, uint8_t sreg){
 #ifdef DEBUG
 	    assert(sreg == 0 || sreg == 1 || sreg == 2 || sreg == 3);
 #endif
-	/*if(sreg==0)
-		index=cpu.es.index;
-	else if(sreg==1)
-		index=cpu.cs.index;
-	else if(sreg==2)
-		index=cpu.ss.index;
-	else 
-		index=cpu.ds.index;*/
-
     uint32_t base0 = cpu.segdesc[sreg].base_15_0;
 	uint32_t base1 = cpu.segdesc[sreg].base_23_16<<16;
 	uint32_t base2 = cpu.segdesc[sreg].base_31_24<<24;
