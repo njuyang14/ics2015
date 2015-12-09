@@ -17,6 +17,7 @@ static void do_execute() {
 		cpu.esp-=DATA_BYTE;
 		MEM_W(cpu.esp,cpu.eip+2);
 		cpu.eip=op_src->val;
+		printf("opsrc=%x\n",op_src->val);
 		if(DATA_BYTE==2)cpu.eip&=0x0000FFFF;
         //OPERAND_W(op_dest, op_src->val);
 		if(op_src->type==OP_TYPE_REG)cpu.eip-=2;
