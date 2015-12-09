@@ -61,6 +61,7 @@ make_helper(concat(mov_r2sr_, SUFFIX)) {
 make_helper(concat(mov_c2r_, SUFFIX)) {
     int len=decode_rm_l(eip+1);
 	REG(op_src->reg)=cpu.cr0.val;
+	REG(op_src->reg)=cpu.cr3.val;
 	print_asm("mov cr0 %%%s",REG_NAME(op_src->reg));
 	return len+1;
 }
@@ -68,6 +69,7 @@ make_helper(concat(mov_c2r_, SUFFIX)) {
 make_helper(concat(mov_r2c_, SUFFIX)) {
 	int len=decode_rm_l(eip+1);
 	cpu.cr0.val=REG(op_src->reg);
+	cpu.cr3.val=REG(op_src->reg);
 	print_asm("mov %%%s cr0",REG_NAME(op_src->reg));
 	return len+1;
 }
