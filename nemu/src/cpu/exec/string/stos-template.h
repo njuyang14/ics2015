@@ -26,6 +26,6 @@ make_helper(concat(stos_m_, SUFFIX)) {
 			cpu.edi-=4;
 	}
 	print_asm_template1();
-	return DATA_BYTE+1;
+	return 1;
 }
 #include "cpu/exec/template-end.h"
