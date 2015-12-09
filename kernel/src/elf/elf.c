@@ -65,7 +65,7 @@ uint32_t loader() {
 			/* TODO: zero the memory region 
 			 * [VirtAddr + FileSiz, VirtAddr + MemSiz)
 			 */
-			 memset((void*)(va+ph[i].p_filesz)/*(ph[i].p_vaddr+ph[i].p_filesz)*/,0,ph[i].p_memsz-ph[i].p_filesz);
+			 memset((void*)(va+ph[i].p_filesz+ph[i].p_offset)/*(ph[i].p_vaddr+ph[i].p_filesz)*/,0,ph[i].p_memsz-ph[i].p_filesz);
 
 		}
 	}
