@@ -1,5 +1,8 @@
 #include "common.h"
 #include "nemu.h"
+#include "tlb.h"
+#include <stdlib.h>
+#include <time.h>
 
 uint32_t dram_read(hwaddr_t, size_t);
 void dram_write(hwaddr_t, size_t, uint32_t);
@@ -55,13 +58,32 @@ hwaddr_t page_translate(lnaddr_t addr){
 	if(cpu.cr0.protect_enable==0||cpu.cr0.paging==0)
 		return (hwaddr_t)addr;
 	/* IA32_PAGE */
-	//Log("in page");
-	uint16_t dir = addr >> 22;
-	uint16_t page = ( addr >> 12 )& 0x3ff;
-	uint16_t offset = addr & 0xfff;
-	uint32_t page_base=hwaddr_read((cpu.cr3.page_directory_base<<12)+dir*4,4)>>12;
-	//Assert((page_base&1)==1,"ad=%x\n",page_base);
-    return offset+((hwaddr_read((page_base<<12)+page*4,4)>>12)<<12);
+	int i,flag=0;
+	for(i=0;i<64;i++){
+		if(tlb[i].tag==(addr>>12)&&tlb[i].valid==1){
+			flag=1;//hit
+			break;
+		}
+	}
+	if(flag==1){
+		uint16_t offset = addr & 0xfff;
+		return offset+((tlb[i].page_data>>12)<<12);
+	}
+	else
+	{
+	    uint16_t dir = addr >> 22;
+	    uint16_t page = ( addr >> 12 )& 0x3ff;
+	    uint16_t offset = addr & 0xfff;
+	    uint32_t page_base=hwaddr_read((cpu.cr3.page_directory_base<<12)+dir*4,4)>>12;
+	    //Assert((page_base&1)==1,"ad=%x\n",page_base);
+		srand(time(0)+clock());
+		int no=rand()%64;
+		tlb[no].valid=1;
+		tlb[no].tag=(addr>>12);
+		tlb[no].page_data=hwaddr_read((page_base<<12)+page*4,4);//TLB read
+
+        return offset+((hwaddr_read((page_base<<12)+page*4,4)>>12)<<12);
+	}
 }
 
 uint32_t lnaddr_read(lnaddr_t addr, size_t len) {

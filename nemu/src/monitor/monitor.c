@@ -1,4 +1,5 @@
 #include "nemu.h"
+#include "../memory/tlb.h"
 
 #define ENTRY_START 0x100000
 
@@ -122,6 +123,13 @@ void init_seg(){
 }
 
 void init_cache();
+
+void init_tlb(){
+	int i;
+	for(i=0;i<64;i++){
+		tlb[i].valid=0;
+	}
+}
 
 void restart() {
 	/* Perform some initialization to restart a program */
