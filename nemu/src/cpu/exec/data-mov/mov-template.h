@@ -1,5 +1,4 @@
 #include "cpu/exec/template-start.h"
-
 #define instr mov
 
 static void do_execute() {
@@ -82,11 +81,13 @@ make_helper(concat(mov_c2r_, SUFFIX)) {
 	return len+1;
 }
 
+void init_tlb();
 make_helper(concat(mov_r2c_, SUFFIX)) {
 	int len=decode_rm_l(eip+1);
 	uint8_t opcode=instr_fetch(eip+1,1);
 	if(opcode==0xd8){
 	    cpu.cr3.val=REG(op_src->reg);
+		init_tlb();
 		print_asm("mov %%%s cr3",REG_NAME(op_src->reg));
 	}
 	else{
