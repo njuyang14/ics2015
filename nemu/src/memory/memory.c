@@ -76,7 +76,7 @@ hwaddr_t page_translate(lnaddr_t addr){
 	    uint16_t offset = addr & 0xfff;
 	    uint32_t page_base=hwaddr_read((cpu.cr3.page_directory_base<<12)+dir*4,4)>>12;
 	    //Assert((page_base&1)==1,"ad=%x\n",page_base);
-		srand(time(0)+clock());
+		srand(time(0)/*+clock()*/);
 		int no=rand()%64;
 		tlb[no].valid=1;
 		tlb[no].tag=(addr>>12);
