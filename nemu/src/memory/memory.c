@@ -61,7 +61,7 @@ hwaddr_t page_translate(lnaddr_t addr){
 	int i,flag=0;
 	for(i=0;i<64;i++){
 		if(tlb[i].tag==(addr>>12)&&tlb[i].valid==1){
-			flag=0;//hit
+			flag=1;//hit
 			break;
 		}
 	}
@@ -76,11 +76,11 @@ hwaddr_t page_translate(lnaddr_t addr){
 	    uint16_t offset = addr & 0xfff;
 	    uint32_t page_base=hwaddr_read((cpu.cr3.page_directory_base<<12)+dir*4,4)>>12;
 	    //Assert((page_base&1)==1,"ad=%x\n",page_base);
-		/*srand(time(0)+clock());
+		srand(time(0)+clock());
 		int no=rand()%64;
 		tlb[no].valid=1;
 		tlb[no].tag=(addr>>12);
-		tlb[no].page_data=hwaddr_read((page_base<<12)+page*4,4);//TLB read*/
+		tlb[no].page_data=hwaddr_read((page_base<<12)+page*4,4);//TLB read
 
         return offset+((hwaddr_read((page_base<<12)+page*4,4)>>12)<<12);
 	}
