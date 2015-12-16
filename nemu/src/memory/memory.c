@@ -61,7 +61,7 @@ hwaddr_t page_translate(lnaddr_t addr){
 	int i,flag=0;
 	for(i=0;i<64;i++){
 		if(tlb[i].tag==(addr>>12)&&tlb[i].valid==1){
-			flag=1;//hit
+			flag=0;//hit
 			break;
 		}
 	}
