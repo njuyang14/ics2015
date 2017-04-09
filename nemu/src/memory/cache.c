@@ -318,23 +318,3 @@ void write_allocate(hwaddr_t addr, size_t len, uint32_t data){
 	}	
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
